@@ -1,0 +1,302 @@
+{
+  "metadata": {
+    "title": "inflee.app - Monetyzuj swoją wiedzę z AI",
+    "description": "Platforma AI dla twórców cyfrowych. Twórz e-booki, buduj strony lądowania i zarabiaj bez działalności gospodarczej.",
+    "keywords": "ai, e-book, generator, monetyzacja, twórcy, influencerzy, strona lądowania",
+    "ogTitle": "inflee.app - Zacznij zarabiać na swojej wiedzy",
+    "ogDescription": "Stwórz profesjonalny e-book i stronę lądowania w 5 minut. Bez kodowania, bez grafika, bez działalności.",
+    "ogImageAlt": "inflee.app - Platforma dla twórców cyfrowych",
+    "ogImageSquareAlt": "Logo inflee.app"
+  },
+  "nav": {
+    "features": "Funkcje",
+    "pricing": "Cennik",
+    "login": "Logowanie",
+    "register": "Zaloguj"
+  },
+  "hero": {
+    "title1": {
+      "part1": "Zacznij w końcu",
+      "part2": "monetyzować",
+      "part3": "Twoje Social Media"
+    },
+    "title2": {
+      "part1": "Docieraj skutecznie do",
+      "part2": "nowych odbiorców"
+    },
+    "subtitle": "Wykorzystaj moc AI skuteczniej niż kiedykolwiek!",
+    "benefit1": "Bez tysięcy obserwujących - wystarczy kilkuset na początek",
+    "benefit2": "Bez działalności gospodarczej czy ZUSu - w pełni legalnie",
+    "benefit3": "Bez wiedzy technicznej czy specjalnych narzędzi - zapomnij o Canvie!",
+    "cta": "Zacznij teraz",
+    "subCta": "Dostępny 21-dniowy okres próbny. Bez karty kredytowej by tworzyć."
+  },
+  "howItWorks": {
+    "title": {
+      "part1": "Stwórz doskonały magnes na nowych odbiorców i zaangażuj obecnych",
+      "part2": "w 3. prostych krokach"
+    },
+    "subtitle": "Przestań odkładać na później. Stwórz e-book oraz stronę do jego pobierania – odbierz pierwsze wpłaty od Twojej Społeczności jeszcze dziś.",
+    "step1": {
+      "title": "1. Stwórz profesjonalny e-book",
+      "text": "Podaj tytuł, wklej link do artykułu lub wgraj PDF. Kliknij \"Generuj\" i kilka chwil masz gotowy e-book. AI tworzy okładkę, spis treści, formatuje rozdziały i dodaje ilustracje. Możesz wszystko edytować w przejrzystym edytorze lub zostawić jak jest — Twój wybór.",
+      "details": [
+        "Podaj tytuł i źródła (link/PDF)",
+        "AI wygeneruje strukturę i treść rozdziałów",
+        "Dostosuj zawartość, masz wpływ na każde słowo",
+        "AI wygeneruje okładkę oraz ilustracje. Możesz też dodać własne grafiki",
+        "Twój e-book jest gotowy do publikacji w kilka minut"
+      ]
+    },
+    "step2": {
+      "title": "2. Wygeneruj stronę zapisu",
+      "text": "Na podstawie treści Twojego e-booka AI stworzy kompletną stronę WWW z angażującą treścią, formularzem zapisu i przyciskami CTA. Dostosujesz kolory, teksty i layout w kilka kliknięć. Publikujesz jednym przyciskiem — gotowa strona do udostępnienia w Social Mediach.",
+      "details": [
+        "AI napisze całą treść strony zapisu",
+        "Możesz dowolnie dostosować treść i kolorystykę strony",
+        "Responsywny design (piękna i skuteczna na każdym urządzeniu)",
+        "Kiedy wszystko jest gotowe, publikujesz jednym przyciskiem",
+        "Teraz strona jest dostępna для wszystkich przez link lub kod QR",
+        "Udostępnij, zbieraj kontakty i przyjmuj wpłaty"
+      ]
+    },
+    "step3": {
+      "title": "3. Zbieraj i zarządzaj leadami",
+      "text": "Każdy, kto pobierze e-book, automatycznie trafia do Twojej bazy danych. Widzisz wszystkie kontakty, zarządzasz statusami, dodajesz notatki. Możesz eksportować bazę do XLS, PDF czy CSV i użyć jej w kampaniach email lub sms.",
+      "details": [
+        "Wszystkie Twoje kontakty dostępne w przyjaznej formie",
+        "Statusy i notatki do każdej pozycji w bazie",
+        "Łatwy eksport do Excela, PDFa czy pliku CSV",
+        "Statystyki odwiedzin Twoich stron oraz pobrań w czasie rzeczywistym",
+        "Już wkrótce integracja z popularnymi narzędziami email czy sms marketingu"
+      ]
+    },
+    "step4": {
+      "title": "4. Monetyzuj i automatyzuj",
+      "text": "Łatwo zintegrujesz swoje konto w buycoffee.to czy Patronite — wdzięczni odbiorcy chętnie postawią Ci kawę, a Ty ciesz się pierwszą monetyzacją. Podłącz ManyChat i automatycznie rozsyłaj e-booki osobom komentującym Twoje posty na Instagramie czy Facebooku. Pierwsze 1000 kontaktów w ManyChat masz za darmo.",
+      "details": [
+        "Prosta integracja z buycoffee.to czy Patronite",
+        "Pierwsze wpłaty od fanów możliwe jeszcze dziś",
+        "Dzięki naszej współpracy możesz zacząć korzystać z ManyChat ZA DARMO",
+        "Gwarancja propozycji płatnej współpracy od Partnerów Inflee.app dla najlepszych kont",
+        "Brak prowizji dla inflee.app od wpłat czy wynagrodzeń naszych Partnerów"
+      ]
+    }
+  },
+  "features": {
+    "title": {
+      "part1": "Wszystko, czego potrzebujesz, by",
+      "part2": "zacząć zarabiać i skutecznie rosnąć",
+      "part3": "w Social Mediach"
+    },
+    "subtitle": "Inflee.app to więcej niż generator AI. To kompletna platforma stworzona aby skutecznie budować i monetyzować Twoją społeczności.",
+    "feature1": {
+      "title": "E-book gotowy w 5 minut",
+      "text": "Wklej link lub wgraj tekst. AI wykona ciężką pracę, tworząc strukturę i treść, a Ty masz pełną kontrolę nad finalnym efektem i możesz edytować każdy element.",
+      "benefits": [
+        { "text": "Oszczędność dziesiątek godzin pisania" },
+        { "text": "Koniec z blokadą twórczą i pustą stroną" },
+        { "text": "Pełen wpływ na treść na każdym etapie" },
+        { "text": "Export do PDF jednym kliknięciem" }
+      ]
+    },
+    "feature2": {
+      "title": "Design, który zachwyca",
+      "text": "AI wygeneruje dla Ciebie przyciągającą wzrok okładkę i spójne grafiki. Twoje materiały będą wyglądać profesjonalnie bez zatrudniania grafika.",
+      "benefits": [
+        { "text": "Zbuduj wizerunek eksperta od pierwszego wejrzenia" },
+        { "text": "Oszczędność pieniędzy na zleceniach graficznych" },
+        { "text": "Większa chęć pobierania Twoich materiałów" },
+        { "text": "Bez opłat licencyjnych za grafikę" }
+      ]
+    },
+    "feature3": {
+      "title": "Strona lądowania bez kodowania",
+      "text": "AI automatycznie napisze treść Twojej strony lądowania. Możesz ją dowolnie edytować, dopasować kolory i opublikować jednym kliknięciem.",
+      "benefits": [
+        { "text": "Start kampanii w kilka minut, a nie tygodni" },
+        { "text": "Brak opłat za domenę i hosting" },
+        { "text": "Pełna kontrola nad finalnym wyglądem i treścią" },
+        { "text": "Wysoka skuteczność dzięki sprawdzonej strukturze" }
+      ]
+    },
+    "feature4": {
+        "title": "Buduj swoją społeczność",
+        "text": "Każde pobranie e-booka to nowy kontakt w Twojej bazie. Zbieraj e-maile i twórz niezależną społeczność, bez oglądania się na algorytmy social mediów.",
+        "benefits": [
+            { "text": "Twój najważniejszy zasób marketingowy" },
+            { "text": "Bezpośrednia komunikacja ze swoimi fanami" },
+            { "text": "Idealna baza do sprzedaży przyszłych produktów" },
+            { "text": "Eksport do formatów zgodnych z narzędziami e-mail/SMS" }
+        ]
+    },
+    "feature5": {
+        "title": "Zarabiaj od pierwszego dnia",
+        "text": "Zintegruj profil buycoffee.to jednym kliknięciem i zacznij generować legalny przychód bez konieczności zakładania działalności gospodarczej.",
+        "benefits": [
+            { "text": "Generuj legalny przychód bez firmy" },
+            { "text": "Wzmacniaj relacje ze swoją społecznością" },
+            { "text": "Gotowe rozwiązanie, bez skomplikowanej konfiguracji" },
+            { "text": "Brak prowizji ze strony Inflee" }
+        ]
+    },
+    "feature6": {
+        "title": "Rozwijaj swój biznes",
+        "text": "Twoja lista rośnie? Świetnie! Z łatwością połączysz ją z systemami mailingowymi lub zautomatyzujesz komunikację dzięki integracji z ManyChat.",
+        "benefits": [
+            { "text": "Pełna kontrola nad Twoimi danymi" },
+            { "text": "Skaluj działania marketingowe bez ograniczeń" },
+            { "text": "Wykorzystaj zebrane kontakty do sprzedaży produktów" },
+            { "text": "Gwarancja propozycji płatnej współpracy", "isGuaranteed": true }
+        ]
+    }
+  },
+  "pricing": {
+    "title": {
+      "part1": "Prosty cennik,",
+      "part2": "który rośnie",
+      "part3": "z Tobą"
+    },
+    "subtitle": "Wybierz plan który najlepiej odpowiada Twoim potrzebom lub zacznij darmowy okres próbny aby poznać lepiej Inflee.app",
+    "paymentMethods": {
+      "subscription": "Subskrypcja (Płatność kartą)",
+      "oneTime": "Jednorazowo (Płatność BLIK)",
+      "prompt": "Płać tak jak jest Ci wygodnie"
+    },
+    "mostPopular": "Najpopularniejszy",
+    "ownApp": "Aplikacja na własność",
+    "from": "od",
+    "plusMaintenance": "+ koszty utrzymania",
+    "currencyPerMonth": "zł/miesiąc",
+    "currencyOnce": "zł",
+    "cheaperBy": "Z subskrypcją taniej o {amount}zł, możesz zrezygnować w dowolnym momencie.",
+    "check": "SPRAWDŹ",
+    "noCardNeeded": "* Nie wymaga karty by zacząć",
+    "includes": "Co zawiera",
+    "comingSoon": "Wkrótce",
+    "stripeIntegration": "Integracja STRIPE - sprzedaż ebooków",
+    "limits": "Limity",
+    "plans": {
+      "rookie": {
+        "name": "Rookie",
+        "description": "Wszystko czego potrzebujesz by zacząć tworzyć i zarabiać!",
+        "button": "21 dni za darmo",
+        "feature1": "Zaawansowany Generator ebook-ów zasilany AI",
+        "feature2": "Automatyczny Generator stron zapisu zasilany AI",
+        "feature3": "Szczegółowe statystyki wizyt oraz pobrań",
+        "feature4": "Intuicyjny CRM do zarządzania Leadami",
+        "feature5": "Integracja z buycoffe.to by zarabiać od pierwszego dnia",
+        "notIncluded1": "max. 1 nowy ebook w miesiącu",
+        "notIncluded2": "max. 1 źródło na ebook",
+        "notIncluded3": "max. 6 rozdziałów na ebook",
+        "notIncluded4": "max. 1 aktywna strona zapisu",
+        "notIncluded5": "max. 100 kontaktów w bazie",
+        "notIncluded6": "Oznaczenia \"made with inflee.app\"",
+        "notIncluded7": "Wsparcie z reakcją do 72h"
+      },
+      "creator": {
+        "name": "Creator",
+        "description": "Wszystko czego potrzebujesz aby rosnąć i zarabiać na poważnie!",
+        "button": "Uruchom Plan",
+        "feature1": "Gwarantowana propozycja płatnej Współpracy",
+        "feature2": "Zaawansowany Generator ebook-ów zasilany AI",
+        "feature3": "Automatyczny Generator stron zapisu zasilany AI",
+        "feature4": "Szczegółowe statystyki wizyt oraz pobrań",
+        "feature5": "Intuicyjny CRM do zarządzania Leadami",
+        "feature6": "Integracja z buycoffe.to by zarabiać od pierwszego dnia",
+        "notIncluded1": "do 5 nowych ebooków w miesiącu",
+        "notIncluded2": "do 5 źródeł na ebook",
+        "notIncluded3": "do 12 rozdziałów na ebook",
+        "notIncluded4": "do 5 aktywnych stron zapisu",
+        "notIncluded5": "do 1000 kontaktów w bazie",
+        "notIncluded6": "Oznaczenia \"made with inflee.app\"",
+        "notIncluded7": "Wsparcie z reakcją do 24h"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Dla influenserów którzy nie chcą się ograniczać!",
+        "button": "Uruchom Plan",
+        "feature1": "Nieograniczona ilość ebooków",
+        "feature2": "Nieograniczona ilość źródeł",
+        "feature3": "Nieograniczona ilość rozdziałów",
+        "feature4": "Nieograniczona ilość stron zapisu",
+        "feature5": "Nieograniczona ilość leadów",
+        "feature6": "Brak oznaczenia \"made with inflee.app\"",
+        "feature7": "Wsparcie z reakcją do 3h"
+      },
+      "whitelabel": {
+        "name": "White Label",
+        "description": "Dla agencji i firm",
+        "button": "Oferta",
+        "modalSubject": "Zapytanie o White Label",
+        "feature1": "Własny branding",
+        "feature2": "Własna domena",
+        "feature3": "Własny Meta Pixel / GTM",
+        "feature4": "Personalizacja e-booków",
+        "feature5": "Personalizacja stron zapisu",
+        "feature6": "Wbudowane integracje z narzędziami zewnętrznymi",
+        "feature7": "Swoboda wyboru modeli AI, również lokalnych",
+        "feature8": "Możliwość dalszej dystrybucji subskrypcji",
+        "feature9": "Możliwość sfinansowania dotacją LGD/PUP"
+      }
+    }
+  },
+  "faq": {
+    "title": {
+      "part1": "Masz pytania?",
+      "part2": "Mamy odpowiedzi"
+    },
+    "faq1": {
+      "q": "Dla kogo jest Inflee?",
+      "a": "Inflee jest dla każdego, kto chce zamienić swoją wiedzę w produkt cyfrowy: twórców, ekspertów, coachów, freelancerów, marketerów i małych firm. Jeśli masz wiedzę, którą chcesz się podzielić i budować społeczność – Inflee jest dla Ciebie. Nie potrzebujesz wiedzy technicznej ani działalności gospodarczej."
+    },
+    "faq2": {
+      "q": "Jakiego rodzaju treści mogę użyć do stworzenia e-booka?",
+      "a": "Możesz wkleić link do artykułu, wpisu na LinkedIn, udostępnić dokument Google/Notion, a także wgrać PDF/DOCX/TXT. Inflee przyjmie także zwykły tekst skopiowany bezpośrednio. Obsługujemy większość popularnych formatów treści."
+    },
+    "faq3": {
+      "q": "Czy mogę edytować wygenerowane treści?",
+      "a": "Tak. Zarówno treść e-booka, jak i strony lądowania są w pełni edytowalne. AI robi 90% pracy, Ty nadajesz finalny szlif. Masz pełną kontrolę nad każdym elementem – od tytułów po ilustracje."
+    },
+    "faq4": {
+      "q": "Czy muszę podawać dane karty, aby zacząć?",
+      "a": "Nie. Darmowy 21-dniowy okres próbny nie wymaga karty kredytowej. Po prostu zarejestruj się i zacznij tworzyć. Bez zobowiązań."
+    },
+    "faq5": {
+      "q": "Czy potrzebuję działalności gospodarczej?",
+      "a": "Nie. Możesz zacząć zarabiać na swojej wiedzy bez rejestracji działalności. Jeśli używasz buycoffee.to, oni zajmują się aspektami formalnymi. Inflee nie wymaga żadnych dokumentów firmowych."
+    },
+    "faq6": {
+      "q": "Ile kosztuje generowanie grafik przez AI?",
+      "a": "Wszystkie koszty generowania grafik AI są wliczone w cenę planu. Nie płacisz nic ekstra za okładki czy ilustracje. W planie darmowym masz limit generowań, w planach płatnych – bez limitów."
+    }
+  },
+  "finalCta": {
+    "title": {
+      "part1": "Gotów, by zamienić swoją pasję",
+      "part2": "w",
+      "part3": "działający biznes?"
+    },
+    "subtitle": "Dołącz do tysięcy twórców, którzy już teraz budują swoje listy mailingowe i zarabiają na wiedzy. Twoja podróż zaczyna się tutaj.",
+    "button": "Zbuduj swój pierwszy e-book za darmo"
+  },
+  "footer": {
+    "copyright": "© 2025 Inflee. Wszelkie prawa zastrzeżone.",
+    "privacy": "Polityka Prywatności",
+    "terms": "Regulamin",
+    "contact": "Kontakt"
+  },
+  "contactModal": {
+    "title": "Skontaktuj się z nami",
+    "subtitle": "Wypełnij formularz, a my odezwiemy się do Ciebie.",
+    "thankYou": "Dziękujemy za kontakt! Odpowiemy najszybciej jak to możliwe.",
+    "close": "Zamknij",
+    "subject": "Temat",
+    "emailLabel": "Adres e-mail",
+    "emailPlaceholder": "twoj@email.com",
+    "phoneLabel": "Numer telefonu",
+    "phonePlaceholder": "+48 123 456 789",
+    "consent": "Wyrażam zgodę na jednorazowy kontakt mailowy i telefoniczny do celów marketingowych.",
+    "submitButton": "Wyślij"
+  }
+}

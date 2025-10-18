@@ -1,0 +1,302 @@
+{
+  "metadata": {
+    "title": "inflee.app - Monetize Your Knowledge with AI",
+    "description": "AI platform for digital creators. Create e-books, build landing pages, and earn without a registered business.",
+    "keywords": "ai, e-book, generator, monetization, creators, influencers, landing page",
+    "ogTitle": "inflee.app - Start Earning from Your Knowledge",
+    "ogDescription": "Create a professional e-book and landing page in 5 minutes. No coding, no graphic designer, no business registration required.",
+    "ogImageAlt": "inflee.app - Platform for digital creators",
+    "ogImageSquareAlt": "inflee.app Logo"
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "login": "Login",
+    "register": "Sign Up"
+  },
+  "hero": {
+    "title1": {
+      "part1": "Finally Start",
+      "part2": "Monetizing",
+      "part3": "Your Social Media"
+    },
+    "title2": {
+      "part1": "Effectively Reach",
+      "part2": "New Audiences"
+    },
+    "subtitle": "Harness the power of AI more effectively than ever before!",
+    "benefit1": "No thousands of followers needed - just a few hundred to start",
+    "benefit2": "No business registration or social security required - fully legal",
+    "benefit3": "No technical knowledge or special tools needed - forget about Canva!",
+    "cta": "Start Now",
+    "subCta": "21-day free trial available. No credit card required to create."
+  },
+  "howItWorks": {
+    "title": {
+      "part1": "Create the perfect lead magnet for new audiences and engage current ones",
+      "part2": "in 3 simple steps"
+    },
+    "subtitle": "Stop procrastinating. Create an e-book and a download page for it – receive your first payments from your community today.",
+    "step1": {
+      "title": "1. Create a professional e-book",
+      "text": "Provide a title, paste a link to an article, or upload a PDF. Click \"Generate\" and in a few moments, you'll have a ready e-book. The AI creates the cover, table of contents, formats chapters, and adds illustrations. You can edit everything in a clean editor or leave it as is – your choice.",
+      "details": [
+        "Provide a title and sources (link/PDF)",
+        "AI will generate the structure and content of the chapters",
+        "Customize the content, you have control over every word",
+        "AI will generate a cover and illustrations. You can also add your own graphics",
+        "Your e-book is ready for publication in minutes"
+      ]
+    },
+    "step2": {
+      "title": "2. Generate a landing page",
+      "text": "Based on your e-book's content, the AI will create a complete webpage with engaging copy, a sign-up form, and CTA buttons. You can customize colors, text, and layout in just a few clicks. Publish with one click – a ready-to-share page for your social media.",
+      "details": [
+        "AI will write the entire copy for the landing page",
+        "You can freely customize the page's content and color scheme",
+        "Responsive design (beautiful and effective on every device)",
+        "When everything is ready, publish with a single click",
+        "The page is now accessible to everyone via a link or QR code",
+        "Share, collect contacts, and accept payments"
+      ]
+    },
+    "step3": {
+      "title": "3. Collect and manage leads",
+      "text": "Anyone who downloads your e-book is automatically added to your database. You can see all contacts, manage statuses, and add notes. You can export the database to XLS, PDF, or CSV and use it in email or SMS campaigns.",
+      "details": [
+        "All your contacts available in a user-friendly format",
+        "Statuses and notes for each entry in the database",
+        "Easy export to Excel, PDF, or CSV files",
+        "Real-time statistics of your page visits and downloads",
+        "Integration with popular email and SMS marketing tools coming soon"
+      ]
+    },
+    "step4": {
+      "title": "4. Monetize and automate",
+      "text": "Easily integrate your buycoffee.to or Patronite account – grateful followers will gladly buy you a coffee, and you can enjoy your first monetization. Connect ManyChat and automatically send e-books to people who comment on your Instagram or Facebook posts. Your first 1000 contacts in ManyChat are free.",
+      "details": [
+        "Simple integration with buycoffee.to or Patronite",
+        "First payments from fans possible today",
+        "Thanks to our partnership, you can start using ManyChat for FREE",
+        "Guaranteed paid collaboration offers from Inflee.app partners for top accounts",
+        "No commission for inflee.app from payments or our partners' fees"
+      ]
+    }
+  },
+  "features": {
+    "title": {
+      "part1": "Everything you need to",
+      "part2": "start earning and grow effectively",
+      "part3": "on Social Media"
+    },
+    "subtitle": "Inflee.app is more than an AI generator. It's a complete platform designed to effectively build and monetize your community.",
+    "feature1": {
+      "title": "E-book ready in 5 minutes",
+      "text": "Paste a link or upload your text. The AI does the heavy lifting, creating the structure and content, while you have full control over the final result and can edit every element.",
+      "benefits": [
+        { "text": "Save dozens of hours of writing" },
+        { "text": "End writer's block and the blank page" },
+        { "text": "Full control over the content at every stage" },
+        { "text": "Export to PDF with a single click" }
+      ]
+    },
+    "feature2": {
+      "title": "Design that impresses",
+      "text": "The AI will generate an eye-catching cover and consistent graphics for you. Your materials will look professional without hiring a graphic designer.",
+      "benefits": [
+        { "text": "Build an expert image from the first glance" },
+        { "text": "Save money on graphic design services" },
+        { "text": "Increase the appeal of your downloadable materials" },
+        { "text": "No licensing fees for graphics" }
+      ]
+    },
+    "feature3": {
+      "title": "Landing page without coding",
+      "text": "The AI will automatically write the copy for your landing page. You can freely edit it, adjust the colors, and publish with a single click.",
+      "benefits": [
+        { "text": "Launch a campaign in minutes, not weeks" },
+        { "text": "No fees for a domain and hosting" },
+        { "text": "Full control over the final look and content" },
+        { "text": "High effectiveness thanks to a proven structure" }
+      ]
+    },
+    "feature4": {
+      "title": "Build your community",
+      "text": "Every e-book download is a new contact in your database. Collect emails and build an independent community, free from the whims of social media algorithms.",
+      "benefits": [
+        { "text": "Your most important marketing asset" },
+        { "text": "Direct communication with your fans" },
+        { "text": "The perfect foundation for selling future products" },
+        { "text": "Export to formats compatible with email/SMS tools" }
+      ]
+    },
+    "feature5": {
+      "title": "Earn from day one",
+      "text": "Integrate your buycoffee.to profile with a single click and start generating legal income without needing to register a business.",
+      "benefits": [
+        { "text": "Generate legal income without a company" },
+        { "text": "Strengthen relationships with your community" },
+        { "text": "A ready-to-use solution, no complicated setup" },
+        { "text": "No commission taken by Inflee" }
+      ]
+    },
+    "feature6": {
+      "title": "Grow your business",
+      "text": "Your list is growing? Great! Easily connect it with mailing systems or automate your communication with our ManyChat integration.",
+      "benefits": [
+        { "text": "Full control over your data" },
+        { "text": "Scale your marketing efforts without limits" },
+        { "text": "Use collected contacts to sell products" },
+        { "text": "Guarantee of a paid collaboration offer", "isGuaranteed": true }
+      ]
+    }
+  },
+  "pricing": {
+    "title": {
+      "part1": "Simple pricing",
+      "part2": "that grows",
+      "part3": "with you"
+    },
+    "subtitle": "Choose the plan that best suits your needs or start a free trial to get to know Inflee.app better.",
+    "paymentMethods": {
+      "subscription": "Subscription (Card Payment)",
+      "oneTime": "One-time (BLIK Payment)",
+      "prompt": "Pay the way you prefer"
+    },
+    "mostPopular": "Most Popular",
+    "ownApp": "Own Your App",
+    "from": "from",
+    "plusMaintenance": "+ maintenance costs",
+    "currencyPerMonth": "$/month",
+    "currencyOnce": "$",
+    "cheaperBy": "Save ${amount} with a subscription, you can cancel anytime.",
+    "check": "CHECK IT OUT",
+    "noCardNeeded": "* No card required to start",
+    "includes": "What's included",
+    "comingSoon": "Coming Soon",
+    "stripeIntegration": "STRIPE Integration - sell e-books",
+    "limits": "Limits",
+    "plans": {
+      "rookie": {
+        "name": "Rookie",
+        "description": "Everything you need to start creating and earning!",
+        "button": "21 days for free",
+        "feature1": "Advanced AI-powered E-book Generator",
+        "feature2": "Automatic AI-powered Landing Page Generator",
+        "feature3": "Detailed visit and download statistics",
+        "feature4": "Intuitive CRM for Lead Management",
+        "feature5": "Integration with buycoffee.to to earn from day one",
+        "notIncluded1": "max. 1 new e-book per month",
+        "notIncluded2": "max. 1 source per e-book",
+        "notIncluded3": "max. 6 chapters per e-book",
+        "notIncluded4": "max. 1 active landing page",
+        "notIncluded5": "max. 100 contacts in the database",
+        "notIncluded6": "Branding \"made with inflee.app\"",
+        "notIncluded7": "Support with up to 72h response time"
+      },
+      "creator": {
+        "name": "Creator",
+        "description": "Everything you need to grow and earn seriously!",
+        "button": "Start Plan",
+        "feature1": "Guaranteed Paid Collaboration Offer",
+        "feature2": "Advanced AI-powered E-book Generator",
+        "feature3": "Automatic AI-powered Landing Page Generator",
+        "feature4": "Detailed visit and download statistics",
+        "feature5": "Intuitive CRM for Lead Management",
+        "feature6": "Integration with buycoffee.to to earn from day one",
+        "notIncluded1": "up to 5 new e-books per month",
+        "notIncluded2": "up to 5 sources per e-book",
+        "notIncluded3": "up to 12 chapters per e-book",
+        "notIncluded4": "up to 5 active landing pages",
+        "notIncluded5": "up to 1000 contacts in the database",
+        "notIncluded6": "Branding \"made with inflee.app\"",
+        "notIncluded7": "Support with up to 24h response time"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "For influencers who don't want limits!",
+        "button": "Start Plan",
+        "feature1": "Unlimited e-books",
+        "feature2": "Unlimited sources",
+        "feature3": "Unlimited chapters",
+        "feature4": "Unlimited landing pages",
+        "feature5": "Unlimited leads",
+        "feature6": "No \"made with inflee.app\" branding",
+        "feature7": "Support with up to 3h response time"
+      },
+      "whitelabel": {
+        "name": "White Label",
+        "description": "For agencies and businesses",
+        "button": "Get a Quote",
+        "modalSubject": "White Label Inquiry",
+        "feature1": "Your own branding",
+        "feature2": "Your own domain",
+        "feature3": "Your own Meta Pixel / GTM",
+        "feature4": "E-book personalization",
+        "feature5": "Landing page personalization",
+        "feature6": "Built-in integrations with external tools",
+        "feature7": "Freedom to choose AI models, including local ones",
+        "feature8": "Ability to resell subscriptions",
+        "feature9": "Possibility of financing through grants"
+      }
+    }
+  },
+  "faq": {
+    "title": {
+      "part1": "Have questions?",
+      "part2": "We have answers"
+    },
+    "faq1": {
+      "q": "Who is Inflee for?",
+      "a": "Inflee is for anyone who wants to turn their knowledge into a digital product: creators, experts, coaches, freelancers, marketers, and small businesses. If you have knowledge to share and want to build a community, Inflee is for you. No technical skills or business registration required."
+    },
+    "faq2": {
+      "q": "What kind of content can I use to create an e-book?",
+      "a": "You can paste a link to an article, a LinkedIn post, share a Google/Notion document, or upload a PDF/DOCX/TXT file. Inflee also accepts plain text copied directly. We support most popular content formats."
+    },
+    "faq3": {
+      "q": "Can I edit the generated content?",
+      "a": "Yes. Both the e-book content and the landing page copy are fully editable. The AI does 90% of the work, you provide the final touch. You have full control over every element – from titles to illustrations."
+    },
+    "faq4": {
+      "q": "Do I need to provide card details to start?",
+      "a": "No. The 21-day free trial does not require a credit card. Just sign up and start creating. No strings attached."
+    },
+    "faq5": {
+      "q": "Do I need a registered business?",
+      "a": "No. You can start earning from your knowledge without registering a business. If you use buycoffee.to, they handle the formal aspects. Inflee does not require any company documents."
+    },
+    "faq6": {
+      "q": "How much does it cost to generate graphics with AI?",
+      "a": "All costs for generating AI graphics are included in your plan's price. You pay nothing extra for covers or illustrations. The free plan has a generation limit, while paid plans are unlimited."
+    }
+  },
+  "finalCta": {
+    "title": {
+      "part1": "Ready to turn your passion",
+      "part2": "into a",
+      "part3": "thriving business?"
+    },
+    "subtitle": "Join thousands of creators who are already building their mailing lists and earning from their knowledge. Your journey starts here.",
+    "button": "Build your first e-book for free"
+  },
+  "footer": {
+    "copyright": "© 2025 Inflee. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact"
+  },
+  "contactModal": {
+    "title": "Contact Us",
+    "subtitle": "Fill out the form, and we will get back to you.",
+    "thankYou": "Thank you for contacting us! We will respond as soon as possible.",
+    "close": "Close",
+    "subject": "Subject",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "your@email.com",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "+1 123 456 789",
+    "consent": "I agree to a one-time email and phone contact for marketing purposes.",
+    "submitButton": "Send"
+  }
+}

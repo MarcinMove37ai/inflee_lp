@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset i podstawowe style dla mobile */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Zapewnienie właściwego wyśrodkowania kontenerów */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Dodatkowe style dla lepszej responsywności - zmniejszone marginesy mobile */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 0.5rem; /* Zmniejszone z 1rem na 0.25rem dla mniejszych marginesów */
+    padding-right: 0.5rem; /* Zmniejszone z 1rem na 0.25rem dla mniejszych marginesów */
+  }
+}
+
+/* Zapobieganie horizontal scroll na mobile */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Usprawnienie touch scrolling na iOS */
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fixes dla flag emoji na różnych systemach */
+.twemoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+
+/* Zapewnienie płynnych przejść */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Fix dla mobile viewport units */
+.min-h-screen {
+  min-height: 100vh;
+  min-height: 100svh; /* Safari mobile fix */
+}
+
+/* Usprawnienie focus states dla accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Zapobieganie zoom na input focus w iOS */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Fix dla overflow na mobile */
+@media (max-width: 768px) {
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+/* Dodatkowe usprawnienia dla iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Poprawki dla flex i grid na starszych przeglądarkach */
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+}
+
+/* Fix dla backdrop-filter na niektórych przeglądarkach */
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* Usprawnienie dla smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
