@@ -1,6 +1,5 @@
 // app/[locale]/page.tsx
 "use client";
-import { AppAnimation } from "./components/AppAnimation";
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { createPortal } from 'react-dom';
 import React, { useEffect, useMemo, useState, FormEvent } from "react";
@@ -108,7 +107,7 @@ const ImageGallery: React.FC<{ images: string[] }> = ({ images }) => {
           <div className="p-1.5 bg-black/20 backdrop-blur-sm border border-purple-500/50 rounded-xl shadow-2xl">
             <img src={selectedImage} alt="Enlarged gallery image" className="max-w-full max-h-[85vh] object-contain rounded-md" />
           </div>
-          <button onClick={closeModal} className="absolute -top-4 -right-4 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg z-20 hover:scale-110 transition-transform" aria-label="Close gallery"> &times; </button>
+          <button onClick={closeModal} className="absolute -top-3 -right-3 bg-white/10 hover:bg-white/20 text-white rounded-full w-8 h-8 flex items-center justify-center text-2xl z-20 hover:scale-110 transition-transform" aria-label="Close gallery"> &times; </button>
         </motion.div>
       </div>
       <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 p-2 rounded-full transition" aria-label="Next image"> <ChevronRight className="w-6 h-6 text-white" /> </button>
@@ -145,9 +144,6 @@ function cx(...a: (string | false | undefined)[]) {
 
 const InfleeVerticalLanding: React.FC = () => {
   const t = useTranslations();
-  // DEBUG - pokaż aktualny locale i przykładowy tekst
-  console.log('Current locale:', t('nav.features'));
-  console.log('Hero title:', t('hero.title1.part1'));
   const [open, setOpen] = useState<number | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
   const [isModalOpen, setModalOpen] = useState(false);
@@ -265,7 +261,6 @@ const InfleeVerticalLanding: React.FC = () => {
 
   const styles = useMemo(
     () => ({
-      heroGlow: "shadow-[0_0_40px_rgba(168,85,247,0.30),0_0_60px_rgba(99,102,241,0.20)] md:shadow-[0_0_80px_rgba(168,85,247,0.30),0_0_120px_rgba(99,102,241,0.20)]",
       featureCard: "bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition",
       cta: "bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-[0_10px_20px_rgba(139,92,246,0.20)] hover:shadow-[0_15px_25px_rgba(139,92,246,0.30)] transition hover:-translate-y-0.5",
     }),
@@ -291,18 +286,18 @@ const InfleeVerticalLanding: React.FC = () => {
   };
 
   return (
-    <div className="overflow-x-hidden bg-[#0A0A0A] text-slate-200 min-h-screen">
+    <div className="overflow-x-hidden min-h-screen">
       <ContactModal isOpen={isModalOpen} onClose={handleCloseModal} subject={modalSubject} />
+      {/* USUWAMY BLOK <style jsx global>, ponieważ globalne style są teraz w layout.tsx */}
       <style jsx global>{`
         html { scroll-behavior: smooth; }
-        body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
         .gradient-text { background: linear-gradient(135deg, #A855F7, #6366F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
       `}</style>
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
-          <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10 h-20">
+          <div className="container mx-auto px-6 h-full flex justify-between items-center">
             <a href="#" className="text-2xl font-bold gradient-text">inflee.app</a>
             <nav className="hidden md:flex items-center space-x-8 text-sm">
               {nav.map((n) => (
@@ -320,58 +315,54 @@ const InfleeVerticalLanding: React.FC = () => {
           </div>
       </header>
 
-      <main className="pt-0">
-        <section className="py-20 md:py-32 relative overflow-visible">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-          <div className="container mx-auto px-6 relative z-10">
-            <motion.div className="grid lg:grid-cols-2 gap-12 items-center" initial="hidden" animate="visible" variants={heroContainerVariants}>
-              <div className="text-left">
-                <motion.div variants={heroItemVariants}>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
-                    {t('hero.title1.part1')} <span className="gradient-text">{t('hero.title1.part2')}</span> {t('hero.title1.part3')}
-                  </h1>
-                  <div className="w-24 h-px bg-gradient-to-r from-purple-500 to-pink-500 my-4"></div>
-                </motion.div>
-
-                <motion.div variants={heroItemVariants}>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
-                    {t('hero.title2.part1')} <span className="gradient-text">{t('hero.title2.part2')}</span>
-                  </h1>
-                  <div className="w-64 h-px bg-gradient-to-r from-purple-500 to-pink-500 my-4"></div>
-                </motion.div>
-
-                <motion.p variants={heroItemVariants} className="mt-6 text-lg md:text-xl text-slate-400">
-                  {t('hero.subtitle')} <br />
-                </motion.p>
-
-                <div className="mt-8 space-y-3">
-                  {[t('hero.benefit1'), t('hero.benefit2'), t('hero.benefit3')].map((point, i) => (
-                    <motion.div key={i} variants={heroItemVariants} className="flex items-center gap-3 text-slate-300">
-                      <Check className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                      <span className="text-base md:text-lg">{point}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <motion.div variants={heroItemVariants} className="mt-10">
-                  <a href="/register" className={cx("inline-block px-24 py-4 rounded-xl font-bold", styles.cta)}>
-                    {t('hero.cta')}
-                  </a>
-                  <p className="mt-4 text-xs text-slate-500">
-                    {t('hero.subCta')}
-                  </p>
-                </motion.div>
+      <main className="pt-20">
+        {/* Przywracamy zwykły tag <section> bez animacji wejścia, aby uprościć kod i uniknąć konfliktów */}
+        <section className="relative min-h-[calc(100vh-5rem)] flex items-center justify-start">
+          <div className="absolute top-0 left-0 w-full h-full z-0 flex justify-end">
+            <img
+              src="/hero.png"
+              alt=""
+              aria-hidden="true"
+              className="w-full h-full object-cover object-center md:w-auto"
+            />
+          </div>
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent z-10" />
+          <div className="container mx-auto px-6 relative z-20">
+            <motion.div
+              className="max-w-2xl text-left"
+              initial="hidden"
+              animate="visible"
+              variants={heroContainerVariants}
+            >
+              <motion.div variants={heroItemVariants}>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+                  {t('hero.title1.part1')} <span className="gradient-text">{t('hero.title1.part2')}</span> {t('hero.title1.part3')}
+                </h1>
+                <div className="w-48 h-px bg-gradient-to-r from-purple-500 to-pink-500 my-6"></div>
+              </motion.div>
+              <motion.div variants={heroItemVariants}>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+                  {t('hero.title2.part1')} <span className="gradient-text">{t('hero.title2.part2')}</span>
+                </h2>
+              </motion.div>
+              <motion.p variants={heroItemVariants} className="mt-8 text-lg text-slate-300">
+                {t('hero.subtitle')}
+              </motion.p>
+              <div className="mt-8 space-y-3">
+                {[t('hero.benefit1'), t('hero.benefit2'), t('hero.benefit3')].map((point, i) => (
+                  <motion.div key={i} variants={heroItemVariants} className="flex items-center gap-3 text-slate-300">
+                    <Check className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                    <span className="text-base md:text-lg">{point}</span>
+                  </motion.div>
+                ))}
               </div>
-
-              <motion.div
-                className="px-4 sm:px-4 lg:px-0 mb-12 lg:mb-0"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              >
-                <div className={cx("rounded-2xl p-2 bg-white/5 border border-white/10 aspect-square", styles.heroGlow)}>
-                  <AppAnimation />
-                </div>
+              <motion.div variants={heroItemVariants} className="mt-10">
+                <a href="/register" className={cx("inline-block px-12 py-4 rounded-lg font-bold", styles.cta)}>
+                  {t('hero.cta')}
+                </a>
+                <p className="mt-4 text-xs text-slate-400">
+                  {t('hero.subCta')}
+                </p>
               </motion.div>
             </motion.div>
           </div>

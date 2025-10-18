@@ -127,7 +127,9 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className="scroll-smooth">
+    // POPRAWKA 1: Dodanie klasy `bg-[#0A0A0A]` do tagu <html>
+    // To jest kluczowa zmiana, która eliminuje "biały błysk".
+    <html lang={locale} className="scroll-smooth bg-[#0A0A0A]">
       <head>
         {/* Dodatkowe meta tagi dla lepszej kompatybilności */}
         <meta name="theme-color" content="#7c3aed" />
@@ -184,7 +186,9 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      <body>
+      {/* POPRAWKA 2: Dodanie domyślnego koloru tekstu `text-slate-200` do <body> */}
+      {/* Zapewnia to czytelność od samego początku ładowania strony. */}
+      <body className="text-slate-200">
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>
