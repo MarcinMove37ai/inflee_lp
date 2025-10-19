@@ -35,8 +35,10 @@
   },
   "howItWorks": {
     "title": {
-      "part1": "Create the perfect lead magnet for new audiences and engage current ones",
-      "part2": "in 3 simple steps"
+      "part1": "Create the",
+      "part2": "perfect lead magnet",
+      "part3": "for new audiences and engage current ones",
+      "part4": "in 4 simple steps"
     },
     "subtitle": "Stop procrastinating. Create an e-book and a download page for it – receive your first payments from your community today.",
     "step1": {
@@ -286,13 +288,14 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "contact": "Contact",
+    "contactSubject": "General inquiry",
     "owner": "The brand owner is Aquatrek Solutions PSA",
     "copyright": "© {year} Inflee.app. All rights reserved.",
     "navigation": "Navigation",
     "legal": "Legal",
-    "krs": "KRS: 0000000000",
-    "nip": "NIP: 0000000000",
-    "regon": "REGON: 000000000"
+    "krs": "KRS: 0001044483",
+    "nip": "NIP: PL7292750466",
+    "regon": "REGON: 525692626"
   },
   "contactModal": {
     "title": "Contact Us",
@@ -306,5 +309,31 @@
     "phonePlaceholder": "+1 123 456 789",
     "consent": "I agree to a one-time email and phone contact for marketing purposes.",
     "submitButton": "Send"
+  },
+  "imageGallery": {
+    "step1": {
+      "image1": "Choose a title and sources for your e-book",
+      "image2": "AI generates the structure and content of chapters",
+      "image3": "Editor allows you to customize every element",
+      "image4": "Ready e-book with cover and illustrations"
+    },
+    "step2": {
+      "image1": "AI creates engaging landing page content",
+      "image2": "Customize colors and texts to your needs",
+      "image3": "Responsive design on every device",
+      "image4": "Publish with one click and collect leads"
+    },
+    "step3": {
+      "image1": "All contacts in a clear database",
+      "image2": "Manage statuses and add notes",
+      "image3": "Export data to various formats",
+      "image4": "Visit and download statistics in real-time"
+    },
+    "step4": {
+      "image1": "Integration with buycoffee.to or Patronite",
+      "image2": "First payments possible today",
+      "image3": "Automation with ManyChat for free",
+      "image4": "Guarantee of paid collaboration offer"
+    }
   }
 }

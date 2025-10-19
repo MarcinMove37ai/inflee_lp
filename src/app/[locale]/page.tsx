@@ -26,29 +26,156 @@ interface Plan {
   isGolden?: boolean;
   buttonTextKey: string;
 }
+const containerWide = "container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32";
 
 // KOMPONENTY
 const ContactModal = ({ isOpen, onClose, subject }: { isOpen: boolean; onClose: () => void; subject: string; }) => {
   const t = useTranslations('contactModal');
+
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
     alert(t('thankYou'));
     onClose();
   };
+
+// BLOKADA SCROLLOWANIA - kompleksowa wersja
+useEffect(() => {
+  if (isOpen) {
+    // Zablokuj scroll na body i html
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.touchAction = 'none'; // dla mobile
+  } else {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.body.style.touchAction = '';
+  }
+
+  return () => {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.body.style.touchAction = '';
+  };
+}, [isOpen]);
+
+// ZAMYKANIE NA ESC - poprawiona wersja
+useEffect(() => {
+  if (!isOpen) return; // Dodaj listener tylko gdy modal otwarty
+
+  const handleEscape = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      onClose();
+    }
+  };
+
+  document.addEventListener('keydown', handleEscape);
+
+  return () => {
+    document.removeEventListener('keydown', handleEscape);
+  };
+}, [isOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[110] p-4" onClick={onClose}>
-          <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} transition={{ duration: 0.3, ease: 'easeInOut' }} className="bg-slate-900/80 ring-1 ring-white/10 rounded-2xl p-8 w-full max-w-md relative" onClick={(e) => e.stopPropagation()}>
-            <button onClick={onClose} className="absolute top-4 left-4 text-slate-400 hover:text-white transition-colors" aria-label={t('close')}> <X className="w-6 h-6" /> </button>
+        // 3. KLIKNIĘCIE POZA MODALEM ZAMYKA (już działa)
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[110] p-4 md:p-20"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="bg-slate-900/80 ring-1 ring-white/10 rounded-2xl p-8 w-full md:w-[480px] relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* PRZYCISK ZAMYKANIA - PRAWY GÓRNY RÓG */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors hover:bg-white/10 rounded-full p-1"
+              aria-label={t('close')}
+            >
+              <X className="w-6 h-6" />
+            </button>
+
             <h2 className="text-2xl font-bold text-white text-center mb-2">{t('title')}</h2>
             <p className="text-sm text-slate-400 text-center mb-6">{t('subtitle')}</p>
+
             <form onSubmit={handleFormSubmit} className="space-y-5">
-              <div> <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-1">{t('subject')}</label> <input type="text" id="subject" name="subject" value={subject} readOnly className="w-full bg-slate-800/50 ring-1 ring-white/10 rounded-md py-2 px-3 text-white focus:ring-indigo-400 focus:outline-none" /> </div>
-              <div> <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">{t('emailLabel')}</label> <input type="email" id="email" name="email" required placeholder={t('emailPlaceholder')} className="w-full bg-slate-800/50 ring-1 ring-white/10 rounded-md py-2 px-3 text-white placeholder-slate-400 focus:ring-indigo-400 focus:outline-none" /> </div>
-              <div> <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1">{t('phoneLabel')}</label> <input type="tel" id="phone" name="phone" required placeholder={t('phonePlaceholder')} className="w-full bg-slate-800/50 ring-1 ring-white/10 rounded-md py-2 px-3 text-white placeholder-slate-400 focus:ring-indigo-400 focus:outline-none" /> </div>
-              <div className="flex items-start space-x-3 pt-2"> <input id="consent" name="consent" type="checkbox" required className="h-4 w-4 mt-1 rounded border-slate-600 bg-slate-700 text-indigo-500 focus:ring-indigo-500" /> <div className="text-sm"> <label htmlFor="consent" className="text-slate-400">{t('consent')}</label> </div> </div>
-              <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium py-3 px-4 rounded-lg hover:opacity-90 transition-opacity shadow-lg">{t('submitButton')}</button>
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-1">
+                  {t('subject')}
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={subject}
+                  readOnly
+                  className="w-full bg-slate-800/50 ring-1 ring-white/10 rounded-md py-2 px-3 text-white focus:ring-indigo-400 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">
+                  {t('emailLabel')}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder={t('emailPlaceholder')}
+                  className="w-full bg-slate-800/50 ring-1 ring-white/10 rounded-md py-2 px-3 text-white placeholder-slate-400 focus:ring-indigo-400 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1">
+                  {t('phoneLabel')}
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder={t('phonePlaceholder')}
+                  className="w-full bg-slate-800/50 ring-1 ring-white/10 rounded-md py-2 px-3 text-white placeholder-slate-400 focus:ring-indigo-400 focus:outline-none"
+                />
+              </div>
+
+              <div className="flex items-start space-x-3 pt-2">
+                <input
+                  id="consent"
+                  name="consent"
+                  type="checkbox"
+                  required
+                  className="h-4 w-4 mt-1 rounded border-slate-600 bg-slate-700 text-indigo-500 focus:ring-indigo-500"
+                />
+                <div className="text-sm">
+                  <label htmlFor="consent" className="text-slate-400">
+                    {t('consent')}
+                  </label>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium py-3 px-4 rounded-lg hover:opacity-90 transition-opacity shadow-lg"
+              >
+                {t('submitButton')}
+              </button>
             </form>
           </motion.div>
         </motion.div>
@@ -58,70 +185,244 @@ const ContactModal = ({ isOpen, onClose, subject }: { isOpen: boolean; onClose: 
 };
 
 const ImageGallery: React.FC<{ images: string[] }> = ({ images }) => {
+  const t = useTranslations();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  useEffect(() => {
-    setIsMounted(true);
-    const checkScreenSize = () => setIsMobile(window.innerWidth < 768);
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => {
-      window.removeEventListener('resize', checkScreenSize);
-      if (activeIndex !== null) {
-        document.body.style.overflow = 'auto';
-      }
+  // Minimalna odległość swipe (w px)
+  const minSwipeDistance = 50;
+
+  // ZAMYKANIE NA ESC
+    useEffect(() => {
+  setIsMounted(true);
+  const checkScreenSize = () => setIsMobile(window.innerWidth < 768);
+      checkScreenSize();
+      window.addEventListener('resize', checkScreenSize);
+      return () => {
+        window.removeEventListener('resize', checkScreenSize);
+      };
+    }, []);
+
+    // BLOKADA SCROLLOWANIA - kompleksowa wersja (jak w ContactModal)
+      useEffect(() => {
+        if (activeIndex !== null) {
+          // Zablokuj scroll na body i html
+          const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+          document.body.style.paddingRight = `${scrollbarWidth}px`;
+          document.body.style.touchAction = 'none'; // dla mobile
+        } else {
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+          document.body.style.touchAction = '';
+        }
+
+        return () => {
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+          document.body.style.touchAction = '';
+        };
+      }, [activeIndex]);
+
+      // ZAMYKANIE NA ESC
+      useEffect(() => {
+        if (activeIndex === null) return; // Tylko gdy modal otwarty
+
+        const handleEscape = (e: KeyboardEvent) => {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            closeModal();
+          }
+        };
+
+        document.addEventListener('keydown', handleEscape);
+
+        return () => {
+          document.removeEventListener('keydown', handleEscape);
+        };
+      }, [activeIndex]);
+
+      const openModal = (index: number) => {
+        setActiveIndex(index);
+      };
+
+    const closeModal = () => {
+      setActiveIndex(null);
     };
-  }, [activeIndex]);
 
-  const openModal = (index: number) => {
-    setActiveIndex(index);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setActiveIndex(null);
-    document.body.style.overflow = 'auto';
-  };
-
-  const goToNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const goToNext = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setActiveIndex((prevIndex) => (prevIndex === null ? 0 : (prevIndex + 1) % images.length));
   };
 
-  const goToPrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const goToPrev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setActiveIndex((prevIndex) => (prevIndex === null ? 0 : (prevIndex - 1 + images.length) % images.length));
   };
 
+  // Obsługa touch events dla swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNext();
+    }
+    if (isRightSwipe) {
+      goToPrev();
+    }
+  };
+
   const selectedImage = activeIndex !== null ? images[activeIndex] : null;
-  const xOffset = isMobile ? 40 : 50;
-  const yOffset = isMobile ? 30 : 35;
+  const xOffset = isMobile ? 40 : 80;
+  const yOffset = isMobile ? 60 : 50;
   const centralImageIndex = (images.length - 1) / 2;
 
   const modalContent = selectedImage && (
-    <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-8" onClick={closeModal}>
-      <button onClick={goToPrev} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 p-2 rounded-full transition" aria-label="Previous image"> <ChevronLeft className="w-6 h-6 text-white" /> </button>
-      <div className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative">
-          <div className="p-1.5 bg-black/20 backdrop-blur-sm border border-purple-500/50 rounded-xl shadow-2xl">
-            <img src={selectedImage} alt="Enlarged gallery image" className="max-w-full max-h-[85vh] object-contain rounded-md" />
+    <div
+      className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+      onClick={closeModal}
+    >
+      {/* PRZYCISKI NAWIGACJI - DESKTOP (NA ZEWNĄTRZ) */}
+      <button
+        onClick={goToPrev}
+        className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-30 bg-slate-900/90 hover:bg-slate-800 ring-1 ring-white/20 p-4 rounded-full transition-all hover:scale-110"
+        aria-label="Previous image"
+      >
+        <ChevronLeft className="w-8 h-8 text-white" />
+      </button>
+
+      <div
+        className="relative w-auto max-w-[90vw]"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          className="bg-slate-900/80 ring-1 ring-white/10 rounded-2xl p-6 relative"
+        >
+          {/* PRZYCISK ZAMYKANIA - PRAWY GÓRNY RÓG */}
+          <button
+            onClick={closeModal}
+            className="absolute top-4 right-4 z-20 text-slate-400 hover:text-white transition-colors hover:bg-white/10 rounded-full p-2"
+            aria-label="Close gallery"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* OBRAZ */}
+          <div className="flex flex-col items-center">
+            {/* KOMENTARZ NAD OBRAZEM */}
+            <div className="mb-4 text-center px-4">
+              <p className="text-white font-semibold text-base md:text-lg leading-relaxed">
+                {t(`imageGallery.step${Math.floor(activeIndex / 4) + 1}.image${(activeIndex % 4) + 1}`)}
+              </p>
+            </div>
+
+            <div className="relative w-full">
+              <img
+                src={selectedImage}
+                alt={`Gallery image ${activeIndex + 1}`}
+                className="w-full max-h-[70vh] object-contain rounded-lg select-none"
+              />
+            </div>
+
+            {/* WSKAŹNIK POZYCJI */}
+            <div className="mt-6 flex items-center gap-2">
+              {images.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`h-2 rounded-full transition-all ${
+                    idx === activeIndex
+                      ? 'w-8 bg-purple-500'
+                      : 'w-2 bg-slate-600'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
-          <button onClick={closeModal} className="absolute -top-3 -right-3 bg-white/10 hover:bg-white/20 text-white rounded-full w-8 h-8 flex items-center justify-center text-2xl z-20 hover:scale-110 transition-transform" aria-label="Close gallery"> &times; </button>
         </motion.div>
       </div>
-      <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 p-2 rounded-full transition" aria-label="Next image"> <ChevronRight className="w-6 h-6 text-white" /> </button>
+
+      <button
+        onClick={goToNext}
+        className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 bg-slate-900/90 hover:bg-slate-800 ring-1 ring-white/20 p-4 rounded-full transition-all hover:scale-110"
+        aria-label="Next image"
+      >
+        <ChevronRight className="w-8 h-8 text-white" />
+      </button>
     </div>
   );
 
   return (
     <>
-      <div className="relative w-full h-48 pb-24 md:h-80 flex items-center justify-center">
+      <div
+        className="
+          relative
+          w-full
+          flex
+          items-center
+          justify-center
+          py-4 md:py-8
+          min-h-[260px] md:min-h-[420px] lg:min-h-[520px]
+          overflow-visible
+          mx-auto
+          md:max-w-[80%]
+        "
+        style={{ transform: 'translateY(-1rem)' }}
+      >
         {images.map((src, index) => (
-          <div key={src} className="absolute w-full max-w-[280px] md:w-4/5 md:max-w-md transition-all duration-300 ease-in-out cursor-pointer group hover:z-20 hover:scale-105" style={{ transform: `translateX(${(index - centralImageIndex) * xOffset}px) translateY(${index * yOffset}px)`, zIndex: index }} onClick={() => openModal(index)}>
-            <div className="p-1.5 bg-black/20 backdrop-blur-sm border border-purple-500/50 rounded-xl transition-colors shadow-2xl">
-              <img src={src} alt={`Gallery image ${index + 1}`} className="w-full h-full object-cover object-top rounded-md aspect-video" />
+          <div
+            key={src}
+            className="
+              absolute
+              transition-all
+              duration-300
+              ease-in-out
+              cursor-pointer
+              group
+              hover:z-20
+              hover:scale-105
+              drop-shadow-[0_0_12px_rgba(0,0,0,0.5)]
+            "
+            style={{
+              transform: `translateX(${(index - centralImageIndex) * (xOffset + (isMobile ? 10 : 0))}px)
+                          translateY(${index * (yOffset - (isMobile ? 20 : 0))}px)
+                          translateX(-50%)`,
+              left: "50%",
+              zIndex: index,
+            }}
+            onClick={() => openModal(index)}
+          >
+            <div className="p-1.5 bg-black/20 backdrop-blur-sm border border-purple-500/50 rounded-xl transition-colors shadow-2xl aspect-[16/9]">
+              <img
+                src={src}
+                alt={`Gallery image ${index + 1}`}
+                className="w-full h-full object-cover object-top rounded-md"
+              />
             </div>
           </div>
         ))}
@@ -157,6 +458,10 @@ const InfleeVerticalLanding: React.FC = () => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    // Usuń focus z aktywnego elementu
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   const nav = [
@@ -219,7 +524,7 @@ const InfleeVerticalLanding: React.FC = () => {
   const renderPlanButton = (plan: Plan) => {
     const buttonClass = `w-full py-3 px-4 rounded-lg font-semibold text-sm transition-all shadow-md ${
       plan.isGolden
-        ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:opacity-90 shadow-lg cursor-pointer'
+        ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:opacity-90 cursor-pointer'
         : plan.highlighted
         ? 'bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-[0_10px_20px_rgba(139,92,246,0.20)] hover:shadow-[0_15px_25px_rgba(139,92,246,0.30)] hover:-translate-y-0.5'
         : 'bg-white/10 border border-white/10 hover:bg-white/20 text-white'
@@ -290,21 +595,34 @@ const InfleeVerticalLanding: React.FC = () => {
   return (
     <div className="overflow-x-hidden min-h-screen">
       <ContactModal isOpen={isModalOpen} onClose={handleCloseModal} subject={modalSubject} />
+      {/* USUWAMY BLOK <style jsx global>, ponieważ globalne style są teraz w layout.tsx */}
       <style jsx global>{`
-        html { scroll-behavior: smooth; }
-        .gradient-text { background: linear-gradient(135deg, #A855F7, #6366F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+          html { scroll-behavior: smooth; }
+          .gradient-text { background: linear-gradient(135deg, #A855F7, #6366F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+          .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+          .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+          /* DODAJ TO: */
+          .modal-open {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+          }
       `}</style>
 
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10 h-20">
-        <div className="container mx-auto px-6 h-full flex justify-between items-center">
+        <div className="container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32 h-full flex justify-between items-center">
+          {/* NOWY KOD LOGO ZNAJDUJE SIĘ TUTAJ */}
           <a href="/" className="group flex items-center cursor-pointer">
+            {/* Obrazek logo */}
             <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 group-hover:ring-white/30 transition-all duration-300 mr-3">
               <img src="/logoW.png" alt="inflee.app logo" className="w-full h-full object-contain"/>
             </div>
+
+            {/* Tekst logo i slogan */}
             <div>
               <h1 className="text-2xl font-bold gradient-text leading-tight">inflee.app</h1>
+              {/* ZMIANA JEST TUTAJ -> używamy klucza tłumaczenia */}
               <p className="mt-1 text-xs text-slate-400 tracking-wide uppercase leading-tight group-hover:text-slate-300 transition-colors duration-300">
                 {t('nav.slogan')}
               </p>
@@ -319,20 +637,23 @@ const InfleeVerticalLanding: React.FC = () => {
             ))}
           </nav>
           <div className="flex items-center gap-4">
+            {/* Przełącznik języka - widoczny tylko na desktop */}
             <div className="hidden md:block">
               <LanguageSwitcher />
             </div>
+
             <a href="/register" className={cx("px-5 py-2 rounded-lg text-sm font-semibold", styles.cta)}>
               {t('nav.register')}
             </a>
           </div>
         </div>
-      </header>
+    </header>
 
       <main className="pt-20">
-        <section className="relative min-h-[calc(100vh-5rem)] flex items-center justify-start">
-          {/* ZMIANA: Przełącznik jest teraz tutaj, jako bezpośrednie dziecko sekcji */}
-          <div className="absolute top-4 right-6 z-30 md:hidden">
+        {/* Przywracamy zwykły tag <section> bez animacji wejścia, aby uprościć kod i uniknąć konfliktów */}
+        <section className="relative min-h-[calc(100vh-5rem)] overflow-x-clip">
+          {/* Przełącznik języków - prawy górny róg */}
+          <div className="absolute top-0 right-0 z-30 pt-6 pr-6 lg:pr-16 xl:pr-24 2xl:pr-32 md:hidden">
             <LanguageSwitcher />
           </div>
 
@@ -345,32 +666,32 @@ const InfleeVerticalLanding: React.FC = () => {
             />
           </div>
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent z-10" />
-          <div className="container mx-auto px-6 relative z-20">
+          <div className="container mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[calc(100vh-5rem)]">
             <motion.div
-              className="max-w-2xl text-left"
+              className="lg:col-span-7 text-left py-12 lg:py-0 lg:pl-20 lg:pr-16 xl:pr-24 2xl:pr-32 max-w-3xl" // DODAJ max-w-3xl
               initial="hidden"
               animate="visible"
               variants={heroContainerVariants}
             >
               <motion.div variants={heroItemVariants}>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight"> {/* ZWIĘKSZ z 4xl/5xl/6xl do 5xl/6xl/7xl */}
                   {t('hero.title1.part1')} <span className="gradient-text">{t('hero.title1.part2')}</span> {t('hero.title1.part3')}
                 </h1>
                 <div className="w-48 h-px bg-gradient-to-r from-purple-500 to-pink-500 my-6"></div>
               </motion.div>
               <motion.div variants={heroItemVariants}>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight"> {/* ZWIĘKSZ z 3xl/4xl/5xl do 4xl/5xl/6xl */}
                   {t('hero.title2.part1')} <span className="gradient-text">{t('hero.title2.part2')}</span>
                 </h2>
               </motion.div>
-              <motion.p variants={heroItemVariants} className="mt-8 text-lg text-slate-300">
+              <motion.p variants={heroItemVariants} className="mt-8 text-xl text-slate-300"> {/* ZWIĘKSZ z text-lg do text-xl */}
                 {t('hero.subtitle')}
               </motion.p>
               <div className="mt-8 space-y-3">
                 {[t('hero.benefit1'), t('hero.benefit2'), t('hero.benefit3')].map((point, i) => (
                   <motion.div key={i} variants={heroItemVariants} className="flex items-center gap-3 text-slate-300">
                     <Check className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                    <span className="text-base md:text-lg">{point}</span>
+                    <span className="text-lg md:text-xl">{point}</span> {/* ZWIĘKSZ z text-base/lg do text-lg/xl */}
                   </motion.div>
                 ))}
               </div>
@@ -386,44 +707,46 @@ const InfleeVerticalLanding: React.FC = () => {
           </div>
         </section>
 
-        <section id="how-it-works" className="py-20 md:py-32">
-          <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto animate-on-scroll">
-              <h2 className="text-3xl md:text-5xl font-bold text-white">
-                {t('howItWorks.title.part1')} <span className="gradient-text">{t('howItWorks.title.part2')}</span>
-              </h2>
-              <p className="mt-4 text-lg text-slate-400">
-                {t('howItWorks.subtitle')}
-              </p>
+        <section id="how-it-works" className="py-20 md:py-32 overflow-x-clip">
+          <div className={containerWide}>
+            <div className="md:grid md:grid-cols-4 animate-on-scroll">
+              <div className="md:col-start-2 md:col-span-2 text-center">
+                <h2 className="text-3xl md:text-5xl font-bold text-white">
+                    {t('howItWorks.title.part1')} <span className="gradient-text">{t('howItWorks.title.part2')}</span> {t('howItWorks.title.part3')} <span className="gradient-text">{t('howItWorks.title.part4')}</span>
+                </h2>
+                <p className="mt-4 text-lg text-slate-400">
+                  {t('howItWorks.subtitle')}
+                </p>
+              </div>
             </div>
-            <div className="my-16 md:my-20 h-px w-full max-w-4xl mx-auto bg-gradient-to-r from-purple-500 to-pink-500 opacity-30"></div>
+           <div className="my-10 md:my-20 h-px w-full max-w-4xl mx-auto bg-gradient-to-r from-purple-500 to-pink-500 opacity-30"></div>
             <div className="mt-20">
               {howItWorks.map((step, idx) => (
                 <React.Fragment key={idx}>
                   {idx > 0 && (
-                    <div className="my-16 md:my-20 h-px w-full max-w-4xl mx-auto bg-gradient-to-r from-purple-500 to-pink-500 opacity-30"></div>
+                    <div className="my-10 md:my-20 h-px w-full max-w-4xl mx-auto bg-gradient-to-r from-purple-500 to-pink-500 opacity-30"></div>
                   )}
-                  <div className="grid md:grid-cols-2 gap-8 items-center animate-on-scroll">
+                  <div className="grid md:grid-cols-2 gap-8 items-center animate-on-scroll lg:px-20">
                     <div className={cx("order-1", idx % 2 === 0 ? "md:order-1" : "md:order-2")}>
-                      <div className="flex items-start gap-4">
-                        <div className={cx("w-16 h-16 rounded-full border flex items-center justify-center flex-shrink-0", step.ring)}>
-                          {step.icon}
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-4">
+                          <div className={cx("w-14 h-14 rounded-full border flex items-center justify-center flex-shrink-0", step.ring)}>
+                            {step.icon}
+                          </div>
+                          <h3 className="text-2xl font-bold text-white">{t(`${step.sectionKey}.title`)}</h3>
                         </div>
-                        <div>
-                          <h3 className="text-2xl font-bold text-white mb-3">{t(`${step.sectionKey}.title`)}</h3>
-                          <p className="text-slate-400 text-lg leading-relaxed mb-4">{t(`${step.sectionKey}.text`)}</p>
-                          <ul className="space-y-2">
-                            {(t.raw(`${step.sectionKey}.details`) as string[]).map((detail: string, i: number) => (
-                              <li key={i} className="flex items-center gap-2 text-slate-300 text-sm">
-                                <Check className="w-4 h-4 text-purple-400 flex-shrink-0" />
-                                <span>{detail}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                        <p className="text-slate-400 text-lg leading-relaxed">{t(`${step.sectionKey}.text`)}</p>
+                        <ul className="space-y-2">
+                          {(t.raw(`${step.sectionKey}.details`) as string[]).map((detail: string, i: number) => (
+                            <li key={i} className="flex items-center gap-2 text-slate-300 text-sm">
+                              <Check className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                              <span>{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                    <div className={cx("order-2 flex md:items-start justify-center mt-12 md:mt-0 pb-12 md:pb-0", idx % 2 === 0 ? "md:order-2" : "md:order-1")}>
+                    <div className={cx("order-2 flex md:items-start justify-center md:mt-0 pb-4 md:pb-0", idx % 2 === 0 ? "md:order-2" : "md:order-1")}>
                       <ImageGallery images={galleryImages[idx]} />
                     </div>
                   </div>
@@ -433,15 +756,17 @@ const InfleeVerticalLanding: React.FC = () => {
           </div>
         </section>
 
-        <section id="features" className="py-20 md:py-32 bg-white/5">
-          <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto animate-on-scroll">
-              <h2 className="text-3xl md:text-5xl font-bold text-white">
-                {t('features.title.part1')} <span className="gradient-text">{t('features.title.part2')}</span> {t('features.title.part3')}
-              </h2>
-              <p className="mt-4 text-lg text-slate-400">
-                {t('features.subtitle')}
-              </p>
+        <section id="features" className="py-20 md:py-32 bg-white/5 overflow-x-clip">
+          <div className={containerWide}>
+            <div className="md:grid md:grid-cols-4 animate-on-scroll">
+              <div className="md:col-start-2 md:col-span-2 text-center">
+                <h2 className="text-3xl md:text-5xl font-bold text-white">
+                  {t('features.title.part1')} <span className="gradient-text">{t('features.title.part2')}</span> {t('features.title.part3')}
+                </h2>
+                <p className="mt-4 text-lg text-slate-400">
+                  {t('features.subtitle')}
+                </p>
+              </div>
             </div>
             <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((f, i) => (
@@ -463,11 +788,11 @@ const InfleeVerticalLanding: React.FC = () => {
           </div>
         </section>
 
-        <section id="pricing" className="py-20 md:py-32">
-          <div className="container mx-auto px-6">
+        <section id="pricing" className="py-20 md:py-32 overflow-x-clip">
+          <div className="container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32">
             <div className="text-center max-w-3xl mx-auto animate-on-scroll">
               <h2 className="text-3xl md:text-5xl font-bold text-white md:whitespace-nowrap">
-                {t('pricing.title.part1')} <span className="gradient-text">{t('pricing.title.part2')} <br className="md:hidden" /> {t('pricing.title.part3')}</span>
+                {t('pricing.title.part1')} <span className="gradient-text">{t('pricing.title.part2')} {t('pricing.title.part3')}</span>
               </h2>
               <p className="mt-4 text-lg text-slate-400">{t('pricing.subtitle')}</p>
             </div>
@@ -504,7 +829,7 @@ const InfleeVerticalLanding: React.FC = () => {
               {plans.map((plan, i) => (
                 <div key={plan.id} className="relative rounded-2xl transition-all duration-300 animate-on-scroll" style={{transitionDelay: `${i * 100}ms`}}>
                   <div className={`p-0.5 rounded-2xl ${plan.highlighted ? 'bg-gradient-to-b from-purple-500 to-indigo-500' : plan.isGolden ? 'bg-gradient-to-b from-amber-500 to-yellow-600' : ''}`}>
-                    <div className={cx("relative bg-[#0A0A0A] backdrop-blur-sm rounded-[15px] h-full flex flex-col", !plan.highlighted && !plan.isGolden ? 'border border-white/10' : '')}>
+                    <div className={cx("relative bg-[#0A0A0A] backdrop-blur-sm rounded-[15px] h-full flex flex-col", !plan.highlighted && !plan.isGolden ? 'border-2 border-purple-500/20' : '')}>
                       {plan.highlighted && (
                         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                           <span className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
@@ -525,7 +850,7 @@ const InfleeVerticalLanding: React.FC = () => {
                         <p className="text-sm text-slate-400 mb-6 h-10">{t(plan.descriptionKey)}</p>
 
                         <div className="mb-2 flex flex-col items-center justify-center">
-                          <div className="border border-white/10 rounded-xl px-6 py-3 transition-colors duration-300">
+                          <div className="border border-purple-500/30 rounded-xl px-6 py-3 transition-colors duration-300">
                             <AnimatePresence mode="wait">
                               <motion.div
                                 key={plan.id === 'whitelabel' ? 'whitelabel-price' : paymentMethod}
@@ -630,52 +955,54 @@ const InfleeVerticalLanding: React.FC = () => {
           </div>
         </section>
 
-        <section id="faq" className="py-20 md:py-32">
-          <div className="container mx-auto px-6 max-w-3xl">
+        <section id="faq" className="py-20 md:py-32 overflow-x-clip">
+          <div className="container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32">
             <div className="text-center animate-on-scroll">
               <h2 className="text-3xl md:text-5xl font-bold text-white">
                 {t('faq.title.part1')} <span className="gradient-text">{t('faq.title.part2')}</span>
               </h2>
             </div>
-            <div className="mt-16 space-y-4 animate-on-scroll">
-              {faqs.map((faqKey, i) => {
-                const isOpen = open === i;
-                return (
-                  <div key={i} data-state={isOpen ? "open" : "closed"} className="rounded-xl overflow-hidden bg-white/[0.03] border border-white/10 transition">
-                    <button
-                      className="w-full flex justify-between items-center text-left p-6"
-                      onClick={() => setOpen((prev) => (prev === i ? null : i))}
-                      aria-expanded={isOpen}
-                      aria-controls={`faq-${i}`}
-                    >
-                      <span className="font-semibold text-white">{t(`${faqKey}.q`)}</span>
-                      <ChevronDown className={cx("w-5 h-5 text-slate-400 transition-transform duration-300", isOpen && "rotate-180")} />
-                    </button>
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                          style={{ overflow: 'hidden' }}
-                          id={`faq-${i}`}
-                        >
-                          <div className="px-6 pb-6 text-slate-400">
-                            <p>{t(`${faqKey}.a`)}</p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
+            <div className="md:grid md:grid-cols-4 mt-16">
+              <div className="md:col-start-2 md:col-span-2 space-y-4 animate-on-scroll">
+                {faqs.map((faqKey, i) => {
+                  const isOpen = open === i;
+                  return (
+                    <div key={i} data-state={isOpen ? "open" : "closed"} className="rounded-xl overflow-hidden bg-white/[0.03] border border-white/10 transition">
+                      <button
+                        className="w-full flex justify-between items-center text-left p-6"
+                        onClick={() => setOpen((prev) => (prev === i ? null : i))}
+                        aria-expanded={isOpen}
+                        aria-controls={`faq-${i}`}
+                      >
+                        <span className="font-semibold text-white">{t(`${faqKey}.q`)}</span>
+                        <ChevronDown className={cx("w-5 h-5 text-slate-400 transition-transform duration-300", isOpen && "rotate-180")} />
+                      </button>
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            style={{ overflow: 'hidden' }}
+                            id={`faq-${i}`}
+                          >
+                            <div className="px-6 pb-6 text-slate-400">
+                              <p>{t(`${faqKey}.a`)}</p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="py-20 md:py-32">
-          <div className="container mx-auto px-6 text-center animate-on-scroll">
+        <section className="py-20 md:py-32 overflow-x-clip">
+         <div className={containerWide + " text-center animate-on-scroll"}>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight">
               {t('finalCta.title.part1')} <br /> {t('finalCta.title.part2')} <span className="gradient-text">{t('finalCta.title.part3')}</span>
             </h2>
@@ -684,65 +1011,77 @@ const InfleeVerticalLanding: React.FC = () => {
             </p>
             <div className="mt-10">
               <a href="/register" className={cx("px-8 py-4 rounded-xl font-bold text-white text-lg", styles.cta)}>
-                🚀 {t('finalCta.button')}
+                {t('finalCta.button')}
               </a>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="py-16 border-t border-white/10">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-12">
+      <footer className="py-20 md:py-32 border-t border-white/10">
+          <div className={containerWide}>
+            <div className="grid md:grid-cols-4 gap-12"> {/* ZMIANA: 3 → 4 */}
 
-            <div className="md:col-span-1 flex flex-col items-start gap-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 mr-3">
-                  <img src="/logoW.png" alt="inflee.app logo" className="w-full h-full object-contain"/>
+              {/* Kolumna 1: Logo i informacje o marce */}
+              <div className="md:col-span-1 flex flex-col items-start gap-6">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 mr-3">
+                    <img src="/logoW.png" alt="inflee.app logo" className="w-full h-full object-contain"/>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold gradient-text leading-tight">inflee.app</h3>
+                    <p className="mt-1 text-xs text-slate-400 tracking-wide uppercase leading-tight">
+                      {t('nav.slogan')}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold gradient-text leading-tight">inflee.app</h3>
-                  <p className="mt-1 text-xs text-slate-400 tracking-wide uppercase leading-tight">
-                    {t('nav.slogan')}
-                  </p>
+                <div className="h-px w-64 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50"></div>
+                <div className="text-sm text-slate-400">
+                  <p>{t('footer.owner')}</p>
                 </div>
+                <div className="text-xs text-slate-500 space-y-1">
+                  <p>{t('footer.krs')}</p>
+                  <p>{t('footer.nip')}</p>
+                  <p>{t('footer.regon')}</p>
+                </div>
+                <p className="text-xs text-slate-500 pt-2">
+                  {t('footer.copyright', { year: new Date().getFullYear() })}
+                </p>
               </div>
-              <div className="text-sm text-slate-400">
-                <p>{t('footer.owner')}</p>
-              </div>
-              <div className="text-xs text-slate-500 space-y-1">
-                <p>{t('footer.krs')}</p>
-                <p>{t('footer.nip')}</p>
-                <p>{t('footer.regon')}</p>
-              </div>
-              <p className="text-xs text-slate-500 pt-2">
-                {t('footer.copyright', { year: new Date().getFullYear() })}
-              </p>
-            </div>
 
-            <div className="hidden md:block md:col-span-1">
-              <h4 className="font-semibold text-white">{t('footer.navigation')}</h4>
-              <div className="my-4 h-px w-16 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50"></div>
-              <div className="flex flex-col space-y-3 items-start">
-                <a href="#how-it-works" className="text-slate-400 hover:text-white transition">{t('nav.howItWorks')}</a>
-                <a href="#features" className="text-slate-400 hover:text-white transition">{t('nav.features')}</a>
-                <a href="#pricing" className="text-slate-400 hover:text-white transition">{t('nav.pricing')}</a>
-                <a href="#faq" className="text-slate-400 hover:text-white transition">{t('nav.faq')}</a>
-              </div>
-            </div>
+              {/* Kolumna 2: PUSTA - NOWA */}
+              <div className="hidden md:block md:col-span-1"></div>
 
-            <div className="md:col-span-1">
-              <h4 className="font-semibold text-white">{t('footer.legal')}</h4>
-              <div className="my-4 h-px w-16 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50"></div>
-              <div className="flex flex-col space-y-3 items-start">
-                <a href="#" className="text-slate-400 hover:text-white transition">{t('footer.privacy')}</a>
-                <a href="#" className="text-slate-400 hover:text-white transition">{t('footer.terms')}</a>
-                <a href="mailto:kontakt@inflee.app" className="text-slate-400 hover:text-white transition">{t('footer.contact')}</a>
+              {/* Kolumna 3: Nawigacja */}
+              <div className="hidden md:block md:col-span-1">
+                  <h4 className="font-semibold text-white text-right">{t('footer.navigation')}</h4>
+                  <div className="my-4 h-px w-48 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50 ml-auto"></div>
+                  <div className="flex flex-col space-y-3 items-end">
+                    <a href="#how-it-works" className="text-slate-400 hover:text-white transition text-right">{t('nav.howItWorks')}</a>
+                    <a href="#features" className="text-slate-400 hover:text-white transition text-right">{t('nav.features')}</a>
+                    <a href="#pricing" className="text-slate-400 hover:text-white transition text-right">{t('nav.pricing')}</a>
+                    <a href="#faq" className="text-slate-400 hover:text-white transition text-right">{t('nav.faq')}</a>
+                  </div>
               </div>
-            </div>
 
+              {/* Kolumna 4: Linki prawne i kontakt */}
+              <div className="md:col-span-1">
+                  <h4 className="font-semibold text-white text-right">{t('footer.legal')}</h4>
+                  <div className="my-4 h-px w-48 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50 ml-auto"></div>
+                  <div className="flex flex-col space-y-3 items-end">
+                    <a href="#" className="text-slate-400 hover:text-white transition text-right">{t('footer.privacy')}</a>
+                    <a href="#" className="text-slate-400 hover:text-white transition text-right">{t('footer.terms')}</a>
+                    <button
+                      onClick={() => handleOpenModal(t('footer.contactSubject'))}
+                      className="text-slate-400 hover:text-white transition text-right cursor-pointer bg-transparent border-0 p-0"
+                    >
+                      {t('footer.contact')}
+                    </button>
+                  </div>
+              </div>
+
+            </div>
           </div>
-        </div>
       </footer>
     </div>
   );

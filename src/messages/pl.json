@@ -35,13 +35,15 @@
   },
   "howItWorks": {
     "title": {
-      "part1": "Stwórz doskonały magnes na nowych odbiorców i zaangażuj obecnych",
-      "part2": "w 3. prostych krokach"
+      "part1": "Stwórz",
+      "part2": "doskonały magnes",
+      "part3": "na nowych odbiorców i zaangażuj obecnych",
+      "part4": "w 4. prostych krokach"
     },
     "subtitle": "Przestań odkładać na później. Stwórz e-book oraz stronę do jego pobierania – odbierz pierwsze wpłaty od Twojej Społeczności jeszcze dziś.",
     "step1": {
       "title": "1. Stwórz profesjonalny e-book",
-      "text": "Podaj tytuł, wklej link do artykułu lub wgraj PDF. Kliknij \"Generuj\" i kilka chwil masz gotowy e-book. AI tworzy okładkę, spis treści, formatuje rozdziały i dodaje ilustracje. Możesz wszystko edytować w przejrzystym edytorze lub zostawić jak jest — Twój wybór.",
+      "text": "Podaj tytuł, wklej link do artykułu lub wgraj PDF. Kliknij \"Generuj\" i kilka chwil masz gotowy e-book. AI tworzy okładkę, spis treści, formatuje rozdziały i dodaje ilustracje. Możesz wszystko edytować w przejrzystym edytorze lub zostawić jak jest – Twój wybór.",
       "details": [
         "Podaj tytuł i źródła (link/PDF)",
         "AI wygeneruje strukturę i treść rozdziałów",
@@ -52,13 +54,13 @@
     },
     "step2": {
       "title": "2. Wygeneruj stronę zapisu",
-      "text": "Na podstawie treści Twojego e-booka AI stworzy kompletną stronę WWW z angażującą treścią, formularzem zapisu i przyciskami CTA. Dostosujesz kolory, teksty i layout w kilka kliknięć. Publikujesz jednym przyciskiem — gotowa strona do udostępnienia w Social Mediach.",
+      "text": "Na podstawie treści Twojego e-booka AI stworzy kompletną stronę WWW z angażującą treścią, formularzem zapisu i przyciskami CTA. Dostosujesz kolory, teksty i layout w kilka kliknięć. Publikujesz jednym przyciskiem – gotowa strona do udostępnienia w Social Mediach.",
       "details": [
         "AI napisze całą treść strony zapisu",
         "Możesz dowolnie dostosować treść i kolorystykę strony",
         "Responsywny design (piękna i skuteczna na każdym urządzeniu)",
         "Kiedy wszystko jest gotowe, publikujesz jednym przyciskiem",
-        "Teraz strona jest dostępna для wszystkich przez link lub kod QR",
+        "Teraz strona jest dostępna dla wszystkich przez link lub kod QR",
         "Udostępnij, zbieraj kontakty i przyjmuj wpłaty"
       ]
     },
@@ -75,7 +77,7 @@
     },
     "step4": {
       "title": "4. Monetyzuj i automatyzuj",
-      "text": "Łatwo zintegrujesz swoje konto w buycoffee.to czy Patronite — wdzięczni odbiorcy chętnie postawią Ci kawę, a Ty ciesz się pierwszą monetyzacją. Podłącz ManyChat i automatycznie rozsyłaj e-booki osobom komentującym Twoje posty na Instagramie czy Facebooku. Pierwsze 1000 kontaktów w ManyChat masz za darmo.",
+      "text": "Łatwo zintegrujesz swoje konto w buycoffee.to czy Patronite – wdzięczni odbiorcy chętnie postawią Ci kawę, a Ty ciesz się pierwszą monetyzacją. Podłącz ManyChat i automatycznie rozsyłaj e-booki osobom komentującym Twoje posty na Instagramie czy Facebooku. Pierwsze 1000 kontaktów w ManyChat masz za darmo.",
       "details": [
         "Prosta integracja z buycoffee.to czy Patronite",
         "Pierwsze wpłaty od fanów możliwe jeszcze dziś",
@@ -275,7 +277,7 @@
   },
   "finalCta": {
     "title": {
-      "part1": "Gotów, by zamienić swoją pasję",
+      "part1": "Zamień w końcu swoją pasję",
       "part2": "w",
       "part3": "działający biznes?"
     },
@@ -286,13 +288,14 @@
     "privacy": "Polityka Prywatności",
     "terms": "Regulamin",
     "contact": "Kontakt",
+    "contactSubject": "Ogólne zapytanie",
     "owner": "Właścicielem marki jest Aquatrek Solutions PSA",
     "copyright": "© {year} Inflee.app. Wszelkie prawa zastrzeżone.",
     "navigation": "Nawigacja",
     "legal": "Informacje Prawne",
-    "krs": "KRS: 0000000000",
-    "nip": "NIP: 0000000000",
-    "regon": "REGON: 000000000"
+    "krs": "KRS: 0001044483",
+    "nip": "NIP: PL7292750466",
+    "regon": "REGON: 525692626"
   },
   "contactModal": {
     "title": "Skontaktuj się z nami",
@@ -306,5 +309,31 @@
     "phonePlaceholder": "+48 123 456 789",
     "consent": "Wyrażam zgodę na jednorazowy kontakt mailowy i telefoniczny do celów marketingowych.",
     "submitButton": "Wyślij"
+  },
+  "imageGallery": {
+    "step1": {
+      "image1": "Wybierz tytuł i źródła dla swojego e-booka",
+      "image2": "AI generuje strukturę i treść rozdziałów",
+      "image3": "Edytor pozwala dostosować każdy element",
+      "image4": "Gotowy e-book z okładką i ilustracjami"
+    },
+    "step2": {
+      "image1": "AI tworzy angażującą treść strony zapisu",
+      "image2": "Dostosuj kolory i teksty według swoich potrzeb",
+      "image3": "Responsywny design na każdym urządzeniu",
+      "image4": "Opublikuj jednym kliknięciem i zbieraj leady"
+    },
+    "step3": {
+      "image1": "Wszystkie kontakty w przejrzystej bazie danych",
+      "image2": "Zarządzaj statusami i dodawaj notatki",
+      "image3": "Eksportuj dane do różnych formatów",
+      "image4": "Statystyki wizyt i pobrań w czasie rzeczywistym"
+    },
+    "step4": {
+      "image1": "Integracja z buycoffee.to lub Patronite",
+      "image2": "Pierwsze wpłaty możliwe już dziś",
+      "image3": "Automatyzacja z ManyChat za darmo",
+      "image4": "Gwarancja propozycji płatnej współpracy"
+    }
   }
 }

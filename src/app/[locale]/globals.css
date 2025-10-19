@@ -2,79 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Reset i podstawowe style dla mobile */
+/* ============================================
+   ULTRA RESTRYKCYJNA BLOKADA HORIZONTAL SCROLL
+   ============================================ */
+
 * {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+  /* GLOBALNA BLOKADA HORIZONTAL SCROLL */
+  overflow-x: clip !important;
+  max-width: 100vw;
 }
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip !important;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100vw !important;
+  position: relative;
 }
 
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: clip !important;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100vw !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-/* Zapewnienie właściwego wyśrodkowania kontenerów */
-.container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Dodatkowe style dla lepszej responsywności - zmniejszone marginesy mobile */
-@media (max-width: 640px) {
-  .container {
-    padding-left: 0.5rem; /* Zmniejszone z 1rem na 0.25rem dla mniejszych marginesów */
-    padding-right: 0.5rem; /* Zmniejszone z 1rem na 0.25rem dla mniejszych marginesów */
-  }
-}
-
-/* Zapobieganie horizontal scroll na mobile */
-html, body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-/* Usprawnienie touch scrolling na iOS */
-body {
+  position: relative;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Fixes dla flag emoji na różnych systemach */
-.twemoji {
-  height: 1em;
-  width: 1em;
-  margin: 0 .05em 0 .1em;
-  vertical-align: -0.1em;
+/* ABSOLUTNA BLOKADA dla wszystkich głównych kontenerów */
+html, body, #__next, main, section, div, article, aside, header, footer, nav {
+  max-width: 100vw !important;
+  overflow-x: clip !important;
 }
 
-/* Zapewnienie płynnych przejść */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+/* Container zawsze w 100% viewport bez overflow */
+.container {
+  width: 100%;
+  max-width: 100% !important;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: clip !important;
 }
+
+/* Responsywne paddingi dla container */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* ============================================
+   WYJĄTKI - Elementy które mogą mieć scroll
+   ============================================ */
+
+/* Modals i overlays mogą mieć własny scroll Y */
+.modal-scroll-content,
+.allow-scroll-y {
+  overflow-y: auto !important;
+  overflow-x: clip !important;
+}
+
+/* Jeśli kiedykolwiek będzie potrzebny horizontal scroll */
+.allow-scroll-x {
+  overflow-x: auto !important;
+}
+
+/* ============================================
+   PRECYZYJNA KONTROLA TEKSTÓW I NAGŁÓWKÓW
+   ============================================ */
+
+/* Nagłówki - zapobieganie overflow ale dozwolone word-wrap */
+h1, h2, h3, h4, h5, h6 {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Tekst w nagłówkach */
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Wszystkie elementy tekstowe */
+p, span, a, li, td, th {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* ============================================
+   MOBILE VIEWPORT I ACCESSIBILITY
+   ============================================ */
 
 /* Fix dla mobile viewport units */
 .min-h-screen {
   min-height: 100vh;
-  min-height: 100svh; /* Safari mobile fix */
-}
-
-/* Usprawnienie focus states dla accessibility */
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid #8b5cf6;
-  outline-offset: 2px;
+  min-height: 100svh;
 }
 
 /* Zapobieganie zoom na input focus w iOS */
@@ -88,17 +140,13 @@ textarea:focus-visible {
   }
 }
 
-/* Fix dla overflow na mobile */
-@media (max-width: 768px) {
-  body {
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  .container {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
+/* Usprawnienie focus states */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
 }
 
 /* Dodatkowe usprawnienia dla iOS Safari */
@@ -112,23 +160,14 @@ textarea:focus-visible {
   }
 }
 
-/* Poprawki dla flex i grid na starszych przeglądarkach */
-.grid {
-  display: grid;
-}
-
-.flex {
-  display: flex;
-}
-
-/* Fix dla backdrop-filter na niektórych przeglądarkach */
+/* Fix dla backdrop-filter */
 @supports not (backdrop-filter: blur(12px)) {
   .backdrop-blur-md {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(0, 0, 0, 0.95);
   }
 }
 
-/* Usprawnienie dla smooth scroll */
+/* Usprawnienie smooth scroll */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -141,4 +180,83 @@ textarea:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ============================================
+   UKRYCIE WSZYSTKICH SCROLLBARÓW
+   ============================================ */
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Internet Explorer i Edge Legacy */
+body {
+  -ms-overflow-style: none;
+}
+
+/* Dodatkowe zapewnienie ukrycia scrollbarów */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Dla wszystkich elementów ze scrollem */
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+*::-webkit-scrollbar-track {
+  display: none;
+}
+
+*::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+/* ============================================
+   DODATKOWE ZABEZPIECZENIA
+   ============================================ */
+
+/* Zapobieganie transformom wykraczającym poza viewport */
+img, picture, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+  overflow: clip;
+}
+
+/* Flex i Grid kontenery */
+.flex, .grid {
+  max-width: 100vw !important;
+  overflow-x: clip !important;
+}
+
+/* Absolute i Fixed positioning */
+[style*="position: absolute"],
+[style*="position: fixed"] {
+  max-width: 100vw !important;
+}
+
+/* ============================================
+   FRAMER MOTION COMPATIBILITY
+   ============================================ */
+
+/* Framer Motion divy zachowują vertical overflow dla animacji */
+[data-framer-name],
+.framer-motion-div {
+  overflow-y: visible !important;
+  overflow-x: clip !important;
 }
