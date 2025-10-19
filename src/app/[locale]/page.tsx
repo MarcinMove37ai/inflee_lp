@@ -629,7 +629,7 @@ const InfleeVerticalLanding: React.FC = () => {
             <div className="absolute top-0 left-0 w-full h-full z-0 flex justify-end">
               {/* ✅ ZMIANA: Hero image - zamiana <img> na <Image> z priority */}
               <Image
-                src="/hero.png"
+                src="/hero.webp"
                 alt=""
                 aria-hidden="true"
                 width={1920}
