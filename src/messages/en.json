@@ -335,5 +335,35 @@
       "image3": "Automation with ManyChat for free",
       "image4": "Guarantee of paid collaboration offer"
     }
+  },
+  "cookies": {
+    "banner": {
+      "title": "🍪 We use cookies",
+      "description": "We use cookies to improve your experience on our website. Learn more in our",
+      "privacyLink": "Privacy Policy",
+      "acceptAll": "Accept all",
+      "customize": "Customize",
+      "rejectAll": "Reject all"
+    },
+    "settings": {
+      "title": "Cookie settings",
+      "subtitle": "Choose which cookies you want to accept",
+      "required": "Required",
+      "save": "Save preferences",
+      "cancel": "Cancel",
+      "necessary": {
+        "title": "Necessary cookies",
+        "description": "These cookies are essential for the website to function and cannot be disabled."
+      },
+      "analytics": {
+        "title": "Analytics cookies",
+        "description": "Help us understand how visitors use our website by collecting anonymous data."
+      },
+      "marketing": {
+        "title": "Marketing cookies",
+        "description": "Used to track visitors across websites to display relevant ads."
+      }
+    },
+    "close": "Close"
   }
 }

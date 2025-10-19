@@ -3,6 +3,7 @@ import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import type { Metadata, Viewport } from 'next';
+import CookieConsent from './components/CookieConsent'; // ✅ Import komponentu ciasteczek
 
 // --- SEKCJA DYNAMICZNYCH METADANYCH DLA SEO ---
 type Props = {
@@ -18,7 +19,7 @@ export const viewport: Viewport = {
 
 // Poprawiona funkcja generateMetadata dla Next.js 15
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params; // WAŻNE: await params w Next.js 15
+  const { locale } = await params;
 
   // Pobieramy tłumaczenia po stronie serwera z przestrzeni nazw "metadata"
   const t = await getTranslations({ locale, namespace: 'metadata' });
@@ -123,18 +124,20 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params; // WAŻNE: await params w Next.js 15
+  const { locale } = await params;
   const messages = await getMessages({ locale });
 
   return (
-    // POPRAWKA 1: Dodanie klasy `bg-[#0A0A0A]` do tagu <html>
-    // To jest kluczowa zmiana, która eliminuje "biały błysk".
     <html lang={locale} className="scroll-smooth bg-[#0A0A0A]">
       <head>
         {/* Dodatkowe meta tagi dla lepszej kompatybilności */}
         <meta name="theme-color" content="#7c3aed" />
         <meta name="msapplication-TileColor" content="#7c3aed" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
+
+        {/* ✅ Preload dla krytycznych zasobów - OPTYMALIZACJA WYDAJNOŚCI */}
+        <link rel="preload" as="image" href="/hero.png" />
+        <link rel="preload" as="image" href="/logoW.png" />
 
         {/* Preconnect dla lepszej wydajności */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -186,11 +189,11 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      {/* POPRAWKA 2: Dodanie domyślnego koloru tekstu `text-slate-200` do <body> */}
-      {/* Zapewnia to czytelność od samego początku ładowania strony. */}
       <body className="text-slate-200">
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
+          {/* ✅ Komponent zgody na ciasteczka - pojawi się na dole ekranu */}
+          <CookieConsent />
         </NextIntlClientProvider>
       </body>
     </html>

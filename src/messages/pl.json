@@ -335,5 +335,35 @@
       "image3": "Automatyzacja z ManyChat za darmo",
       "image4": "Gwarancja propozycji płatnej współpracy"
     }
+  },
+  "cookies": {
+    "banner": {
+      "title": "🍪 Używamy ciasteczek",
+      "description": "Używamy plików cookie, aby poprawić Twoje doświadczenia na naszej stronie. Dowiedz się więcej w naszej",
+      "privacyLink": "Polityce Prywatności",
+      "acceptAll": "Akceptuję wszystkie",
+      "customize": "Dostosuj",
+      "rejectAll": "Odrzuć wszystkie"
+    },
+    "settings": {
+      "title": "Ustawienia ciasteczek",
+      "subtitle": "Wybierz, które ciasteczka chcesz zaakceptować",
+      "required": "Wymagane",
+      "save": "Zapisz preferencje",
+      "cancel": "Anuluj",
+      "necessary": {
+        "title": "Niezbędne ciasteczka",
+        "description": "Te pliki cookie są niezbędne do działania strony i nie mogą być wyłączone."
+      },
+      "analytics": {
+        "title": "Ciasteczka analityczne",
+        "description": "Pomagają nam zrozumieć, jak odwiedzający korzystają z naszej strony, zbierając anonimowe dane."
+      },
+      "marketing": {
+        "title": "Ciasteczka marketingowe",
+        "description": "Używane do śledzenia odwiedzających na stronach internetowych w celu wyświetlania reklam."
+      }
+    },
+    "close": "Zamknij"
   }
 }
