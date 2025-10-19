@@ -3,23 +3,28 @@ import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import type { Metadata, Viewport } from 'next';
-import CookieConsent from './components/CookieConsent'; // ✅ Import komponentu ciasteczek
+import CookieConsent from './components/CookieConsent';
+import { Inter } from 'next/font/google';
 
-// --- SEKCJA DYNAMICZNYCH METADANYCH DLA SEO ---
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+// --- Typ Props ---
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
+// ✅ Ustawienia viewportu
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 };
 
-// Poprawiona funkcja generateMetadata dla Next.js 15
+// ✅ Asynchroniczne metadata (tu params jest Promise)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-
-  // Pobieramy tłumaczenia po stronie serwera z przestrzeni nazw "metadata"
+  const { locale } = await params; // ← poprawnie awaitowane
   const t = await getTranslations({ locale, namespace: 'metadata' });
 
   return {
@@ -29,8 +34,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     authors: [{ name: 'inflee.app' }],
     creator: 'inflee.app',
     publisher: 'inflee.app',
-
-    // Open Graph
     openGraph: {
       type: 'website',
       locale: locale === 'pl' ? 'pl_PL' : 'en_US',
@@ -55,51 +58,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
     },
-
-    // Twitter Card
     twitter: {
       card: 'summary_large_image',
       site: '@inflee_app',
       creator: '@inflee_app',
       title: t('ogTitle'),
       description: t('ogDescription'),
-      images: [
-        {
-          url: 'https://inflee.app/og-image.png',
-          alt: t('ogImageAlt'),
-        },
-      ],
+      images: [{ url: 'https://inflee.app/og-image.png', alt: t('ogImageAlt') }],
     },
-
-    // Favicon i ikony
     icons: {
       icon: [
         { url: '/favicon.ico' },
         { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
         { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       ],
-      apple: [
-        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-      ],
+      apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
       other: [
         { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
         { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
       ],
     },
-
     manifest: '/manifest.json',
-
-    // Dodatkowe meta tagi
     metadataBase: new URL('https://inflee.app'),
     alternates: {
       canonical: `https://inflee.app/${locale}`,
-      languages: {
-        'pl': 'https://inflee.app/pl',
-        'en': 'https://inflee.app/en',
-      },
+      languages: { pl: 'https://inflee.app/pl', en: 'https://inflee.app/en' },
     },
-
-    // Robots
     robots: {
       index: true,
       follow: true,
@@ -114,35 +98,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// --- GŁÓWNY KOMPONENT LAYOUTU ---
+// --- GŁÓWNY KOMPONENT LAYOUTU (tu params NIE jest Promise) ---
 export default async function LocaleLayout({
   children,
-  params
+  params, // <-- 1. Pobierz cały obiekt `params`
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale } = await params;
+  const { locale } = params; // <-- 2. Wyciągnij `locale` wewnątrz funkcji
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className="scroll-smooth bg-[#0A0A0A]">
+    <html lang={locale} className={`${inter.className} scroll-smooth bg-[#0A0A0A]`}>
       <head>
-        {/* Dodatkowe meta tagi dla lepszej kompatybilności */}
         <meta name="theme-color" content="#7c3aed" />
         <meta name="msapplication-TileColor" content="#7c3aed" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
 
-        {/* ✅ Preload dla krytycznych zasobów - OPTYMALIZACJA WYDAJNOŚCI */}
-        <link rel="preload" as="image" href="/hero.png" fetchPriority="high" />
-        <link rel="preload" as="image" href="/logoW.png" fetchPriority="high" />
+        {/* ✅ Preload dla obrazów */}
+        <link rel="preload" as="image" href="/hero.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/logoW.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/hiw_1_1.webp" />
+        <link rel="preload" as="image" href="/images/hiw_2_1.webp" />
+        <link rel="preload" as="image" href="/images/hiw_3_1.webp" />
+        <link rel="preload" as="image" href="/images/hiw_4_1.webp" />
 
-        {/* Preconnect dla lepszej wydajności */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
 
-        {/* Facebook Pixel - defer loading */}
+        {/* Facebook Pixel */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -164,38 +148,41 @@ export default async function LocaleLayout({
           }}
         />
         <noscript>
-          <img height="1" width="1" style={{display:'none'}}
-               src="https://www.facebook.com/tr?id=574848185272133&ev=PageView&noscript=1"
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=574848185272133&ev=PageView&noscript=1"
           />
         </noscript>
 
-        {/* Structured Data - JSON-LD */}
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "inflee.app",
-              "description": "Platforma AI dla początkujących twórców cyfrowych. Analizuj profil, targetuj odbiorców, monetyzuj treści.",
-              "url": "https://inflee.app",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://inflee.app/?q={search_term_string}",
-                "query-input": "required name=search_term_string"
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'inflee.app',
+              description:
+                'Platforma AI dla początkujących twórców cyfrowych. Analizuj profil, targetuj odbiorców, monetyzuj treści.',
+              url: 'https://inflee.app',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://inflee.app/?q={search_term_string}',
+                'query-input': 'required name=search_term_string',
               },
-              "sameAs": [
-                "https://instagram.com/inflee_app",
-                "https://linkedin.com/company/inflee-app"
-              ]
-            })
+              sameAs: [
+                'https://instagram.com/inflee_app',
+                'https://linkedin.com/company/inflee-app',
+              ],
+            }),
           }}
         />
       </head>
       <body className="text-slate-200">
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
-          {/* ✅ Komponent zgody na ciasteczka - pojawi się na dole ekranu */}
           <CookieConsent />
         </NextIntlClientProvider>
       </body>

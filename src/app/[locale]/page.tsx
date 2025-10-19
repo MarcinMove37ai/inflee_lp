@@ -421,10 +421,10 @@ ImageGallery.displayName = 'ImageGallery';
 
 // DANE
 const galleryImages = [
-  ["/images/hiw_1_1.png", "/images/hiw_1_2.png", "/images/hiw_1_3.png", "/images/hiw_1_4.png"],
-  ["/images/hiw_2_1.png", "/images/hiw_2_2.png", "/images/hiw_2_3.png", "/images/hiw_2_4.png"],
-  ["/images/hiw_3_1.png", "/images/hiw_3_2.png", "/images/hiw_3_3.png", "/images/hiw_3_4.png"],
-  ["/images/hiw_4_1.png", "/images/hiw_4_2.png", "/images/hiw_4_3.png", "/images/hiw_4_4.png"],
+  ["/images/hiw_1_1.webp", "/images/hiw_1_2.webp", "/images/hiw_1_3.webp", "/images/hiw_1_4.webp"],
+  ["/images/hiw_2_1.webp", "/images/hiw_2_2.webp", "/images/hiw_2_3.webp", "/images/hiw_2_4.webp"],
+  ["/images/hiw_3_1.webp", "/images/hiw_3_2.webp", "/images/hiw_3_3.webp", "/images/hiw_3_4.webp"],
+  ["/images/hiw_4_1.webp", "/images/hiw_4_2.webp", "/images/hiw_4_3.webp", "/images/hiw_4_4.webp"],
 ];
 
 function cx(...a: (string | false | undefined)[]) {
