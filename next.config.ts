@@ -4,27 +4,40 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
-  // KRYTYCZNE: Enable standalone output dla Docker
+  // KRYTYCZNE: Utrzymanie standalone output dla Dockera
   output: 'standalone',
 
-  // Wyłącz ESLint podczas build dla Docker (można włączyć później)
+  // Utrzymanie ignorowania błędów na potrzeby builda w Dockerze
   eslint: {
     ignoreDuringBuilds: true,
   },
-
-  // Wyłącz TypeScript checking podczas build (opcjonalnie)
   typescript: {
     ignoreBuildErrors: true,
   },
 
-  // Opcjonalne optymalizacje dla produkcji
+  // ✅ ZAKTUALIZOWANE I UTRZYMANE USTAWIENIA OBRAZÓW
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000, // 1 rok cache
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+
+  // ✅ DODANO: reactStrictMode dla lepszego developmentu
+  reactStrictMode: true,
+
+  // Utrzymane optymalizacje dla produkcji
   compress: true,
   poweredByHeader: false,
 
-  // Security headers (opcjonalne)
+  // ✅ ZAKTUALIZOWANE I UTRZYMANE NAGŁÓWKI
   async headers() {
     return [
       {
+        // Security headers
         source: '/(.*)',
         headers: [
           {
@@ -38,6 +51,26 @@ const nextConfig: NextConfig = {
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
+          },
+        ],
+      },
+      {
+        // Cache dla statycznych obrazów i innych assetów
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache dla obrazów optymalizowanych przez Next.js
+        source: '/_next/image(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

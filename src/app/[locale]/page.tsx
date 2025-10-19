@@ -29,9 +29,6 @@ import X from 'lucide-react/dist/esm/icons/x';
 // ✅ LazyMotion zamiast pełnego Framer Motion
 import { LazyMotion, domAnimation, m as motion, AnimatePresence } from "framer-motion";
 
-// Komponent ContactModal jest zdefiniowany inline poniżej jako ContactModalInline
-// i używany bezpośrednio bez dynamic import
-
 // INTERFEJSY I TYPY
 type PaymentMethod = 'card' | 'blik';
 
@@ -55,14 +52,12 @@ const containerWide = "container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-
 const ContactModalInline = memo(({ isOpen, onClose, subject }: { isOpen: boolean; onClose: () => void; subject: string; }) => {
   const t = useTranslations('contactModal');
 
-  // ✅ useCallback dla stabilnych referencji
   const handleFormSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
     alert(t('thankYou'));
     onClose();
   }, [t, onClose]);
 
-  // ✅ useCallback dla event handlerów
   const handleEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       e.preventDefault();
@@ -242,7 +237,6 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
     };
   }, [activeIndex]);
 
-  // ✅ useCallback dla stabilnych referencji
   const closeModal = useCallback(() => {
     setActiveIndex(null);
   }, []);
@@ -294,12 +288,10 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
 
   const selectedImage = activeIndex !== null ? images[activeIndex] : null;
 
-  // ✅ Memoizowane wartości
   const xOffset = useMemo(() => isMobile ? 40 : 80, [isMobile]);
   const yOffset = useMemo(() => isMobile ? 60 : 50, [isMobile]);
   const centralImageIndex = useMemo(() => (images.length - 1) / 2, [images.length]);
 
-  // ✅ Memoizowane style dla każdego obrazu
   const imageStyles = useMemo(() =>
     images.map((_, index) => ({
       transform: `translateX(${(index - centralImageIndex) * (xOffset + (isMobile ? 10 : 0))}px) translateY(${index * (yOffset - (isMobile ? 20 : 0))}px) translateX(-50%)`,
@@ -350,7 +342,7 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
             </div>
 
             <div className="relative w-full">
-              {/* ✅ Next.js Image z optymalizacją */}
+              {/* ✅ ZMIANA: priority zamiast loading="eager", dodano sizes */}
               <Image
                 src={selectedImage}
                 alt={`Gallery image ${activeIndex + 1}`}
@@ -358,7 +350,8 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
                 height={800}
                 className="w-full max-h-[70vh] object-contain rounded-lg select-none"
                 quality={85}
-                loading="eager"
+                priority
+                sizes="90vw"
               />
             </div>
 
@@ -402,7 +395,7 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
             onClick={() => openModal(index)}
           >
             <div className="p-1.5 bg-black/20 backdrop-blur-sm border border-purple-500/50 rounded-xl transition-colors shadow-2xl aspect-[16/9]">
-              {/* ✅ Next.js Image */}
+              {/* ✅ ZMIANA: dodano placeholder="blur" i blurDataURL */}
               <Image
                 src={src}
                 alt={`Gallery image ${index + 1}`}
@@ -411,6 +404,8 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
                 className="w-full h-full object-cover object-top rounded-md"
                 quality={75}
                 loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
               />
             </div>
           </div>
@@ -442,7 +437,6 @@ const InfleeVerticalLanding: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalSubject, setModalSubject] = useState('');
 
-  // ✅ useCallback dla event handlerów
   const handleOpenModal = useCallback((subject: string) => {
     setModalSubject(subject);
     setModalOpen(true);
@@ -538,7 +532,6 @@ const InfleeVerticalLanding: React.FC = () => {
     );
   }, [handleOpenModal, t]);
 
-  // ✅ Zoptymalizowany IntersectionObserver
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>(".animate-on-scroll");
     const obs = new IntersectionObserver(
@@ -583,7 +576,6 @@ const InfleeVerticalLanding: React.FC = () => {
   }), []);
 
   return (
-    // ✅ LazyMotion wrapper
     <LazyMotion features={domAnimation}>
       <div className="overflow-x-hidden min-h-screen">
         <ContactModalInline isOpen={isModalOpen} onClose={handleCloseModal} subject={modalSubject} />
@@ -600,7 +592,6 @@ const InfleeVerticalLanding: React.FC = () => {
           <div className="container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32 h-full flex justify-between items-center">
             <a href="/" className="group flex items-center cursor-pointer">
               <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 group-hover:ring-white/30 transition-all duration-300 mr-3">
-                {/* ✅ Next.js Image dla logo */}
                 <Image src="/logoW.png" alt="inflee.app logo" width={48} height={48} className="w-full h-full object-contain" priority />
               </div>
               <div>
@@ -636,12 +627,17 @@ const InfleeVerticalLanding: React.FC = () => {
             </div>
 
             <div className="absolute top-0 left-0 w-full h-full z-0 flex justify-end">
-              {/* Hero image - oryginalny układ z <img> dla zachowania responsywności */}
-              <img
+              {/* ✅ ZMIANA: Hero image - zamiana <img> na <Image> z priority */}
+              <Image
                 src="/hero.png"
                 alt=""
                 aria-hidden="true"
+                width={1920}
+                height={1080}
+                priority
+                quality={85}
                 className="w-full h-full object-cover object-center md:w-auto"
+                sizes="(max-width: 768px) 100vw, 60vw"
               />
             </div>
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent z-10" />
