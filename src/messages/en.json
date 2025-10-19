@@ -11,8 +11,10 @@
   "nav": {
     "features": "Features",
     "pricing": "Pricing",
-    "login": "Login",
-    "register": "Sign Up"
+    "register": "Sign Up",
+    "slogan": "Educate | Grow | Earn",
+    "howItWorks": "How it works",
+    "faq": "FAQ"
   },
   "hero": {
     "title1": {
@@ -278,13 +280,19 @@
       "part3": "thriving business?"
     },
     "subtitle": "Join thousands of creators who are already building their mailing lists and earning from their knowledge. Your journey starts here.",
-    "button": "Build your first e-book for free"
+    "button": "Start now"
   },
   "footer": {
-    "copyright": "© 2025 Inflee. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "contact": "Contact"
+    "contact": "Contact",
+    "owner": "The brand owner is Aquatrek Solutions PSA",
+    "copyright": "© {year} Inflee.app. All rights reserved.",
+    "navigation": "Navigation",
+    "legal": "Legal",
+    "krs": "KRS: 0000000000",
+    "nip": "NIP: 0000000000",
+    "regon": "REGON: 000000000"
   },
   "contactModal": {
     "title": "Contact Us",

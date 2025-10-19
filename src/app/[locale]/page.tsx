@@ -1,5 +1,6 @@
 // app/[locale]/page.tsx
 "use client";
+import Link from 'next/link';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { createPortal } from 'react-dom';
 import React, { useEffect, useMemo, useState, FormEvent } from "react";
@@ -159,9 +160,10 @@ const InfleeVerticalLanding: React.FC = () => {
   };
 
   const nav = [
+    { href: "#how-it-works", label: t('nav.howItWorks') },
     { href: "#features", label: t('nav.features') },
     { href: "#pricing", label: t('nav.pricing') },
-    { href: "/login", label: t('nav.login') },
+    { href: "#faq", label: t('nav.faq') },
   ];
 
   const howItWorks = [
@@ -288,7 +290,6 @@ const InfleeVerticalLanding: React.FC = () => {
   return (
     <div className="overflow-x-hidden min-h-screen">
       <ContactModal isOpen={isModalOpen} onClose={handleCloseModal} subject={modalSubject} />
-      {/* USUWAMY BLOK <style jsx global>, ponieważ globalne style są teraz w layout.tsx */}
       <style jsx global>{`
         html { scroll-behavior: smooth; }
         .gradient-text { background: linear-gradient(135deg, #A855F7, #6366F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -297,27 +298,44 @@ const InfleeVerticalLanding: React.FC = () => {
       `}</style>
 
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10 h-20">
-          <div className="container mx-auto px-6 h-full flex justify-between items-center">
-            <a href="#" className="text-2xl font-bold gradient-text">inflee.app</a>
-            <nav className="hidden md:flex items-center space-x-8 text-sm">
-              {nav.map((n) => (
-                <a key={n.href} href={n.href} className="text-slate-300 hover:text-white transition">
-                  {n.label}
-                </a>
-              ))}
-            </nav>
-            <div className="flex items-center gap-4">
-              <LanguageSwitcher />
-              <a href="/register" className={cx("px-5 py-2 rounded-lg text-sm font-semibold", styles.cta)}>
-                {t('nav.register')}
-              </a>
+        <div className="container mx-auto px-6 h-full flex justify-between items-center">
+          <a href="/" className="group flex items-center cursor-pointer">
+            <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 group-hover:ring-white/30 transition-all duration-300 mr-3">
+              <img src="/logoW.png" alt="inflee.app logo" className="w-full h-full object-contain"/>
             </div>
+            <div>
+              <h1 className="text-2xl font-bold gradient-text leading-tight">inflee.app</h1>
+              <p className="mt-1 text-xs text-slate-400 tracking-wide uppercase leading-tight group-hover:text-slate-300 transition-colors duration-300">
+                {t('nav.slogan')}
+              </p>
+            </div>
+          </a>
+
+          <nav className="hidden md:flex items-center space-x-8 text-sm">
+            {nav.map((n) => (
+              <a key={n.href} href={n.href} className="text-slate-300 hover:text-white transition">
+                {n.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:block">
+              <LanguageSwitcher />
+            </div>
+            <a href="/register" className={cx("px-5 py-2 rounded-lg text-sm font-semibold", styles.cta)}>
+              {t('nav.register')}
+            </a>
           </div>
+        </div>
       </header>
 
       <main className="pt-20">
-        {/* Przywracamy zwykły tag <section> bez animacji wejścia, aby uprościć kod i uniknąć konfliktów */}
         <section className="relative min-h-[calc(100vh-5rem)] flex items-center justify-start">
+          {/* ZMIANA: Przełącznik jest teraz tutaj, jako bezpośrednie dziecko sekcji */}
+          <div className="absolute top-4 right-6 z-30 md:hidden">
+            <LanguageSwitcher />
+          </div>
+
           <div className="absolute top-0 left-0 w-full h-full z-0 flex justify-end">
             <img
               src="/hero.png"
@@ -673,16 +691,56 @@ const InfleeVerticalLanding: React.FC = () => {
         </section>
       </main>
 
-      <footer className="py-12 border-t border-white/10">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-          <div className="text-sm">
-            <p className="text-lg font-bold gradient-text">inflee.app</p>
-            <p className="text-slate-400 mt-2">{t('footer.copyright')}</p>
-          </div>
-          <div className="flex space-x-6 mt-6 md:mt-0 text-sm text-slate-400">
-            <a href="#" className="hover:text-white transition">{t('footer.privacy')}</a>
-            <a href="#" className="hover:text-white transition">{t('footer.terms')}</a>
-            <a href="mailto:kontakt@inflee.app" className="hover:text-white transition">{t('footer.contact')}</a>
+      <footer className="py-16 border-t border-white/10">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-12">
+
+            <div className="md:col-span-1 flex flex-col items-start gap-6">
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 mr-3">
+                  <img src="/logoW.png" alt="inflee.app logo" className="w-full h-full object-contain"/>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold gradient-text leading-tight">inflee.app</h3>
+                  <p className="mt-1 text-xs text-slate-400 tracking-wide uppercase leading-tight">
+                    {t('nav.slogan')}
+                  </p>
+                </div>
+              </div>
+              <div className="text-sm text-slate-400">
+                <p>{t('footer.owner')}</p>
+              </div>
+              <div className="text-xs text-slate-500 space-y-1">
+                <p>{t('footer.krs')}</p>
+                <p>{t('footer.nip')}</p>
+                <p>{t('footer.regon')}</p>
+              </div>
+              <p className="text-xs text-slate-500 pt-2">
+                {t('footer.copyright', { year: new Date().getFullYear() })}
+              </p>
+            </div>
+
+            <div className="hidden md:block md:col-span-1">
+              <h4 className="font-semibold text-white">{t('footer.navigation')}</h4>
+              <div className="my-4 h-px w-16 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50"></div>
+              <div className="flex flex-col space-y-3 items-start">
+                <a href="#how-it-works" className="text-slate-400 hover:text-white transition">{t('nav.howItWorks')}</a>
+                <a href="#features" className="text-slate-400 hover:text-white transition">{t('nav.features')}</a>
+                <a href="#pricing" className="text-slate-400 hover:text-white transition">{t('nav.pricing')}</a>
+                <a href="#faq" className="text-slate-400 hover:text-white transition">{t('nav.faq')}</a>
+              </div>
+            </div>
+
+            <div className="md:col-span-1">
+              <h4 className="font-semibold text-white">{t('footer.legal')}</h4>
+              <div className="my-4 h-px w-16 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50"></div>
+              <div className="flex flex-col space-y-3 items-start">
+                <a href="#" className="text-slate-400 hover:text-white transition">{t('footer.privacy')}</a>
+                <a href="#" className="text-slate-400 hover:text-white transition">{t('footer.terms')}</a>
+                <a href="mailto:kontakt@inflee.app" className="text-slate-400 hover:text-white transition">{t('footer.contact')}</a>
+              </div>
+            </div>
+
           </div>
         </div>
       </footer>

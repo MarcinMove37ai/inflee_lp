@@ -11,8 +11,10 @@
   "nav": {
     "features": "Funkcje",
     "pricing": "Cennik",
-    "login": "Logowanie",
-    "register": "Zaloguj"
+    "register": "Zaloguj",
+    "slogan": "Edukuj | Rośnij | Zarabiaj",
+    "howItWorks": "Jak to działa?",
+    "faq": "FAQ"
   },
   "hero": {
     "title1": {
@@ -278,13 +280,19 @@
       "part3": "działający biznes?"
     },
     "subtitle": "Dołącz do tysięcy twórców, którzy już teraz budują swoje listy mailingowe i zarabiają na wiedzy. Twoja podróż zaczyna się tutaj.",
-    "button": "Zbuduj swój pierwszy e-book za darmo"
+    "button": "Zacznij teraz"
   },
   "footer": {
-    "copyright": "© 2025 Inflee. Wszelkie prawa zastrzeżone.",
     "privacy": "Polityka Prywatności",
     "terms": "Regulamin",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "owner": "Właścicielem marki jest Aquatrek Solutions PSA",
+    "copyright": "© {year} Inflee.app. Wszelkie prawa zastrzeżone.",
+    "navigation": "Nawigacja",
+    "legal": "Informacje Prawne",
+    "krs": "KRS: 0000000000",
+    "nip": "NIP: 0000000000",
+    "regon": "REGON: 000000000"
   },
   "contactModal": {
     "title": "Skontaktuj się z nami",
