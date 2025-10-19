@@ -1,0 +1,9 @@
+# Allow all user agents to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow crawling of Next.js internal folders
+Disallow: /_next/
+
+# Location of sitemap (opcjonalne, ale zalecane)
+# Sitemap: https://inflee.app/sitemap.xml

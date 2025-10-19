@@ -406,6 +406,7 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
                 loading="lazy"
                 placeholder="blur"
                 blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                sizes="(max-width: 768px) 80vw, 400px" // ✅ DODAJ TĘ LINIĘ
               />
             </div>
           </div>

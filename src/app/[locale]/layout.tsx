@@ -13,8 +13,6 @@ type Props = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 // Poprawiona funkcja generateMetadata dla Next.js 15
