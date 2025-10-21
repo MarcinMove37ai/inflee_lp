@@ -1,11 +1,11 @@
-// app/[locale]/page.tsx - WERSJA ZOPTYMALIZOWANA
+// app/[locale]/page.tsx - WERSJA ZOPTYMALIZOWANA (WĘŻSZY KONTENER)
 "use client";
 import Link from 'next/link';
 import Image from 'next/image'; // ✅ Next.js Image
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { createPortal } from 'react-dom';
 import React, { useEffect, useMemo, useState, useCallback, FormEvent, memo } from "react";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 // ✅ Individual icon imports dla tree-shaking
 import Check from 'lucide-react/dist/esm/icons/check';
@@ -46,7 +46,8 @@ interface Plan {
   buttonTextKey: string;
 }
 
-const containerWide = "container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32";
+// 🔴 POPRAWKA: Przywrócono 'max-w-7xl', aby kontener był węższy (max 1280px)
+const containerWide = "container mx-auto px-6";
 
 // KOMPONENTY - z memoizacją
 const ContactModalInline = memo(({ isOpen, onClose, subject }: { isOpen: boolean; onClose: () => void; subject: string; }) => {
@@ -433,11 +434,12 @@ function cx(...a: (string | false | undefined)[]) {
 
 const InfleeVerticalLanding: React.FC = () => {
   const t = useTranslations();
+  const activeLocale = useLocale();
   const [open, setOpen] = useState<number | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalSubject, setModalSubject] = useState('');
-
+  const [showSwitcher, setShowSwitcher] = useState<boolean | null>(null);
   const handleOpenModal = useCallback((subject: string) => {
     setModalSubject(subject);
     setModalOpen(true);
@@ -449,6 +451,36 @@ const InfleeVerticalLanding: React.FC = () => {
       document.activeElement.blur();
     }
   }, []);
+
+  useEffect(() => {
+    // Ten kod uruchomi się bezpiecznie tylko na kliencie, po hydracji.
+    try {
+      let initialLocale = sessionStorage.getItem('initialLocale');
+
+      // DEBUG LOGI:
+      console.log('--- JĘZYK DEBUG ---');
+      console.log('Aktualny locale (z URL):', activeLocale);
+      console.log('Zapisany "initialLocale" (z sessionStorage):', initialLocale);
+
+      if (!initialLocale) {
+        // Pierwsza wizyta w sesji: zapisujemy aktualny język.
+        initialLocale = activeLocale;
+        sessionStorage.setItem('initialLocale', initialLocale);
+        console.log('To pierwsza wizyta. Zapisuję:', initialLocale);
+      }
+
+      const decision = initialLocale === 'pl';
+      console.log('Decyzja o pokazaniu przełącznika (musi być "true" na /pl):', decision);
+
+      // Ustawiamy widoczność na podstawie zapisanego, początkowego języka.
+      setShowSwitcher(decision);
+
+    } catch (e) {
+      // Fallback, jeśli sessionStorage jest wyłączony (np. tryb prywatny)
+      console.error('Błąd sessionStorage! Używam fallbacku na "activeLocale".');
+      setShowSwitcher(activeLocale === 'pl');
+    }
+  }, [activeLocale]); // Uruchom ponownie, jeśli zmieni się locale
 
   const nav = useMemo(() => [
     { href: "#how-it-works", label: t('nav.howItWorks') },
@@ -524,14 +556,27 @@ const InfleeVerticalLanding: React.FC = () => {
       );
     }
 
+    // Mapa identyfikatorów planów na ścieżki URL
+    const planPaths: { [key: string]: string } = {
+      rookie: '/free',
+      creator: '/crea',
+      unlimited: '/inf',
+    };
+
+    // Pobierz ścieżkę dla bieżącego planu lub pusty string, jeśli nie pasuje
+    const planPath = planPaths[plan.id] || '';
+
+    // Zbuduj docelowy URL
+    const targetUrl = `https://app.inflee.app/register${planPath}?lang=${activeLocale}`;
+
     return (
-      <a href="/register" target="_blank" rel="noopener noreferrer">
+      <a href={targetUrl} target="_blank" rel="noopener noreferrer">
         <button className={buttonClass}>
           {t(plan.buttonTextKey)}
         </button>
       </a>
     );
-  }, [handleOpenModal, t]);
+  }, [handleOpenModal, t, activeLocale]);
 
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>(".animate-on-scroll");
@@ -583,6 +628,8 @@ const InfleeVerticalLanding: React.FC = () => {
 
         <style jsx global>{`
           html { scroll-behavior: smooth; }
+          {/* ✅ TUTAJ JEST POPRAWKA - PRZYWRÓCENIE CZCIONKI INTER */}
+          body { font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
           .gradient-text { background: linear-gradient(135deg, #A855F7, #6366F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
           .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: transform, opacity; }
           .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
@@ -590,13 +637,26 @@ const InfleeVerticalLanding: React.FC = () => {
         `}</style>
 
         <header className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10 h-20">
-          <div className="container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32 h-full flex justify-between items-center">
-            <a href="/" className="group flex items-center cursor-pointer">
-              <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 group-hover:ring-white/30 transition-all duration-300 mr-3">
+          {/* 🔴 ZMIANA 2: Usuwamy 'container', 'mx-auto', 'max-w-' i używamy tych samych klas co 'containerWide' */}
+          <div className={containerWide + " h-full flex justify-between items-center overflow-x-visible-safe"}>
+
+            {/* Bez zmian od tego miejsca */}
+            <a href="/" className="group flex items-center cursor-pointer overflow-x-visible-safe">
+              <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 group-hover:ring-white/30 transition-all duration-300 mr-3 overflow-x-visible-safe">
                 <Image src="/logoW.png" alt="inflee.app logo" width={48} height={48} className="w-full h-full object-contain" priority />
               </div>
               <div>
-                <h1 className="text-2xl font-bold gradient-text leading-tight">inflee.app</h1>
+                <h1
+                  className="text-2xl font-bold leading-tight"
+                  style={{
+                    background: 'linear-gradient(135deg, #A855F7, #6366F1)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  inflee.app
+                </h1>
                 <p className="mt-1 text-xs text-slate-400 tracking-wide uppercase leading-tight group-hover:text-slate-300 transition-colors duration-300">
                   {t('nav.slogan')}
                 </p>
@@ -611,10 +671,12 @@ const InfleeVerticalLanding: React.FC = () => {
               ))}
             </nav>
             <div className="flex items-center gap-4">
-              <div className="hidden md:block">
-                <LanguageSwitcher />
-              </div>
-              <a href="/register" className={cx("px-5 py-2 rounded-lg text-sm font-semibold", styles.cta)}>
+              {showSwitcher === true && (
+                <div className="hidden md:block">
+                  <LanguageSwitcher />
+                </div>
+              )}
+              <a href={`https://app.inflee.app/login?lang=${activeLocale}`} className="px-4 py-1.5 bg-white/10 border border-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-semibold transition">
                 {t('nav.register')}
               </a>
             </div>
@@ -623,9 +685,11 @@ const InfleeVerticalLanding: React.FC = () => {
 
         <main className="pt-20">
           <section className="relative min-h-[calc(100vh-5rem)] overflow-x-clip">
-            <div className="absolute top-0 right-0 z-30 pt-6 pr-6 lg:pr-16 xl:pr-24 2xl:pr-32 md:hidden">
-              <LanguageSwitcher />
-            </div>
+            {showSwitcher === true && (
+              <div className="absolute top-0 right-0 z-30 pt-6 pr-6 lg:pr-16 xl:pr-24 2xl:pr-32 md:hidden">
+                <LanguageSwitcher />
+              </div>
+            )}
 
             <div className="absolute top-0 left-0 w-full h-full z-0 flex justify-end">
               {/* ✅ ZMIANA: Hero image - zamiana <img> na <Image> z priority */}
@@ -642,15 +706,19 @@ const InfleeVerticalLanding: React.FC = () => {
               />
             </div>
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent z-10" />
-            <div className="container mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[calc(100vh-5rem)]">
+            {/* Użycie 'containerWide' z 'max-w-7xl' */}
+            <div className={containerWide + " relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[calc(100vh-5rem)]"}>
               <motion.div
-                className="lg:col-span-7 text-left py-12 lg:py-0 lg:pl-20 lg:pr-16 xl:pr-24 2xl:pr-32 max-w-3xl"
+                className="lg:col-span-7 text-left py-12 lg:py-0 max-w-3xl"
                 initial="hidden"
                 animate="visible"
                 variants={heroContainerVariants}
               >
+                {/* PONIŻEJ ZNAJDUJĄ SIĘ POPRAWNE, WIĘKSZE KLASY
+                  (text-6xl, text-xl, text-lg, px-24, itd.)
+                */}
                 <motion.div variants={heroItemVariants}>
-                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">
+                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-tight">
                     {t('hero.title1.part1')} <span className="gradient-text">{t('hero.title1.part2')}</span> {t('hero.title1.part3')}
                   </h1>
                   <div className="w-48 h-px bg-gradient-to-r from-purple-500 to-pink-500 my-6"></div>
@@ -660,22 +728,22 @@ const InfleeVerticalLanding: React.FC = () => {
                     {t('hero.title2.part1')} <span className="gradient-text">{t('hero.title2.part2')}</span>
                   </h2>
                 </motion.div>
-                <motion.p variants={heroItemVariants} className="mt-8 text-xl text-slate-300">
+                <motion.p variants={heroItemVariants} className="mt-6 text-lg md:text-xl text-slate-400">
                   {t('hero.subtitle')}
                 </motion.p>
                 <div className="mt-8 space-y-3">
                   {[t('hero.benefit1'), t('hero.benefit2'), t('hero.benefit3')].map((point, i) => (
                     <motion.div key={i} variants={heroItemVariants} className="flex items-center gap-3 text-slate-300">
                       <Check className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                      <span className="text-lg md:text-xl">{point}</span>
+                      <span className="text-base md:text-lg">{point}</span>
                     </motion.div>
                   ))}
                 </div>
                 <motion.div variants={heroItemVariants} className="mt-10">
-                  <a href="/register" className={cx("inline-block px-12 py-4 rounded-lg font-bold", styles.cta)}>
+                  <a href="#pricing" className={cx("inline-block px-24 py-4 rounded-xl font-bold", styles.cta)}>
                     {t('hero.cta')}
                   </a>
-                  <p className="mt-4 text-xs text-slate-400">
+                  <p className="mt-4 text-xs text-slate-500">
                     {t('hero.subCta')}
                   </p>
                 </motion.div>
@@ -765,7 +833,7 @@ const InfleeVerticalLanding: React.FC = () => {
           </section>
 
           <section id="pricing" className="py-20 md:py-32 overflow-x-clip">
-            <div className="container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32">
+            <div className={containerWide}>
               <div className="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2 className="text-3xl md:text-5xl font-bold text-white md:whitespace-nowrap">
                   {t('pricing.title.part1')} <span className="gradient-text">{t('pricing.title.part2')} {t('pricing.title.part3')}</span>
@@ -932,7 +1000,7 @@ const InfleeVerticalLanding: React.FC = () => {
           </section>
 
           <section id="faq" className="py-20 md:py-32 overflow-x-clip">
-            <div className="container mx-auto px-6 lg:px-28 lg:pr-16 xl:pr-24 2xl:pr-32">
+            <div className={containerWide}>
               <div className="text-center animate-on-scroll">
                 <h2 className="text-3xl md:text-5xl font-bold text-white">
                   {t('faq.title.part1')} <span className="gradient-text">{t('faq.title.part2')}</span>
@@ -986,7 +1054,7 @@ const InfleeVerticalLanding: React.FC = () => {
                 {t('finalCta.subtitle')}
               </p>
               <div className="mt-10">
-                <a href="/register" className={cx("px-8 py-4 rounded-xl font-bold text-white text-lg", styles.cta)}>
+                <a href={`https://app.inflee.app/register/final?lang=${activeLocale}`} className={cx("px-8 py-4 rounded-xl font-bold text-white text-lg", styles.cta)}>
                   {t('finalCta.button')}
                 </a>
               </div>

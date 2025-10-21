@@ -4,12 +4,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import type { Metadata, Viewport } from 'next';
 import CookieConsent from './components/CookieConsent';
-import { Inter } from 'next/font/google';
+// 🛑 USUNIĘTO: import { Inter } from 'next/font/google';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-});
+// 🛑 USUNIĘTO: const inter = Inter(...)
 
 // --- Typ Props ---
 type Props = {
@@ -106,11 +103,12 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const { locale } = params; // <-- 2. Wyciągnij `locale` wewnątrz funkcji
+  const { locale } = await params;// <-- 2. Wyciągnij `locale` wewnątrz funkcji
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className={`${inter.className} scroll-smooth bg-[#0A0A0A]`}>
+    // 🛑 USUNIĘTO: `${inter.className}` z tagu <html>
+    <html lang={locale} className={`scroll-smooth bg-[#0A0A0A]`}>
       <head>
         <meta name="theme-color" content="#7c3aed" />
         <meta name="msapplication-TileColor" content="#7c3aed" />
@@ -180,7 +178,7 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      <body className="text-slate-200">
+      <body className="text-slate-200 overflow-x-hidden">
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
           <CookieConsent />

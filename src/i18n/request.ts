@@ -5,8 +5,8 @@ import { routing } from './routing';
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;
 
-  // Walidacja locale
-  if (!locale || !routing.locales.includes(locale as any)) {
+  // ✅ KRYTYCZNE: Odrzuć nieprawidłowe locale (jak "logoW.webp")
+  if (!locale || !routing.locales.includes(locale as any) || locale.includes('.')) {
     locale = routing.defaultLocale;
   }
 
@@ -16,8 +16,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
   try {
     const messages = (await import(`../messages/${locale}.json`)).default;
     console.log('✅ Loaded messages for:', locale);
-    console.log('📦 Message keys:', Object.keys(messages).join(', '));
-    console.log('🔤 Nav features:', messages.nav?.features);
 
     return {
       locale,
@@ -25,6 +23,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
     };
   } catch (error) {
     console.error('❌ Error loading messages for locale:', locale, error);
-    throw error;
+
+    // ✅ Fallback do domyślnego locale w przypadku błędu
+    const fallbackMessages = (await import(`../messages/${routing.defaultLocale}.json`)).default;
+    return {
+      locale: routing.defaultLocale,
+      messages: fallbackMessages
+    };
   }
 });
