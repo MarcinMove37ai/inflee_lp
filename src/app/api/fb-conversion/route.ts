@@ -1,6 +1,6 @@
 // app/api/fb-conversion/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { FB_PIXEL_ID, FB_ACCESS_TOKEN } from '../../lib/fbPixel'
+import { FB_PIXEL_ID } from '../../lib/fbPixel'
 import crypto from 'crypto'
 
 const hashData = (data: string | undefined | null) => {
@@ -10,10 +10,10 @@ const hashData = (data: string | undefined | null) => {
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Odbieramy testEventCode z żądania
+    // 1. Odbieramy dane z żądania
     const { eventName, userData, customData, eventId, testEventCode } = await request.json()
 
-    // Normalizacja i haszowanie danych
+    // Normalizacja i haszowanie danych użytkownika (wymagane przez FB)
     const hashedUserData = {
       em: userData.email ? [hashData(userData.email.toLowerCase().trim())] : undefined,
       ph: userData.phone ? [hashData(userData.phone.replace(/\D/g, ''))] : undefined,
@@ -36,9 +36,11 @@ export async function POST(request: NextRequest) {
         user_data: hashedUserData,
         custom_data: customData
       }],
-      // 2. WAŻNE: Dodajemy kod testowy do payloadu wysyłanego do FB (jeśli istnieje)
+      // 2. Dodajemy kod testowy do payloadu (jeśli został przesłany w requestcie)
       ...(testEventCode && { test_event_code: testEventCode }),
-      access_token: FB_ACCESS_TOKEN
+
+      // ✅ KLUCZOWA ZMIANA: Pobieramy token bezpiecznie ze zmiennych środowiskowych serwera
+      access_token: process.env.FB_ACCESS_TOKEN
     }
 
     const response = await fetch(`https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events`, {
