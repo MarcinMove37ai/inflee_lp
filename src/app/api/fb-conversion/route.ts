@@ -1,3 +1,4 @@
+// app/api/fb-conversion/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { FB_PIXEL_ID, FB_ACCESS_TOKEN } from '../../lib/fbPixel'
 import crypto from 'crypto'
@@ -9,9 +10,10 @@ const hashData = (data: string | undefined | null) => {
 
 export async function POST(request: NextRequest) {
   try {
-    const { eventName, userData, customData, eventId } = await request.json()
+    // 1. Odbieramy testEventCode z żądania
+    const { eventName, userData, customData, eventId, testEventCode } = await request.json()
 
-    // Normalizacja i haszowanie danych zgodnie z wymogami Meta
+    // Normalizacja i haszowanie danych
     const hashedUserData = {
       em: userData.email ? [hashData(userData.email.toLowerCase().trim())] : undefined,
       ph: userData.phone ? [hashData(userData.phone.replace(/\D/g, ''))] : undefined,
@@ -34,6 +36,8 @@ export async function POST(request: NextRequest) {
         user_data: hashedUserData,
         custom_data: customData
       }],
+      // 2. WAŻNE: Dodajemy kod testowy do payloadu wysyłanego do FB (jeśli istnieje)
+      ...(testEventCode && { test_event_code: testEventCode }),
       access_token: FB_ACCESS_TOKEN
     }
 
@@ -44,6 +48,12 @@ export async function POST(request: NextRequest) {
     })
 
     const result = await response.json()
+
+    if (!response.ok) {
+        console.error('FB API Error:', result);
+        return NextResponse.json({ success: false, error: result }, { status: response.status });
+    }
+
     return NextResponse.json({ success: true, result })
   } catch (error) {
     console.error('Conversions API error:', error)

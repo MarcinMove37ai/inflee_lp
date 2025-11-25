@@ -6,6 +6,7 @@ import LanguageSwitcher from './components/LanguageSwitcher';
 import { createPortal } from 'react-dom';
 import React, { useEffect, useMemo, useState, useCallback, FormEvent, memo, useRef } from "react";
 import { useTranslations, useLocale } from 'next-intl';
+import { trackHybridEvent } from "@/app/lib/fbPixel";
 
 // ✅ Individual icon imports dla tree-shaking
 import Check from 'lucide-react/dist/esm/icons/check';
@@ -585,20 +586,19 @@ const InfleeVerticalLanding: React.FC = () => {
 
     // Logika śledzenia (nie blokuje otwierania nowej karty)
     const handlePlanClick = () => {
-      // 1. Oblicz wartość dla Facebooka
+      // 1. Oblicz wartość
       let value = 0;
       const currency = activeLocale === 'pl' ? 'PLN' : 'USD';
 
       if (paymentMethod === 'blik') {
-        value = plan.priceBlik; // Pełna wartość dla BLIK
+        value = plan.priceBlik;
       } else {
-        // Dla karty: Rookie to Trial (0), reszta pełna cena
         value = plan.id === 'rookie' ? 0 : plan.priceCard;
       }
 
-      // 2. Wyślij zdarzenie do Pixela (jeśli istnieje)
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'InitiateCheckout', {
+      // 2. 🔥 Użyj funkcji hybrydowej (Browser + Server)
+      // To wyśle zdarzenie do Pixela ORAZ do Twojego API, co zwiększy dokładność
+      trackHybridEvent('InitiateCheckout', {
           content_name: `Plan ${plan.nameKey} (${paymentMethod})`,
           content_ids: [`${plan.id}_${paymentMethod}`],
           content_type: 'product',
@@ -606,8 +606,7 @@ const InfleeVerticalLanding: React.FC = () => {
           value: value,
           num_items: 1,
           payment_method: paymentMethod
-        });
-      }
+      });
     };
 
     return (
@@ -664,20 +663,29 @@ const InfleeVerticalLanding: React.FC = () => {
             const sectionConfig = sectionsToTrack.find(s => s.id === sectionId);
 
             if (sectionConfig) {
-              // WYSYŁKA
-              if (typeof window !== 'undefined' && (window as any).fbq) {
-                console.log(`👁️ [FB ViewContent] Wysyłam (RAM): ${sectionId}`);
-
-                (window as any).fbq('track', 'ViewContent', {
+              // Parametry zdarzenia
+              const eventParams = {
                   content_name: sectionConfig.name,
                   content_ids: [sectionId],
                   content_type: 'product_group',
                   currency: activeLocale === 'pl' ? 'PLN' : 'USD'
-                });
+              };
 
-                // ZAPIS DO PAMIĘCI RAM (znika po F5)
-                viewedSectionsRef.current.add(sectionId);
+              // 🔥 LOGIKA: Jeśli to sekcja CEN (pricing) -> Wyślij HYBRYDOWO (Mocne śledzenie)
+              if (sectionId === 'pricing') {
+                 console.log(`👁️ [Hybrid ViewContent] Pricing Section (Double Track)`);
+                 trackHybridEvent('ViewContent', eventParams);
               }
+              // Dla reszty sekcji (FAQ, Features) -> Zostawiamy tylko Browser (Oszczędność serwera)
+              else {
+                 if (typeof window !== 'undefined' && (window as any).fbq) {
+                    console.log(`👁️ [Browser ViewContent] ${sectionId}`);
+                    (window as any).fbq('track', 'ViewContent', eventParams);
+                 }
+              }
+
+              // ZAPIS DO PAMIĘCI RAM
+              viewedSectionsRef.current.add(sectionId);
             }
 
             observer.unobserve(entry.target);

@@ -1,44 +1,39 @@
-// src/app/[locale]/components/Analytics.tsx
+// app/[locale]/components/Analytics.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
 import Script from "next/script";
-import { FB_PIXEL_ID } from "@/app/lib/fbPixel";
-// ❌ USUNIĘTO import usePathname - komponent ma być ślepy na zmiany URL
+import { FB_PIXEL_ID, trackHybridEvent } from "@/app/lib/fbPixel"; // 👈 Importujemy nową funkcję hybrydową
 
 export default function Analytics() {
-  // Flaga w pamięci (nie resetuje się przy renderowaniu)
+  // Flaga, żeby kod wykonał się tylko raz (React Strict Mode protection)
   const isInitialized = useRef(false);
 
   useEffect(() => {
-    // 1. Zabezpieczenie: Jeśli już zainicjowano w tej sesji komponentu, nie rób nic.
+    // 1. Zabezpieczenie przed podwójnym odpaleniem
     if (isInitialized.current) return;
 
-    // Sprawdzamy czy fbq istnieje (powinno, bo Script jest ładowany poniżej)
+    // Sprawdzamy czy fbq istnieje (powinno, bo Script ładuje się poniżej)
     if (typeof window !== 'undefined' && (window as any).fbq) {
 
-        // --- BLOKADA 1: Bezpośrednie ustawienie flagi w obiekcie ---
+        // --- BLOKADY AUTOMATYZMU ---
+        // Wyłączamy automatyczne śledzenie zmian URL (kotwic)
         (window as any).fbq.disablePushState = true;
         (window as any).fbq.allowDuplicatePageViews = false;
 
-        // --- BLOKADA 2: Konfiguracja w INIT ---
-        // Przenosimy INIT tutaj. Wykona się tylko raz.
+        // --- INIT ---
         (window as any).fbq('init', FB_PIXEL_ID, {}, {
             autoConfig: false,
             disablePushState: true
         });
 
-        // Track PageView - tylko raz
-        (window as any).fbq('track', 'PageView');
-
-        console.log("🔒 [Analytics] Pixel zainicjowany (History Tracking: DISABLED). PageView wysłane.");
+        // 🔥 KLUCZOWA ZMIANA: Wysyłamy PageView HYBRYDOWO (Browser + Server)
+        console.log("🔒 [Analytics] Init & Hybrid PageView sent");
+        trackHybridEvent('PageView');
 
         // Zamykamy bramkę
         isInitialized.current = true;
     }
-
-  // Pusta tablica zależności [] oznacza: uruchom tylko przy montowaniu layoutu.
-  // Brak usePathname sprawia, że zmiana hasha (#pricing) nie wymusi ponownego sprawdzenia.
   }, []);
 
   return (
@@ -56,8 +51,7 @@ export default function Analytics() {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
 
-          // UWAGA: Usunęliśmy stąd 'init'. Jest teraz wywoływany w useEffect,
-          // co daje nam pełną kontrolę nad momentem uruchomienia.
+          // INIT został przeniesiony do useEffect wyżej, aby mieć nad nim pełną kontrolę
         `,
       }}
     />
