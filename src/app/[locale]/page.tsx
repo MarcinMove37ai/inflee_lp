@@ -684,7 +684,7 @@ const InfleeVerticalLanding: React.FC = () => {
                  }
               }
 
-              // ZAPIS DO PAMIĘCI RAM
+              // ZAPIS DO PAMIĘCI RAM?
               viewedSectionsRef.current.add(sectionId);
             }
 
