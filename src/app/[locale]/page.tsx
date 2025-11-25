@@ -58,13 +58,11 @@ const ContactModalInline = memo(({ isOpen, onClose, subject }: { isOpen: boolean
     e.preventDefault();
 
     // 1. Wyślij zdarzenie Contact do Facebooka
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Contact', {
-        content_name: subject, // To rozróżni "White Label" od "Ogólne zapytanie"
-        currency: 'PLN',
-        value: 0.00 // Kontakt nie ma bezpośredniej wartości pieniężnej, ale jest leadem
-      });
-    }
+    trackHybridEvent('Contact', {
+      content_name: subject,
+      currency: 'PLN',
+      value: 0.00
+    });
 
     alert(t('thankYou'));
     onClose();
