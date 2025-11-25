@@ -1,39 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { FB_PIXEL_ID, FB_ACCESS_TOKEN } from '../../lib/fbPixel'
+import crypto from 'crypto'
+
+const hashData = (data: string | undefined | null) => {
+  if (!data) return undefined
+  return crypto.createHash('sha256').update(data).digest('hex')
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const { eventName, userData, customData } = await request.json()
+    const { eventName, userData, customData, eventId } = await request.json()
 
-    // Przygotowanie danych dla Conversions API
+    // Normalizacja i haszowanie danych zgodnie z wymogami Meta
+    const hashedUserData = {
+      em: userData.email ? [hashData(userData.email.toLowerCase().trim())] : undefined,
+      ph: userData.phone ? [hashData(userData.phone.replace(/\D/g, ''))] : undefined,
+      fn: userData.firstName ? [hashData(userData.firstName.toLowerCase().trim())] : undefined,
+      ln: userData.lastName ? [hashData(userData.lastName.toLowerCase().trim())] : undefined,
+      ct: userData.city ? [hashData(userData.city.toLowerCase().trim())] : undefined,
+      country: userData.country ? [hashData(userData.country.toLowerCase().trim())] : undefined,
+      client_ip_address: request.ip || request.headers.get('x-forwarded-for'),
+      client_user_agent: request.headers.get('user-agent'),
+      fbp: userData.fbp,
+      fbc: userData.fbc,
+    }
+
     const eventData = {
       data: [{
         event_name: eventName,
         event_time: Math.floor(Date.now() / 1000),
         action_source: 'website',
-        user_data: {
-          em: userData.email ? [userData.email.toLowerCase().trim()] : undefined,
-          ph: userData.phone ? [userData.phone.replace(/\D/g, '')] : undefined,
-          fn: userData.firstName ? [userData.firstName.toLowerCase().trim()] : undefined,
-          client_ip_address: request.ip || request.headers.get('x-forwarded-for'),
-          client_user_agent: request.headers.get('user-agent'),
-        },
+        event_id: eventId,
+        user_data: hashedUserData,
         custom_data: customData
       }],
       access_token: FB_ACCESS_TOKEN
     }
 
-    // Wysłanie do Facebook Conversions API
     const response = await fetch(`https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(eventData)
     })
 
     const result = await response.json()
-
     return NextResponse.json({ success: true, result })
   } catch (error) {
     console.error('Conversions API error:', error)

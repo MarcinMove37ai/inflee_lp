@@ -1,4 +1,5 @@
 // app/[locale]/layout.tsx
+import Analytics from './components/Analytics';
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
@@ -124,36 +125,6 @@ export default async function LocaleLayout({
 
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
 
-        {/* Facebook Pixel */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.addEventListener('load', function() {
-                setTimeout(function() {
-                  !function(f,b,e,v,n,t,s)
-                  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                  n.queue=[];t=b.createElement(e);t.async=!0;
-                  t.src=v;s=b.getElementsByTagName(e)[0];
-                  s.parentNode.insertBefore(t,s)}(window, document,'script',
-                  'https://connect.facebook.net/en_US/fbevents.js');
-                  fbq('init', '574848185272133');
-                  fbq('track', 'PageView');
-                }, 3000);
-              });
-            `,
-          }}
-        />
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=574848185272133&ev=PageView&noscript=1"
-          />
-        </noscript>
-
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -180,6 +151,7 @@ export default async function LocaleLayout({
       </head>
       <body className="text-slate-200 overflow-x-hidden">
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <Analytics />
           {children}
           <CookieConsent />
         </NextIntlClientProvider>

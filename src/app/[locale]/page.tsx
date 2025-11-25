@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image'; // ✅ Next.js Image
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { createPortal } from 'react-dom';
-import React, { useEffect, useMemo, useState, useCallback, FormEvent, memo } from "react";
+import React, { useEffect, useMemo, useState, useCallback, FormEvent, memo, useRef } from "react";
 import { useTranslations, useLocale } from 'next-intl';
 
 // ✅ Individual icon imports dla tree-shaking
@@ -55,9 +55,19 @@ const ContactModalInline = memo(({ isOpen, onClose, subject }: { isOpen: boolean
 
   const handleFormSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
+
+    // 1. Wyślij zdarzenie Contact do Facebooka
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Contact', {
+        content_name: subject, // To rozróżni "White Label" od "Ogólne zapytanie"
+        currency: 'PLN',
+        value: 0.00 // Kontakt nie ma bezpośredniej wartości pieniężnej, ale jest leadem
+      });
+    }
+
     alert(t('thankYou'));
     onClose();
-  }, [t, onClose]);
+  }, [t, onClose, subject]);
 
   const handleEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -508,11 +518,15 @@ const InfleeVerticalLanding: React.FC = () => {
   const faqs = useMemo(() => ["faq.faq1", "faq.faq2", "faq.faq3", "faq.faq4", "faq.faq5", "faq.faq6"], []);
 
   const plans: Plan[] = useMemo(() => [
-    { id: 'rookie', nameKey: 'pricing.plans.rookie.name', descriptionKey: 'pricing.plans.rookie.description', priceCard: 37, priceBlik: 87, currencyKey: 'pricing.currencyPerMonth', featuresKeys: ['pricing.plans.rookie.feature1', 'pricing.plans.rookie.feature2', 'pricing.plans.rookie.feature3', 'pricing.plans.rookie.feature4', 'pricing.plans.rookie.feature5'], notIncludedKeys: ['pricing.plans.rookie.notIncluded1', 'pricing.plans.rookie.notIncluded2', 'pricing.plans.rookie.notIncluded3', 'pricing.plans.rookie.notIncluded4', 'pricing.plans.rookie.notIncluded5', 'pricing.plans.rookie.notIncluded6', 'pricing.plans.rookie.notIncluded7'], buttonTextKey: 'pricing.plans.rookie.button' },
-    { id: 'creator', nameKey: 'pricing.plans.creator.name', descriptionKey: 'pricing.plans.creator.description', priceCard: 87, priceBlik: 137, currencyKey: 'pricing.currencyPerMonth', featuresKeys: ['pricing.plans.creator.feature1', 'pricing.plans.creator.feature2', 'pricing.plans.creator.feature3', 'pricing.plans.creator.feature4', 'pricing.plans.creator.feature5', 'pricing.plans.creator.feature6'], notIncludedKeys: ['pricing.plans.creator.notIncluded1', 'pricing.plans.creator.notIncluded2', 'pricing.plans.creator.notIncluded3', 'pricing.plans.creator.notIncluded4', 'pricing.plans.creator.notIncluded5', 'pricing.plans.creator.notIncluded6', 'pricing.plans.creator.notIncluded7'], highlighted: true, buttonTextKey: 'pricing.plans.creator.button' },
-    { id: 'unlimited', nameKey: 'pricing.plans.unlimited.name', descriptionKey: 'pricing.plans.unlimited.description', priceCard: 297, priceBlik: 347, currencyKey: 'pricing.currencyPerMonth', featuresKeys: ['pricing.plans.unlimited.feature1', 'pricing.plans.unlimited.feature2', 'pricing.plans.unlimited.feature3', 'pricing.plans.unlimited.feature4', 'pricing.plans.unlimited.feature5', 'pricing.plans.unlimited.feature6', 'pricing.plans.unlimited.feature7'], notIncludedKeys: [], buttonTextKey: 'pricing.plans.unlimited.button' },
+    { id: 'rookie', nameKey: 'pricing.plans.rookie.name', descriptionKey: 'pricing.plans.rookie.description', priceCard: 37, priceBlik: 47, currencyKey: 'pricing.currencyPerMonth', featuresKeys: ['pricing.plans.rookie.feature1', 'pricing.plans.rookie.feature2', 'pricing.plans.rookie.feature3', 'pricing.plans.rookie.feature4', 'pricing.plans.rookie.feature5'], notIncludedKeys: ['pricing.plans.rookie.notIncluded1', 'pricing.plans.rookie.notIncluded2', 'pricing.plans.rookie.notIncluded3', 'pricing.plans.rookie.notIncluded4', 'pricing.plans.rookie.notIncluded5', 'pricing.plans.rookie.notIncluded6', 'pricing.plans.rookie.notIncluded7'], buttonTextKey: 'pricing.plans.rookie.button' },
+    { id: 'creator', nameKey: 'pricing.plans.creator.name', descriptionKey: 'pricing.plans.creator.description', priceCard: 87, priceBlik: 97, currencyKey: 'pricing.currencyPerMonth',
+      featuresKeys: activeLocale === 'pl'
+        ? ['pricing.plans.creator.feature1', 'pricing.plans.creator.feature2', 'pricing.plans.creator.feature3', 'pricing.plans.creator.feature4', 'pricing.plans.creator.feature5', 'pricing.plans.creator.feature6']
+        : ['pricing.plans.creator.feature2', 'pricing.plans.creator.feature3', 'pricing.plans.creator.feature4', 'pricing.plans.creator.feature5', 'pricing.plans.creator.feature6'],
+      notIncludedKeys: ['pricing.plans.creator.notIncluded1', 'pricing.plans.creator.notIncluded2', 'pricing.plans.creator.notIncluded3', 'pricing.plans.creator.notIncluded4', 'pricing.plans.creator.notIncluded5', 'pricing.plans.creator.notIncluded6', 'pricing.plans.creator.notIncluded7'], highlighted: true, buttonTextKey: 'pricing.plans.creator.button' },
+    { id: 'unlimited', nameKey: 'pricing.plans.unlimited.name', descriptionKey: 'pricing.plans.unlimited.description', priceCard: 287, priceBlik: 297, currencyKey: 'pricing.currencyPerMonth', featuresKeys: ['pricing.plans.unlimited.feature1', 'pricing.plans.unlimited.feature2', 'pricing.plans.unlimited.feature3', 'pricing.plans.unlimited.feature4', 'pricing.plans.unlimited.feature5', 'pricing.plans.unlimited.feature6', 'pricing.plans.unlimited.feature7'], notIncludedKeys: [], buttonTextKey: 'pricing.plans.unlimited.button' },
     { id: 'whitelabel', nameKey: 'pricing.plans.whitelabel.name', descriptionKey: 'pricing.plans.whitelabel.description', priceCard: 10000, priceBlik: 10000, currencyKey: 'pricing.currencyOnce', featuresKeys: ['pricing.plans.whitelabel.feature1', 'pricing.plans.whitelabel.feature2', 'pricing.plans.whitelabel.feature3', 'pricing.plans.whitelabel.feature4', 'pricing.plans.whitelabel.feature5', 'pricing.plans.whitelabel.feature6', 'pricing.plans.whitelabel.feature7', 'pricing.plans.whitelabel.feature8', 'pricing.plans.whitelabel.feature9'], notIncludedKeys: [], isGolden: true, buttonTextKey: 'pricing.plans.whitelabel.button' }
-  ], []);
+  ], [activeLocale]);
 
   const getPrice = useCallback((plan: Plan) => {
     const price = paymentMethod === 'card' ? plan.priceCard : plan.priceBlik;
@@ -556,27 +570,54 @@ const InfleeVerticalLanding: React.FC = () => {
       );
     }
 
-    // Mapa identyfikatorów planów na ścieżki URL
     const planPaths: { [key: string]: string } = {
       rookie: '/free',
       creator: '/crea',
       unlimited: '/inf',
     };
 
-    // Pobierz ścieżkę dla bieżącego planu lub pusty string, jeśli nie pasuje
     const planPath = planPaths[plan.id] || '';
-
-    // Zbuduj docelowy URL
     const targetUrl = `https://app.inflee.app/register${planPath}?lang=${activeLocale}`;
 
+    const finalButtonTextKey = (plan.id === 'rookie' && paymentMethod === 'blik')
+      ? 'pricing.plans.creator.button'
+      : plan.buttonTextKey;
+
+    // Logika śledzenia (nie blokuje otwierania nowej karty)
+    const handlePlanClick = () => {
+      // 1. Oblicz wartość dla Facebooka
+      let value = 0;
+      const currency = activeLocale === 'pl' ? 'PLN' : 'USD';
+
+      if (paymentMethod === 'blik') {
+        value = plan.priceBlik; // Pełna wartość dla BLIK
+      } else {
+        // Dla karty: Rookie to Trial (0), reszta pełna cena
+        value = plan.id === 'rookie' ? 0 : plan.priceCard;
+      }
+
+      // 2. Wyślij zdarzenie do Pixela (jeśli istnieje)
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'InitiateCheckout', {
+          content_name: `Plan ${plan.nameKey} (${paymentMethod})`,
+          content_ids: [`${plan.id}_${paymentMethod}`],
+          content_type: 'product',
+          currency: currency,
+          value: value,
+          num_items: 1,
+          payment_method: paymentMethod
+        });
+      }
+    };
+
     return (
-      <a href={targetUrl} target="_blank" rel="noopener noreferrer">
+      <a href={targetUrl} target="_blank" onClick={handlePlanClick} rel="noopener noreferrer">
         <button className={buttonClass}>
-          {t(plan.buttonTextKey)}
+          {t(finalButtonTextKey)}
         </button>
       </a>
     );
-  }, [handleOpenModal, t, activeLocale]);
+  }, [handleOpenModal, t, activeLocale, paymentMethod]);
 
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>(".animate-on-scroll");
@@ -594,6 +635,68 @@ const InfleeVerticalLanding: React.FC = () => {
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, []);
+
+  // ✅ POPRAWIONE: Niezależne śledzenie każdej sekcji (Raz na sesję)
+  const viewedSectionsRef = useRef<Set<string>>(new Set());
+
+  useEffect(() => {
+    // 1. Definicja sekcji
+    const sectionsToTrack = [
+      { id: 'how-it-works', name: 'How It Works Section' },
+      { id: 'features', name: 'Features Section' },
+      { id: 'pricing', name: 'Pricing Section' },
+      { id: 'faq', name: 'FAQ Section' }
+    ];
+
+    // 2. Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+
+            // SPRAWDZENIE: Czy mamy to w pamięci RAM komponentu?
+            if (viewedSectionsRef.current.has(sectionId)) {
+              observer.unobserve(entry.target);
+              return;
+            }
+
+            const sectionConfig = sectionsToTrack.find(s => s.id === sectionId);
+
+            if (sectionConfig) {
+              // WYSYŁKA
+              if (typeof window !== 'undefined' && (window as any).fbq) {
+                console.log(`👁️ [FB ViewContent] Wysyłam (RAM): ${sectionId}`);
+
+                (window as any).fbq('track', 'ViewContent', {
+                  content_name: sectionConfig.name,
+                  content_ids: [sectionId],
+                  content_type: 'product_group',
+                  currency: activeLocale === 'pl' ? 'PLN' : 'USD'
+                });
+
+                // ZAPIS DO PAMIĘCI RAM (znika po F5)
+                viewedSectionsRef.current.add(sectionId);
+              }
+            }
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    // 3. Podpięcie (tylko niewidzianych w tej sesji odświeżenia)
+    sectionsToTrack.forEach(section => {
+      if (!viewedSectionsRef.current.has(section.id)) {
+        const el = document.getElementById(section.id);
+        if (el) observer.observe(el);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [activeLocale]);
 
   const styles = useMemo(
     () => ({
@@ -640,14 +743,14 @@ const InfleeVerticalLanding: React.FC = () => {
           {/* 🔴 ZMIANA 2: Usuwamy 'container', 'mx-auto', 'max-w-' i używamy tych samych klas co 'containerWide' */}
           <div className={containerWide + " h-full flex justify-between items-center overflow-x-visible-safe"}>
 
-            {/* Bez zmian od tego miejsca */}
+            {/* ✅ WKLEJ TEN KOD W MIEJSCE STAREGO BLOKU LOGO */}
             <a href="/" className="group flex items-center cursor-pointer overflow-x-visible-safe">
-              <div className="w-12 h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1.5 group-hover:ring-white/30 transition-all duration-300 mr-3 overflow-x-visible-safe">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-800/70 backdrop-blur-sm rounded-lg ring-1 ring-white/20 flex items-center justify-center p-1 sm:p-1.5 group-hover:ring-white/30 transition-all duration-300 mr-2 sm:mr-3 overflow-x-visible-safe">
                 <Image src="/logoW.png" alt="inflee.app logo" width={48} height={48} className="w-full h-full object-contain" priority />
               </div>
               <div>
                 <h1
-                  className="text-2xl font-bold leading-tight"
+                  className="text-xl sm:text-2xl font-bold leading-tight"
                   style={{
                     background: 'linear-gradient(135deg, #A855F7, #6366F1)',
                     WebkitBackgroundClip: 'text',
@@ -657,7 +760,7 @@ const InfleeVerticalLanding: React.FC = () => {
                 >
                   inflee.app
                 </h1>
-                <p className="mt-1 text-xs text-slate-400 tracking-wide uppercase leading-tight group-hover:text-slate-300 transition-colors duration-300">
+                <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs text-slate-400 tracking-wide uppercase leading-tight group-hover:text-slate-300 transition-colors duration-300">
                   {t('nav.slogan')}
                 </p>
               </div>
@@ -834,13 +937,14 @@ const InfleeVerticalLanding: React.FC = () => {
 
           <section id="pricing" className="py-20 md:py-32 overflow-x-clip">
             <div className={containerWide}>
-              <div className="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h2 className="text-3xl md:text-5xl font-bold text-white md:whitespace-nowrap">
+              <div className="text-center max-w-4xl mx-auto animate-on-scroll">
+                <h2 className="text-3xl md:text-5xl font-bold text-white">
                   {t('pricing.title.part1')} <span className="gradient-text">{t('pricing.title.part2')} {t('pricing.title.part3')}</span>
                 </h2>
                 <p className="mt-4 text-lg text-slate-400">{t('pricing.subtitle')}</p>
               </div>
 
+              {activeLocale === 'pl' && (
               <div className="text-center my-12 animate-on-scroll">
                 <div className="bg-slate-900/80 rounded-lg ring-1 ring-white/10 p-1 inline-flex backdrop-blur-sm">
                   <button
@@ -868,8 +972,9 @@ const InfleeVerticalLanding: React.FC = () => {
                 </div>
                 <p className="text-slate-400 text-sm mt-4">{t('pricing.paymentMethods.prompt')}</p>
               </div>
+              )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+              <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start ${activeLocale !== 'pl' ? 'mt-12' : ''}`}>
                 {plans.map((plan, i) => (
                   <div key={plan.id} className="relative rounded-2xl transition-all duration-300 animate-on-scroll" style={{transitionDelay: `${i * 100}ms`}}>
                     <div className={`p-0.5 rounded-2xl ${plan.highlighted ? 'bg-gradient-to-b from-purple-500 to-indigo-500' : plan.isGolden ? 'bg-gradient-to-b from-amber-500 to-yellow-600' : ''}`}>
@@ -921,11 +1026,10 @@ const InfleeVerticalLanding: React.FC = () => {
                                   style={{ overflow: 'hidden' }}
                                 >
                                   <p className="text-xs text-slate-400 mt-2 mb-4 text-center">
-                                    {t('pricing.cheaperBy', { amount: plan.priceBlik - plan.priceCard })}
-                                    {' '}
+                                    {`Z subskrypcją oszczędzasz ${(plan.priceBlik - plan.priceCard) * 12} zł rocznie. `}
                                     <button
                                       onClick={() => setPaymentMethod('card')}
-                                      className="font-semibold text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
+                                      className="font-semibold text-purple-400 hover:text-purple-300 transition-colors cursor-pointer"
                                     >
                                       {t('pricing.check')}
                                     </button>
