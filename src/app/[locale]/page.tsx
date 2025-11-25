@@ -1158,7 +1158,7 @@ const InfleeVerticalLanding: React.FC = () => {
                 {t('finalCta.subtitle')}
               </p>
               <div className="mt-10">
-                <a href={`https://app.inflee.app/register/final?lang=${activeLocale}`} className={cx("px-8 py-4 rounded-xl font-bold text-white text-lg", styles.cta)}>
+                <a href="#pricing" className={cx("px-8 py-4 rounded-xl font-bold text-white text-lg", styles.cta)}>
                   {t('finalCta.button')}
                 </a>
               </div>
