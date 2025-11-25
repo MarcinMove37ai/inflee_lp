@@ -9,7 +9,8 @@ WORKDIR /app
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* ./
 RUN \
-  if [ -f package-lock.json ]; then npm ci --only=production; \
+  if [ -f package-lock.json ]; \
+  then npm ci --only=production; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -18,11 +19,23 @@ FROM base AS builder
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN \
-  if [ -f package-lock.json ]; then npm ci; \
+  if [ -f package-lock.json ]; \
+  then npm ci; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
 COPY . .
+
+# --- 🟢 ZMIANY: Przekazanie zmiennych środowiskowych do procesu budowania ---
+# Next.js potrzebuje tych zmiennych w czasie "npm run build", aby
+# umieścić je w kodzie przeglądarki (zwłaszcza te z NEXT_PUBLIC_).
+
+ARG NEXT_PUBLIC_FB_PIXEL_ID
+ENV NEXT_PUBLIC_FB_PIXEL_ID=$NEXT_PUBLIC_FB_PIXEL_ID
+
+# Token dostępu jest używany tylko na serwerze (Runtime), więc nie musimy
+# go tutaj deklarować, Railway wstrzyknie go przy uruchomieniu kontenera.
+# --------------------------------------------------------------------------
 
 # Next.js collects completely anonymous telemetry data, disable if you want
 ENV NEXT_TELEMETRY_DISABLED=1
