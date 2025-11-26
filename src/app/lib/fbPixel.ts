@@ -11,29 +11,34 @@ declare global {
   }
 }
 
-// Pomocnik do pobierania ciasteczek
-const getCookie = (name: string) => {
-  if (typeof document === 'undefined') return null;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(';').shift();
-  return null;
-};
+// Interfejs dla danych użytkownika (Matching)
+interface UserDataPayload {
+  email?: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  city?: string;
+  country?: string;
+}
 
 // --- GŁÓWNA FUNKCJA HYBRYDOWA ---
-export const trackHybridEvent = async (eventName: string, params: any = {}) => {
+export const trackHybridEvent = async (
+  eventName: string,
+  params: any = {},
+  userData: UserDataPayload = {} // 👈 NOWOŚĆ: Argument na dane osobowe
+) => {
   const eventId = `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-  // 1. Browser Pixel
+  // 1. Browser Pixel (Standardowy)
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', eventName, params, { eventID: eventId });
     console.log(`📡 [Hybrid] Browser sent: ${eventName} (ID: ${eventId})`);
   }
 
-  // 2. Server CAPI
+  // 2. Server CAPI (Backend)
   try {
-    const fbp = getCookie('_fbp');
-    const fbc = getCookie('_fbc');
+    // Nie musimy już ręcznie czytać ciasteczek _fbp/_fbc tutaj.
+    // Przeglądarka wyśle je automatycznie w nagłówkach do naszego API (same-origin).
 
     await fetch('/api/fb-conversion', {
       method: 'POST',
@@ -42,19 +47,16 @@ export const trackHybridEvent = async (eventName: string, params: any = {}) => {
         eventName,
         eventId,
         customData: params,
-        userData: {
-          fbp: fbp,
-          fbc: fbc,
-          client_user_agent: navigator.userAgent,
-        }
+        userData: userData // Przekazujemy e-mail/telefon do backendu
       })
     });
-    console.log(`SERVER [Hybrid] CAPI sent: ${eventName}`);
+    console.log(`🚀 [Hybrid] CAPI sent: ${eventName} (with userData: ${Object.keys(userData).length > 0})`);
   } catch (e) {
     console.error('CAPI Error:', e);
   }
 };
 
+// Prosty wrapper dla samego Pixela (opcjonalny)
 export const event = (name: string, options = {}) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', name, options);

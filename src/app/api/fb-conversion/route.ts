@@ -1,64 +1,116 @@
-// app/api/fb-conversion/route.ts
-import { NextRequest, NextResponse } from 'next/server'
-import { FB_PIXEL_ID } from '../../lib/fbPixel'
-import crypto from 'crypto'
+import { NextRequest, NextResponse } from 'next/server';
+import {
+  FacebookAdsApi,
+  ServerEvent,
+  EventRequest,
+  UserData,
+  CustomData
+} from 'facebook-nodejs-business-sdk';
+import crypto from 'crypto';
 
-const hashData = (data: string | undefined | null) => {
-  if (!data) return undefined
-  return crypto.createHash('sha256').update(data).digest('hex')
-}
+// Konfiguracja (tylko pobranie ID, bez initu tutaj)
+const PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID!;
+
+// Funkcja pomocnicza do haszowania (SHA256)
+const hash = (value: string) => crypto.createHash('sha256').update(value).digest('hex');
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Odbieramy dane z żądania
-    const { eventName, userData, customData, eventId, testEventCode } = await request.json()
+    // 1. Pobieramy Token DOPIERO TUTAJ (wewnątrz funkcji)
+    // Dzięki temu build się nie wywali, bo ta linijka wykona się tylko na działającym serwerze
+    const accessToken = process.env.FB_ACCESS_TOKEN;
 
-    // Normalizacja i haszowanie danych użytkownika (wymagane przez FB)
-    const hashedUserData = {
-      em: userData.email ? [hashData(userData.email.toLowerCase().trim())] : undefined,
-      ph: userData.phone ? [hashData(userData.phone.replace(/\D/g, ''))] : undefined,
-      fn: userData.firstName ? [hashData(userData.firstName.toLowerCase().trim())] : undefined,
-      ln: userData.lastName ? [hashData(userData.lastName.toLowerCase().trim())] : undefined,
-      ct: userData.city ? [hashData(userData.city.toLowerCase().trim())] : undefined,
-      country: userData.country ? [hashData(userData.country.toLowerCase().trim())] : undefined,
-      client_ip_address: request.ip || request.headers.get('x-forwarded-for'),
-      client_user_agent: request.headers.get('user-agent'),
-      fbp: userData.fbp,
-      fbc: userData.fbc,
+    if (!accessToken) {
+      throw new Error("Brak FB_ACCESS_TOKEN w zmiennych środowiskowych");
     }
 
-    const eventData = {
-      data: [{
-        event_name: eventName,
-        event_time: Math.floor(Date.now() / 1000),
-        action_source: 'website',
-        event_id: eventId,
-        user_data: hashedUserData,
-        custom_data: customData
-      }],
-      // 2. Dodajemy kod testowy do payloadu (jeśli został przesłany w requestcie)
-      ...(testEventCode && { test_event_code: testEventCode }),
+    // 2. Inicjalizacja API w momencie żądania
+    FacebookAdsApi.init(accessToken);
 
-      // ✅ KLUCZOWA ZMIANA: Pobieramy token bezpiecznie ze zmiennych środowiskowych serwera
-      access_token: process.env.FB_ACCESS_TOKEN
+    const body = await request.json();
+    const { eventName, eventId, customData, userData: clientUserData } = body;
+
+    // --- Reszta kodu bez zmian ---
+
+    // 1. Pobieranie IP
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const clientIp = forwardedFor ? forwardedFor.split(',')[0] : request.ip || '0.0.0.0';
+
+    // 2. User Agent
+    const userAgent = request.headers.get('user-agent') || '';
+
+    // 3. Ciasteczka
+    const fbpCookie = request.cookies.get('_fbp')?.value || clientUserData?.fbp;
+    const fbcCookie = request.cookies.get('_fbc')?.value || clientUserData?.fbc;
+
+    // 4. Budowanie UserData
+    const userDataObj = new UserData()
+      .setClientIpAddress(clientIp)
+      .setClientUserAgent(userAgent);
+
+    if (fbpCookie) userDataObj.setFbp(fbpCookie);
+    if (fbcCookie) userDataObj.setFbc(fbcCookie);
+
+    if (clientUserData?.email) {
+      const normalizedEmail = clientUserData.email.trim().toLowerCase();
+      userDataObj.setEmails([hash(normalizedEmail)]);
     }
 
-    const response = await fetch(`https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(eventData)
-    })
-
-    const result = await response.json()
-
-    if (!response.ok) {
-        console.error('FB API Error:', result);
-        return NextResponse.json({ success: false, error: result }, { status: response.status });
+    if (clientUserData?.phone) {
+      const normalizedPhone = clientUserData.phone.replace(/\D/g, '');
+      userDataObj.setPhones([hash(normalizedPhone)]);
     }
 
-    return NextResponse.json({ success: true, result })
-  } catch (error) {
-    console.error('Conversions API error:', error)
-    return NextResponse.json({ success: false, error: 'Failed to send event' }, { status: 500 })
+    if (clientUserData?.firstName) userDataObj.setFirstNames([hash(clientUserData.firstName.trim().toLowerCase())]);
+    if (clientUserData?.lastName) userDataObj.setLastNames([hash(clientUserData.lastName.trim().toLowerCase())]);
+
+    // 5. CustomData
+    const customDataObj = new CustomData();
+    if (customData) {
+      if (customData.currency) customDataObj.setCurrency(customData.currency);
+      if (customData.value) customDataObj.setValue(customData.value);
+      if (customData.content_name) customDataObj.setContentName(customData.content_name);
+      if (customData.content_ids) customDataObj.setContentIds(customData.content_ids);
+      if (customData.content_type) customDataObj.setContentType(customData.content_type);
+      // Dodaj inne pola customData według potrzeb
+      if (customData.source) customDataObj.setCustomProperties({ source: customData.source });
+      if (customData.plan_selected) customDataObj.setCustomProperties({ plan_selected: customData.plan_selected });
+    }
+
+    // 6. ServerEvent
+    const serverEvent = new ServerEvent()
+      .setEventName(eventName)
+      .setEventTime(Math.floor(Date.now() / 1000))
+      .setUserData(userDataObj)
+      .setCustomData(customDataObj)
+      .setActionSource('website');
+
+    if (eventId) {
+      serverEvent.setEventId(eventId);
+    }
+
+    // 7. Wysłanie
+    const eventsData = [serverEvent];
+    const eventRequest = new EventRequest(accessToken, PIXEL_ID).setEvents(eventsData);
+
+    if (body.testEventCode) {
+        eventRequest.setTestEventCode(body.testEventCode);
+    }
+
+    const response = await eventRequest.execute();
+
+    return NextResponse.json({
+      success: true,
+      id: response.events_received
+    });
+
+  } catch (error: any) {
+    console.error('FB CAPI Error:', error.response ? error.response.data : error.message);
+    // Nie zwracaj błędu 500 do klienta, żeby nie psuć UX formularza,
+    // tylko zaloguj błąd po stronie serwera.
+    return NextResponse.json(
+      { success: false, error: 'Event processing failed' },
+      { status: 200 }
+    );
   }
 }

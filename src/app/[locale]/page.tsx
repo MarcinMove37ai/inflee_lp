@@ -54,14 +54,26 @@ const containerWide = "container mx-auto px-6";
 const ContactModalInline = memo(({ isOpen, onClose, subject }: { isOpen: boolean; onClose: () => void; subject: string; }) => {
   const t = useTranslations('contactModal');
 
-  const handleFormSubmit = useCallback((e: FormEvent) => {
+  // Wewnątrz komponentu ContactModalInline w pliku page.tsx
+
+const handleFormSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // 1. Wyślij zdarzenie Contact do Facebooka
+    // 1. Pobieramy dane wpisane przez użytkownika
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const phone = formData.get('phone') as string;
+
+    // 2. Wyślij zdarzenie Contact HYBRYDOWO z danymi użytkownika (Email/Telefon)
+    // Dzięki temu Facebook połączy to zdarzenie z konkretną osobą (Advanced Matching)
     trackHybridEvent('Contact', {
       content_name: subject,
       currency: 'PLN',
       value: 0.00
+    }, {
+      // ✅ Tutaj przekazujemy dane do haszowania na serwerze (nowy argument z Kroku 3)
+      email: email,
+      phone: phone
     });
 
     alert(t('thankYou'));
