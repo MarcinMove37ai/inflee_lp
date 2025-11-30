@@ -963,33 +963,47 @@ const InfleeVerticalLanding: React.FC = () => {
               </div>
 
               {activeLocale === 'pl' && (
-              <div className="text-center my-12 animate-on-scroll">
-                <div className="bg-slate-900/80 rounded-lg ring-1 ring-white/10 p-1 inline-flex backdrop-blur-sm">
-                  <button
-                    onClick={() => setPaymentMethod('card')}
-                    className={`flex items-center px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 ${
-                      paymentMethod === 'card'
-                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg'
-                        : 'text-slate-300 hover:bg-white/5'
-                    }`}
-                  >
-                    <CreditCard className="w-4 h-4 mr-2" />
-                    {t('pricing.paymentMethods.subscription')}
-                  </button>
-                  <button
-                    onClick={() => setPaymentMethod('blik')}
-                    className={`flex items-center px-6 py-3 rounded-md text-sm font-medium transition-all duration-300 ${
-                      paymentMethod === 'blik'
-                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg'
-                        : 'text-slate-300 hover:bg-white/5'
-                    }`}
-                  >
-                    <Smartphone className="w-4 h-4 mr-2" />
-                    {t('pricing.paymentMethods.oneTime')}
-                  </button>
+                <div className="text-center my-12 animate-on-scroll">
+                  <div className="bg-slate-900/80 rounded-lg ring-1 ring-white/10 p-1 inline-flex backdrop-blur-sm relative">
+                    <motion.div
+                      className="absolute top-1 bottom-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-md shadow-lg pointer-events-none"
+                      animate={{
+                        left: paymentMethod === 'card' ? '4px' : 'calc(50% + 2px)',
+                        width: 'calc(50% - 6px)'
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 35,
+                        mass: 0.8
+                      }}
+                    />
+
+                    <button
+                      onClick={() => setPaymentMethod('card')}
+                      className={`relative z-10 flex items-center px-6 py-3 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer ${
+                        paymentMethod === 'card'
+                          ? 'text-white'
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      {t('pricing.paymentMethods.subscription')}
+                    </button>
+                    <button
+                      onClick={() => setPaymentMethod('blik')}
+                      className={`relative z-10 flex items-center px-6 py-3 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer ${
+                        paymentMethod === 'blik'
+                          ? 'text-white'
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      <Smartphone className="w-4 h-4 mr-2" />
+                      {t('pricing.paymentMethods.oneTime')}
+                    </button>
+                  </div>
+                  <p className="text-slate-400 text-sm mt-4">{t('pricing.paymentMethods.prompt')}</p>
                 </div>
-                <p className="text-slate-400 text-sm mt-4">{t('pricing.paymentMethods.prompt')}</p>
-              </div>
               )}
 
               <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start ${activeLocale !== 'pl' ? 'mt-12' : ''}`}>
