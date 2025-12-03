@@ -5,9 +5,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import type { Metadata, Viewport } from 'next';
 import CookieConsent from './components/CookieConsent';
-// 🛑 USUNIĘTO: import { Inter } from 'next/font/google';
-
-// 🛑 USUNIĘTO: const inter = Inter(...)
 
 // --- Typ Props ---
 type Props = {
