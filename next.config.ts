@@ -7,10 +7,11 @@ const nextConfig: NextConfig = {
   // KRYTYCZNE: Utrzymanie standalone output dla Dockera
   output: 'standalone',
 
-  // Utrzymanie ignorowania błędów na potrzeby builda w Dockerze
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // ❌ USUNIĘTE: eslint (przestarzałe w Next.js 16)
+  // Jeśli chcesz ignorować błędy ESLint podczas buildu, użyj:
+  // npm run build -- --no-lint
+
+  // Utrzymanie ignorowania błędów TypeScript na potrzeby builda w Dockerze
   typescript: {
     ignoreBuildErrors: true,
   },
