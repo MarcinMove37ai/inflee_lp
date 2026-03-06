@@ -1,167 +1,167 @@
 {
   "metadata": {
-    "title": "Inflee.app - Monetyzuj swoją wiedzę z AI",
-    "description": "Platforma AI dla twórców cyfrowych. Twórz e-booki, buduj strony zapoisu i zarabiaj bez działalności gospodarczej.",
-    "keywords": "ai, e-book, generator, monetyzacja, twórcy, influencerzy, strona lądowania",
-    "ogTitle": "Inflee.app - Edukuj | Rośnij | Zarabiaj",
-    "ogDescription": "Platforma AI dla twórców cyfrowych. Twórz e-booki, buduj strony zapoisu i zarabiaj bez działalności gospodarczej.",
-    "ogImageAlt": "Inflee.app - Platforma dla twórców cyfrowych",
+    "title": "Inflee.app - Generuj leady sprzedażowe z AI",
+    "description": "Platforma AI dla przedsiębiorców i freelancerów. Twórz e-booki, rolki promocyjne i strony zapisu, które przyciągają klientów na autopilot.",
+    "keywords": "ai, lead generation, generowanie leadów, e-book, rolki promocyjne, reels, freelancer, mały biznes, strona lądowania",
+    "ogTitle": "Inflee.app - Twórz | Przyciągaj | Sprzedawaj",
+    "ogDescription": "Platforma AI dla przedsiębiorców i freelancerów. Twórz e-booki, rolki promocyjne i strony zapisu, które przyciągają klientów na autopilot.",
+    "ogImageAlt": "Inflee.app - Platforma do generowania leadów sprzedażowych",
     "ogImageSquareAlt": "Logo inflee.app"
   },
   "nav": {
     "features": "Funkcje",
     "pricing": "Cennik",
     "register": "Zaloguj",
-    "slogan": "Edukuj | Rośnij | Zarabiaj",
+    "slogan": "Wiedza | Leady | Sprzedaż",
     "howItWorks": "Jak to działa?",
     "faq": "FAQ"
   },
   "hero": {
     "title1": {
-      "part1": "Zacznij w końcu",
-      "part2": "monetyzować",
-      "part3": "Twoje Social Media"
+      "part1": "Zamień swoją wiedzę w",
+      "part2": "maszynę do leadów",
+      "part3": "sprzedażowych"
     },
     "title2": {
-      "part1": "Docieraj skutecznie do",
-      "part2": "nowych odbiorców"
+      "part1": "Przyciągaj klientów",
+      "part2": "na autopilocie"
     },
-    "subtitle": "Wykorzystaj moc AI skuteczniej niż kiedykolwiek!",
-    "benefit1": "Bez tysięcy obserwujących - wystarczy kilkuset na początek",
-    "benefit2": "Bez działalności gospodarczej czy ZUSu - w pełni legalnie",
-    "benefit3": "Bez wiedzy technicznej czy specjalnych narzędzi - zapomnij o Canvie!",
-    "cta": "Zacznij teraz",
-    "subCta": "Dostępny 21-dniowy okres próbny. Bez karty kredytowej by tworzyć."
+    "subtitle": "E-booki, rolki promocyjne i strony zapisu — AI zrobi to za Ciebie w kilka minut.",
+    "benefit1": "Bez zatrudniania copywritera, grafika czy montażysty",
+    "benefit2": "Bez wiedzy technicznej — zapomnij o Canvie i CapCucie",
+    "benefit3": "Bez przepalania budżetu na reklamy, które nie konwertują",
+    "cta": "Zacznij generować leady",
+    "subCta": "Dostępny 21-dniowy okres próbny. Bez karty kredytowej by zacząć."
   },
   "howItWorks": {
     "title": {
       "part1": "Stwórz",
-      "part2": "doskonały magnes",
-      "part3": "na nowych odbiorców i zaangażuj obecnych",
+      "part2": "kompletny lejek sprzedażowy",
+      "part3": "który przyciąga klientów i buduje Twoją bazę",
       "part4": "w 4. prostych krokach"
     },
-    "subtitle": "Przestań odkładać na później. Stwórz e-book oraz stronę do jego pobierania – odbierz pierwsze wpłaty od Twojej Społeczności jeszcze dziś.",
+    "subtitle": "Przestań tracić czas na ręczne tworzenie materiałów. Uruchom swój lead magnet — e-book, stronę zapisu i rolki promocyjne — jeszcze dziś.",
     "step1": {
-      "title": "1. Stwórz profesjonalny e-book",
-      "text": "Podaj tytuł, wklej link do artykułu lub wgraj PDF. Kliknij \"Generuj\" i kilka chwil masz gotowy e-book. AI tworzy okładkę, spis treści, formatuje rozdziały i dodaje ilustracje. Możesz wszystko edytować w przejrzystym edytorze lub zostawić jak jest – Twój wybór.",
+      "title": "1. Stwórz ekspercki e-book",
+      "text": "Podaj temat, wklej link do artykułu lub wgraj PDF z Twoją ofertą. AI stworzy profesjonalny e-book z okładką, spisem treści, rozdziałami i ilustracjami. Idealny lead magnet, który pokazuje Twoje kompetencje i przyciąga potencjalnych klientów.",
       "details": [
-        "Podaj tytuł i źródła (link/PDF)",
+        "Podaj temat i źródła (link/PDF/tekst własny)",
         "AI wygeneruje strukturę i treść rozdziałów",
-        "Dostosuj zawartość, masz wpływ na każde słowo",
-        "AI wygeneruje okładkę oraz ilustracje. Możesz też dodać własne grafiki",
-        "Twój e-book jest gotowy do publikacji w kilka minut"
+        "Dostosuj zawartość — masz wpływ na każde słowo",
+        "AI stworzy okładkę i ilustracje. Możesz dodać też własne",
+        "Gotowy lead magnet w kilka minut, nie tygodni"
       ]
     },
     "step2": {
       "title": "2. Wygeneruj stronę zapisu",
-      "text": "Na podstawie treści Twojego e-booka AI stworzy kompletną stronę WWW z angażującą treścią, formularzem zapisu i przyciskami CTA. Dostosujesz kolory, teksty i layout w kilka kliknięć. Publikujesz jednym przyciskiem – gotowa strona do udostępnienia w Social Mediach.",
+      "text": "Na podstawie treści e-booka AI stworzy kompletną stronę zapisu z perswazyjną treścią, formularzem kontaktowym i przyciskami CTA. Dostosujesz kolory, teksty i layout. Publikujesz jednym kliknięciem — strona gotowa do zbierania leadów.",
       "details": [
-        "AI napisze całą treść strony zapisu",
-        "Możesz dowolnie dostosować treść i kolorystykę strony",
-        "Responsywny design (piękna i skuteczna na każdym urządzeniu)",
-        "Kiedy wszystko jest gotowe, publikujesz jednym przyciskiem",
-        "Teraz strona jest dostępna dla wszystkich przez link lub kod QR",
-        "Udostępnij, zbieraj kontakty i przyjmuj wpłaty"
+        "AI napisze perswazyjną treść strony zapisu",
+        "Dostosuj treść i kolorystykę do Twojej marki",
+        "Responsywny design (działa idealnie na telefonie i komputerze)",
+        "Publikujesz jednym kliknięciem",
+        "Strona dostępna przez link lub kod QR",
+        "Udostępnij, zbieraj kontakty do potencjalnych klientów"
       ]
     },
     "step3": {
-      "title": "3. Zbieraj i zarządzaj leadami",
-      "text": "Każdy, kto pobierze e-book, automatycznie trafia do Twojej bazy danych. Widzisz wszystkie kontakty, zarządzasz statusami, dodajesz notatki. Możesz eksportować bazę do XLS, PDF czy CSV i użyć jej w kampaniach email lub sms.",
+      "title": "3. Generuj rolki promocyjne",
+      "text": "AI przeanalizuje treść Twojego e-booka i stworzy serię krótkich, angażujących rolek wideo. Gotowe materiały na Instagram, TikTok, Facebook czy LinkedIn — bez kamery, bez montażu, bez stresu. Każda rolka kieruje widzów na Twoją stronę zapisu.",
       "details": [
-        "Wszystkie Twoje kontakty dostępne w przyjaznej formie",
-        "Statusy i notatki do każdej pozycji w bazie",
-        "Łatwy eksport do Excela, PDFa czy pliku CSV",
-        "Statystyki odwiedzin Twoich stron oraz pobrań w czasie rzeczywistym",
-        "Już wkrótce integracja z popularnymi narzędziami email czy sms marketingu"
+        "AI tworzy rolki na podstawie treści Twojego e-booka",
+        "Gotowe do publikacji na Instagramie, TikToku i Facebooku",
+        "Bez kamery, bez montażu — wszystko generuje AI",
+        "Każda rolka z wezwaniem do działania kierującym na stronę zapisu",
+        "Regularny content, który buduje Twój wizerunek eksperta"
       ]
     },
     "step4": {
-      "title": "4. Monetyzuj i automatyzuj",
-      "text": "Łatwo zintegrujesz swoje konto w buycoffee.to czy Patronite – wdzięczni odbiorcy chętnie postawią Ci kawę, a Ty ciesz się pierwszą monetyzacją. Podłącz ManyChat i automatycznie rozsyłaj e-booki osobom komentującym Twoje posty na Instagramie czy Facebooku. Pierwsze 1000 kontaktów w ManyChat masz za darmo.",
+      "title": "4. Zbieraj leady i sprzedawaj",
+      "text": "Każdy, kto pobierze e-book, trafia do Twojej bazy potencjalnych klientów. Zarządzaj kontaktami, dodawaj notatki, śledź statusy. Eksportuj bazę do Excela, CSV lub PDFa i wykorzystaj ją w kampaniach email, SMS czy cold callingu.",
       "details": [
-        "Prosta integracja z buycoffee.to czy Patronite",
-        "Pierwsze wpłaty od fanów możliwe jeszcze dziś",
-        "Dzięki naszej współpracy możesz zacząć korzystać z ManyChat ZA DARMO",
-        "Gwarancja propozycji płatnej współpracy od Partnerów Inflee.app dla najlepszych kont",
-        "Brak prowizji dla inflee.app od wpłat czy wynagrodzeń naszych Partnerów"
+        "Wszystkie kontakty w przejrzystym CRM-ie",
+        "Statusy, notatki i tagi do każdego leada",
+        "Eksport do Excela, PDFa czy CSV jednym kliknięciem",
+        "Statystyki wizyt, pobrań i konwersji w czasie rzeczywistym",
+        "Już wkrótce integracja z popularnymi systemami email marketingu"
       ]
     }
   },
   "features": {
     "title": {
       "part1": "Wszystko, czego potrzebujesz, by",
-      "part2": "zacząć zarabiać i skutecznie rosnąć",
-      "part3": "w Social Mediach"
+      "part2": "systematycznie pozyskiwać klientów",
+      "part3": "i rosnąć"
     },
-    "subtitle": "Inflee.app to więcej niż generator AI. To kompletna platforma stworzona aby skutecznie budować i monetyzować Twoją społeczności.",
+    "subtitle": "Inflee.app to więcej niż generator AI. To kompletna platforma do budowy lejka sprzedażowego — od lead magnetu, przez content, po zarządzanie bazą klientów.",
     "feature1": {
-      "title": "E-book gotowy w 5 minut",
-      "text": "Wklej link lub wgraj tekst. AI wykona ciężką pracę, tworząc strukturę i treść, a Ty masz pełną kontrolę nad finalnym efektem i możesz edytować każdy element.",
+      "title": "Lead magnet gotowy w 5 minut",
+      "text": "Wklej link lub wgraj tekst o Twojej branży. AI stworzy profesjonalny e-book, który pokaże Twoje kompetencje i przekona potencjalnych klientów do zostawienia kontaktu.",
       "benefits": [
-        { "text": "Oszczędność dziesiątek godzin pisania" },
-        { "text": "Koniec z blokadą twórczą i pustą stroną" },
-        { "text": "Pełen wpływ na treść na każdym etapie" },
+        { "text": "Oszczędność dziesiątek godzin pisania i projektowania" },
+        { "text": "Profesjonalny materiał, który buduje zaufanie klientów" },
+        { "text": "Pełna kontrola nad treścią na każdym etapie" },
         { "text": "Export do PDF jednym kliknięciem" }
       ]
     },
     "feature2": {
-      "title": "Design, który zachwyca",
-      "text": "AI wygeneruje dla Ciebie przyciągającą wzrok okładkę i spójne grafiki. Twoje materiały będą wyglądać profesjonalnie bez zatrudniania grafika.",
+      "title": "Rolki, które przyciągają klientów",
+      "text": "AI zamieni treść Twojego e-booka w serię krótkich, angażujących rolek wideo. Gotowy content na social media bez kamery, bez montażu, bez specjalistycznych umiejętności.",
       "benefits": [
-        { "text": "Zbuduj wizerunek eksperta od pierwszego wejrzenia" },
-        { "text": "Oszczędność pieniędzy na zleceniach graficznych" },
-        { "text": "Większa chęć pobierania Twoich materiałów" },
-        { "text": "Bez opłat licencyjnych za grafikę" }
+        { "text": "Content video gotowy w minuty, nie godziny" },
+        { "text": "Profesjonalne materiały bez ekipy filmowej" },
+        { "text": "Idealny format do budowania zasięgu i pozyskiwania leadów" },
+        { "text": "Każda rolka kieruje na Twoją stronę zapisu" }
       ]
     },
     "feature3": {
-      "title": "Strona lądowania bez kodowania",
-      "text": "AI automatycznie napisze treść Twojej strony lądowania. Możesz ją dowolnie edytować, dopasować kolory i opublikować jednym kliknięciem.",
+      "title": "Strona zapisu bez kodowania",
+      "text": "AI automatycznie napisze perswazyjną treść Twojej strony zapisu. Dostosujesz ją do swojej marki i publikujesz jednym kliknięciem. Formularz kontaktowy działa od razu.",
       "benefits": [
-        { "text": "Start kampanii w kilka minut, a nie tygodni" },
+        { "text": "Start zbierania leadów w minuty, nie tygodnie" },
         { "text": "Brak opłat za domenę i hosting" },
-        { "text": "Pełna kontrola nad finalnym wyglądem i treścią" },
-        { "text": "Wysoka skuteczność dzięki sprawdzonej strukturze" }
+        { "text": "Pełna kontrola nad wyglądem i treścią" },
+        { "text": "Wysoka konwersja dzięki sprawdzonej strukturze" }
       ]
     },
     "feature4": {
-        "title": "Buduj swoją społeczność",
-        "text": "Każde pobranie e-booka to nowy kontakt w Twojej bazie. Zbieraj e-maile i twórz niezależną społeczność, bez oglądania się na algorytmy social mediów.",
-        "benefits": [
-            { "text": "Twój najważniejszy zasób marketingowy" },
-            { "text": "Bezpośrednia komunikacja ze swoimi fanami" },
-            { "text": "Idealna baza do sprzedaży przyszłych produktów" },
-            { "text": "Eksport do formatów zgodnych z narzędziami e-mail/SMS" }
-        ]
+      "title": "Buduj bazę potencjalnych klientów",
+      "text": "Każde pobranie e-booka to nowy lead w Twojej bazie. Zbieraj dane kontaktowe i buduj własną listę niezależną od algorytmów social mediów czy kosztów reklam.",
+      "benefits": [
+        { "text": "Twój najcenniejszy zasób sprzedażowy" },
+        { "text": "Bezpośredni kontakt z zainteresowanymi klientami" },
+        { "text": "Idealna baza do follow-upów i ofert sprzedażowych" },
+        { "text": "Eksport do formatów zgodnych z CRM-ami i narzędziami email" }
+      ]
     },
     "feature5": {
-        "title": "Zarabiaj od pierwszego dnia",
-        "text": "Zintegruj profil buycoffee.to jednym kliknięciem i zacznij generować legalny przychód bez konieczności zakładania działalności gospodarczej.",
-        "benefits": [
-            { "text": "Generuj legalny przychód bez firmy" },
-            { "text": "Wzmacniaj relacje ze swoją społecznością" },
-            { "text": "Gotowe rozwiązanie, bez skomplikowanej konfiguracji" },
-            { "text": "Brak prowizji ze strony Inflee" }
-        ]
+      "title": "Konwertuj leady na klientów",
+      "text": "Zarządzaj swoją bazą leadów w intuicyjnym CRM-ie. Śledź, kto pobrał materiały, oznaczaj statusy, dodawaj notatki i planuj follow-upy — wszystko w jednym miejscu.",
+      "benefits": [
+        { "text": "Przejrzysty widok każdego potencjalnego klienta" },
+        { "text": "Statusy i notatki dla lepszego zarządzania procesem sprzedaży" },
+        { "text": "Gotowe dane do kampanii email, SMS i cold callingu" },
+        { "text": "Zero prowizji od Inflee za Twoje transakcje" }
+      ]
     },
     "feature6": {
-        "title": "Rozwijaj swój biznes",
-        "text": "Twoja lista rośnie? Świetnie! Z łatwością połączysz ją z systemami mailingowymi lub zautomatyzujesz komunikację dzięki integracji z ManyChat.",
-        "benefits": [
-            { "text": "Pełna kontrola nad Twoimi danymi" },
-            { "text": "Skaluj działania marketingowe bez ograniczeń" },
-            { "text": "Wykorzystaj zebrane kontakty do sprzedaży produktów" },
-            { "text": "Gwarancja propozycji płatnej współpracy", "isGuaranteed": true }
-        ]
+      "title": "Skaluj swój biznes",
+      "text": "Twoja baza leadów rośnie? Świetnie! Eksportuj ją do dowolnego systemu, automatyzuj komunikację i zamieniaj potencjalnych klientów w płacących na dużą skalę.",
+      "benefits": [
+        { "text": "Pełna kontrola nad Twoimi danymi" },
+        { "text": "Skaluj działania sprzedażowe bez ograniczeń" },
+        { "text": "Wykorzystaj zebrane kontakty w dowolnym narzędziu" },
+        { "text": "Gwarancja propozycji płatnej współpracy", "isGuaranteed": true }
+      ]
     }
   },
   "pricing": {
     "title": {
       "part1": "Prosty cennik,",
       "part2": "który rośnie",
-      "part3": "z Tobą"
+      "part3": "z Twoim biznesem"
     },
-    "subtitle": "Wybierz plan który najlepiej odpowiada Twoim potrzebom lub zacznij darmowy okres próbny aby poznać lepiej Inflee.app",
+    "subtitle": "Wybierz plan dopasowany do skali Twojej działalności lub zacznij darmowy okres próbny, by przekonać się jak działa Inflee.app",
     "paymentMethods": {
       "subscription": "Subskrypcja (Płatność kartą)",
       "oneTime": "Jednorazowo (Płatność BLIK)",
@@ -182,51 +182,51 @@
     "limits": "Limity",
     "plans": {
       "rookie": {
-        "name": "Rookie",
-        "description": "Wszystko czego potrzebujesz by zacząć tworzyć i zarabiać!",
+        "name": "Starter",
+        "description": "Wszystko czego potrzebujesz by zacząć generować leady!",
         "button": "21 dni za darmo",
-        "feature1": "Zaawansowany Generator ebook-ów zasilany AI",
-        "feature2": "Automatyczny Generator stron zapisu zasilany AI",
-        "feature3": "Szczegółowe statystyki wizyt oraz pobrań",
-        "feature4": "Intuicyjny CRM do zarządzania Leadami",
-        "feature5": "Integracja z buycoffe.to by zarabiać od pierwszego dnia",
-        "notIncluded1": "max. 1 nowy ebook w miesiącu",
-        "notIncluded2": "max. 1 źródło na ebook",
-        "notIncluded3": "max. 6 rozdziałów na ebook",
+        "feature1": "Generator lead magnetów (e-booków) zasilany AI",
+        "feature2": "Generator stron zapisu zasilany AI",
+        "feature3": "Generator rolek promocyjnych zasilany AI",
+        "feature4": "Intuicyjny CRM do zarządzania leadami",
+        "feature5": "Szczegółowe statystyki wizyt, pobrań i konwersji",
+        "notIncluded1": "max. 1 nowy e-book w miesiącu",
+        "notIncluded2": "max. 1 źródło na e-book",
+        "notIncluded3": "max. 6 rozdziałów na e-book",
         "notIncluded4": "max. 1 aktywna strona zapisu",
         "notIncluded5": "max. 100 kontaktów w bazie",
         "notIncluded6": "Oznaczenia \"made with inflee.app\"",
         "notIncluded7": "Wsparcie z reakcją do 72h"
       },
       "creator": {
-        "name": "Creator",
-        "description": "Wszystko czego potrzebujesz aby rosnąć i zarabiać na poważnie!",
+        "name": "Business",
+        "description": "Pełny zestaw narzędzi do poważnego generowania leadów!",
         "button": "Uruchom Plan",
-        "feature1": "Gwarantowana propozycja płatnej Współpracy",
-        "feature2": "Zaawansowany Generator ebook-ów zasilany AI",
-        "feature3": "Automatyczny Generator stron zapisu zasilany AI",
-        "feature4": "Szczegółowe statystyki wizyt oraz pobrań",
-        "feature5": "Intuicyjny CRM do zarządzania Leadami",
-        "feature6": "Integracja z buycoffe.to by zarabiać od pierwszego dnia",
-        "notIncluded1": "do 5 nowych ebooków w miesiącu",
-        "notIncluded2": "do 5 źródeł na ebook",
-        "notIncluded3": "do 12 rozdziałów na ebook",
+        "feature1": "Gwarantowana propozycja płatnej współpracy",
+        "feature2": "Generator lead magnetów (e-booków) zasilany AI",
+        "feature3": "Generator stron zapisu zasilany AI",
+        "feature4": "Generator rolek promocyjnych zasilany AI",
+        "feature5": "Intuicyjny CRM do zarządzania leadami",
+        "feature6": "Szczegółowe statystyki wizyt, pobrań i konwersji",
+        "notIncluded1": "do 5 nowych e-booków w miesiącu",
+        "notIncluded2": "do 5 źródeł na e-book",
+        "notIncluded3": "do 12 rozdziałów na e-book",
         "notIncluded4": "do 5 aktywnych stron zapisu",
         "notIncluded5": "do 1000 kontaktów w bazie",
         "notIncluded6": "Oznaczenia \"made with inflee.app\"",
         "notIncluded7": "Wsparcie z reakcją do 24h"
       },
       "unlimited": {
-        "name": "Unlimited",
-        "description": "Dla influenserów którzy nie chcą się ograniczać!",
+        "name": "Scale",
+        "description": "Dla firm, które nie chcą się ograniczać!",
         "button": "Uruchom Plan",
-        "feature1": "Nieograniczona ilość ebooków",
+        "feature1": "Nieograniczona ilość e-booków i rolek",
         "feature2": "Nieograniczona ilość źródeł",
         "feature3": "Nieograniczona ilość rozdziałów",
         "feature4": "Nieograniczona ilość stron zapisu",
-        "feature5": "Nieograniczona ilość leadów",
+        "feature5": "Nieograniczona ilość leadów w bazie",
         "feature6": "Brak oznaczenia \"made with inflee.app\"",
-        "feature7": "Wsparcie z reakcją do 3h"
+        "feature7": "Priorytetowe wsparcie z reakcją do 3h"
       },
       "whitelabel": {
         "name": "White Label",
@@ -236,7 +236,7 @@
         "feature1": "Własny branding",
         "feature2": "Własna domena",
         "feature3": "Własny Meta Pixel / GTM",
-        "feature4": "Personalizacja e-booków",
+        "feature4": "Personalizacja e-booków i rolek",
         "feature5": "Personalizacja stron zapisu",
         "feature6": "Wbudowane integracje z narzędziami zewnętrznymi",
         "feature7": "Swoboda wyboru modeli AI, również lokalnych",
@@ -252,37 +252,37 @@
     },
     "faq1": {
       "q": "Dla kogo jest Inflee?",
-      "a": "Inflee jest dla każdego, kto chce zamienić swoją wiedzę w produkt cyfrowy: twórców, ekspertów, coachów, freelancerów, marketerów i małych firm. Jeśli masz wiedzę, którą chcesz się podzielić i budować społeczność – Inflee jest dla Ciebie. Nie potrzebujesz wiedzy technicznej ani działalności gospodarczej."
+      "a": "Inflee jest dla przedsiębiorców, freelancerów, konsultantów, coachów i małych firm, którym zależy na systematycznym pozyskiwaniu nowych klientów. Jeśli masz wiedzę ekspercką w swojej branży i chcesz ją zamienić w narzędzie sprzedażowe — Inflee jest dla Ciebie. Nie potrzebujesz wiedzy technicznej."
     },
     "faq2": {
-      "q": "Jakiego rodzaju treści mogę użyć do stworzenia e-booka?",
-      "a": "Możesz wkleić link do artykułu, wpisu na LinkedIn, udostępnić dokument Google/Notion, a także wgrać PDF/DOCX/TXT. Inflee przyjmie także zwykły tekst skopiowany bezpośrednio. Obsługujemy większość popularnych formatów treści."
+      "q": "Jak rolki promocyjne pomagają mi generować leady?",
+      "a": "AI analizuje treść Twojego e-booka i tworzy z niego serię krótkich, angażujących rolek wideo gotowych do publikacji na Instagramie, TikToku czy Facebooku. Każda rolka zawiera wezwanie do pobrania Twojego e-booka — dzięki temu buduje zasięg i kieruje potencjalnych klientów na Twoją stronę zapisu."
     },
     "faq3": {
       "q": "Czy mogę edytować wygenerowane treści?",
-      "a": "Tak. Zarówno treść e-booka, jak i strony lądowania są w pełni edytowalne. AI robi 90% pracy, Ty nadajesz finalny szlif. Masz pełną kontrolę nad każdym elementem – od tytułów po ilustracje."
+      "a": "Tak. Zarówno treść e-booka, rolek, jak i strony zapisu jest w pełni edytowalna. AI robi 90% pracy, Ty nadajesz finalny szlif. Masz pełną kontrolę nad każdym elementem — od tytułów po ilustracje i scenariusze rolek."
     },
     "faq4": {
       "q": "Czy muszę podawać dane karty, aby zacząć?",
-      "a": "Nie. Darmowy 21-dniowy okres próbny nie wymaga karty kredytowej. Po prostu zarejestruj się i zacznij tworzyć. Bez zobowiązań."
+      "a": "Nie. Darmowy 21-dniowy okres próbny nie wymaga karty kredytowej. Zarejestruj się i stwórz swój pierwszy lead magnet. Bez zobowiązań."
     },
     "faq5": {
-      "q": "Czy potrzebuję działalności gospodarczej?",
-      "a": "Nie. Możesz zacząć zarabiać na swojej wiedzy bez rejestracji działalności. Jeśli używasz buycoffee.to, oni zajmują się aspektami formalnymi. Inflee nie wymaga żadnych dokumentów firmowych."
+      "q": "Jakiego rodzaju treści mogę użyć jako źródło?",
+      "a": "Możesz wkleić link do artykułu, wpisu na LinkedIn, udostępnić dokument Google/Notion, a także wgrać PDF/DOCX/TXT. Inflee przyjmie też zwykły tekst skopiowany bezpośrednio. Obsługujemy większość popularnych formatów treści."
     },
     "faq6": {
-      "q": "Ile kosztuje generowanie grafik przez AI?",
-      "a": "Wszystkie koszty generowania grafik AI są wliczone w cenę planu. Nie płacisz nic ekstra za okładki czy ilustracje. W planie darmowym masz limit generowań, w planach płatnych – bez limitów."
+      "q": "Ile kosztuje generowanie grafik i rolek przez AI?",
+      "a": "Wszystkie koszty generowania grafik AI i rolek promocyjnych są wliczone w cenę planu. Nie płacisz nic ekstra. W planie darmowym masz limit generowań, w planach płatnych — znacznie wyższe lub brak limitów."
     }
   },
   "finalCta": {
     "title": {
-      "part1": "Zamień w końcu swoją pasję",
-      "part2": "w",
-      "part3": "działający biznes?"
+      "part1": "Przestań czekać na klientów",
+      "part2": "zacznij ich",
+      "part3": "przyciągać systematycznie"
     },
-    "subtitle": "Dołącz do tysięcy twórców, którzy już teraz budują swoje listy mailingowe i zarabiają na wiedzy. Twoja podróż zaczyna się tutaj.",
-    "button": "Zacznij teraz"
+    "subtitle": "Dołącz do przedsiębiorców i freelancerów, którzy już teraz generują leady sprzedażowe na autopilocie. Twój pierwszy lead magnet jest kilka minut stąd.",
+    "button": "Zacznij generować leady"
   },
   "footer": {
     "privacy": "Polityka Prywatności",
@@ -312,28 +312,28 @@
   },
   "imageGallery": {
     "step1": {
-      "image1": "Wybierz tytuł i źródła dla swojego e-booka",
+      "image1": "Podaj temat i źródła dla swojego lead magnetu",
       "image2": "AI generuje strukturę i treść rozdziałów",
       "image3": "Edytor pozwala dostosować każdy element",
       "image4": "Gotowy e-book z okładką i ilustracjami"
     },
     "step2": {
-      "image1": "AI tworzy angażującą treść strony zapisu",
-      "image2": "Dostosuj kolory i teksty według swoich potrzeb",
+      "image1": "AI tworzy perswazyjną treść strony zapisu",
+      "image2": "Dostosuj wygląd do swojej marki",
       "image3": "Responsywny design na każdym urządzeniu",
       "image4": "Opublikuj jednym kliknięciem i zbieraj leady"
     },
     "step3": {
-      "image1": "Wszystkie kontakty w przejrzystej bazie danych",
-      "image2": "Zarządzaj statusami i dodawaj notatki",
-      "image3": "Eksportuj dane do różnych formatów",
-      "image4": "Statystyki wizyt i pobrań w czasie rzeczywistym"
+      "image1": "AI generuje rolki na podstawie treści e-booka",
+      "image2": "Gotowe materiały wideo na social media",
+      "image3": "Każda rolka kieruje na Twoją stronę zapisu",
+      "image4": "Regularny content bez kamery i montażu"
     },
     "step4": {
-      "image1": "Integracja z buycoffee.to lub Patronite",
-      "image2": "Pierwsze wpłaty możliwe już dziś",
-      "image3": "Automatyzacja z ManyChat za darmo",
-      "image4": "Gwarancja propozycji płatnej współpracy"
+      "image1": "Wszystkie leady w przejrzystym CRM-ie",
+      "image2": "Zarządzaj statusami i planuj follow-upy",
+      "image3": "Eksportuj dane do dowolnego formatu",
+      "image4": "Statystyki konwersji w czasie rzeczywistym"
     }
   },
   "cookies": {
