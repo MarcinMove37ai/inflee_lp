@@ -8,15 +8,14 @@ const intlMiddleware = createMiddleware(routing);
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // ✅ KLUCZOWE: Bezpośrednie wykluczenie plików statycznych PRZED next-intl
   if (
-    pathname.includes('.') || // Wszystkie pliki z rozszerzeniem
+    pathname.includes('.') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/_vercel') ||
     pathname.startsWith('/favicon') ||
-    pathname.startsWith('/images') || // Jeśli obrazy są w /images
-    pathname.startsWith('/public')    // Jeśli coś jest w /public
+    pathname.startsWith('/images') ||
+    pathname.startsWith('/public')
   ) {
     return NextResponse.next();
   }
@@ -25,9 +24,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    // Dopasuj wszystkie ścieżki OPRÓCZ plików statycznych
-    '/((?!_next|_vercel|api|favicon|images|.*\\..*).)*',
-    '/'
-  ]
+  matcher: ['/((?!_next|_vercel|api|favicon|images|.*\\..*).*)']
 };

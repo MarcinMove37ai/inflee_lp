@@ -1,7 +1,7 @@
 // src/app/[locale]/components/CookieConsent.tsx
 "use client";
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { LazyMotion, domAnimation, m as motion, AnimatePresence } from "framer-motion";
 import Cookie from 'lucide-react/dist/esm/icons/cookie';
 import X from 'lucide-react/dist/esm/icons/x';
@@ -10,21 +10,19 @@ import Check from 'lucide-react/dist/esm/icons/check';
 
 const CookieConsent = () => {
   const t = useTranslations('cookies');
+  const locale = useLocale();
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
-  // Preferencje ciasteczek
   const [preferences, setPreferences] = useState({
-    necessary: true, // Zawsze włączone
+    necessary: true,
     analytics: false,
     marketing: false,
   });
 
   useEffect(() => {
-    // Sprawdź czy użytkownik już wyraził zgodę
     const consent = localStorage.getItem('cookieConsent');
     if (!consent) {
-      // Opóźnienie 1s przed pokazaniem bannera (lepsze UX)
       setTimeout(() => setShowBanner(true), 1000);
     }
   }, []);
@@ -38,8 +36,6 @@ const CookieConsent = () => {
     };
     localStorage.setItem('cookieConsent', JSON.stringify(allAccepted));
     setShowBanner(false);
-
-    // Tutaj można zainicjalizować narzędzia analityczne
     initializeTracking(allAccepted);
   };
 
@@ -62,24 +58,18 @@ const CookieConsent = () => {
     localStorage.setItem('cookieConsent', JSON.stringify(savedPreferences));
     setShowBanner(false);
     setShowSettings(false);
-
-    // Inicjalizuj tylko wybrane narzędzia
     initializeTracking(savedPreferences);
   };
 
   const initializeTracking = (consent: any) => {
-    // Google Analytics
     if (consent.analytics && typeof window !== 'undefined') {
-      // window.gtag('consent', 'update', {
-      //   'analytics_storage': 'granted'
-      // });
     }
-
-    // Marketing pixels
     if (consent.marketing && typeof window !== 'undefined') {
-      // Facebook Pixel, Google Ads, etc.
     }
   };
+
+  // Link do privacy z uwzględnieniem locale
+  const privacyHref = `/${locale}/privacy`;
 
   if (!showBanner) return null;
 
@@ -88,7 +78,6 @@ const CookieConsent = () => {
       <AnimatePresence>
         {showBanner && (
           <>
-            {/* ✅ BACKDROP Z BLUR - pokrywa całą stronę */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -97,7 +86,6 @@ const CookieConsent = () => {
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[119]"
             />
 
-            {/* BANNER CIASTECZEK - nad backdropem */}
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -106,7 +94,6 @@ const CookieConsent = () => {
               className="fixed bottom-0 left-0 right-0 z-[120] p-4 md:p-6"
             >
               <div className="max-w-6xl mx-auto">
-                {/* PANEL USTAWIEŃ */}
                 {showSettings ? (
                   <motion.div
                     initial={{ scale: 0.95, opacity: 0 }}
@@ -133,7 +120,6 @@ const CookieConsent = () => {
                     </div>
 
                     <div className="space-y-4 mb-6">
-                      {/* Ciasteczka niezbędne */}
                       <div className="flex items-start justify-between p-4 bg-white/5 rounded-xl border border-white/10">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
@@ -151,7 +137,6 @@ const CookieConsent = () => {
                         </div>
                       </div>
 
-                      {/* Ciasteczka analityczne */}
                       <div className="flex items-start justify-between p-4 bg-white/5 rounded-xl border border-white/10">
                         <div className="flex-1">
                           <h4 className="font-semibold text-white mb-1">{t('settings.analytics.title')}</h4>
@@ -172,7 +157,6 @@ const CookieConsent = () => {
                         </button>
                       </div>
 
-                      {/* Ciasteczka marketingowe */}
                       <div className="flex items-start justify-between p-4 bg-white/5 rounded-xl border border-white/10">
                         <div className="flex-1">
                           <h4 className="font-semibold text-white mb-1">{t('settings.marketing.title')}</h4>
@@ -211,33 +195,23 @@ const CookieConsent = () => {
                     </div>
                   </motion.div>
                 ) : (
-                  /* BANNER GŁÓWNY */
                   <div className="bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl">
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                      {/* Ikona */}
                       <div className="w-12 h-12 bg-purple-500/10 border border-purple-500/30 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Cookie className="w-6 h-6 text-purple-400" />
                       </div>
 
-                      {/* Treść */}
                       <div className="flex-1">
                         <h3 className="text-lg md:text-xl font-bold text-white mb-2">
                           {t('banner.title')}
                         </h3>
                         <p className="text-sm md:text-base text-slate-400 leading-relaxed">
                           {t('banner.description')}{' '}
-                          <a
-                            href="/privacy-policy"
-                            className="text-purple-400 hover:text-purple-300 underline transition-colors"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {t('banner.privacyLink')}
-                          </a>
+
+                            <a href={privacyHref} className="text-purple-400 hover:text-purple-300 underline transition-colors" target="_blank" rel="noopener noreferrer">{t('banner.privacyLink')}</a>
                         </p>
                       </div>
 
-                      {/* Przyciski */}
                       <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                         <button
                           onClick={handleAcceptAll}

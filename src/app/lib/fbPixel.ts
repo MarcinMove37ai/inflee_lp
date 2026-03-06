@@ -32,7 +32,6 @@ export const trackHybridEvent = async (
   // 1. Browser Pixel (Standardowy)
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', eventName, params, { eventID: eventId });
-    console.log(`📡 [Hybrid] Browser sent: ${eventName} (ID: ${eventId})`);
   }
 
   // 2. Server CAPI (Backend)
@@ -50,7 +49,6 @@ export const trackHybridEvent = async (
         userData: userData // Przekazujemy e-mail/telefon do backendu
       })
     });
-    console.log(`🚀 [Hybrid] CAPI sent: ${eventName} (with userData: ${Object.keys(userData).length > 0})`);
   } catch (e) {
     console.error('CAPI Error:', e);
   }

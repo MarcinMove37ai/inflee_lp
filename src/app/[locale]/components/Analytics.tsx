@@ -28,7 +28,6 @@ export default function Analytics() {
         });
 
         // 🔥 KLUCZOWA ZMIANA: Wysyłamy PageView HYBRYDOWO (Browser + Server)
-        console.log("🔒 [Analytics] Init & Hybrid PageView sent");
         trackHybridEvent('PageView');
 
         // Zamykamy bramkę

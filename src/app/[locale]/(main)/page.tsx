@@ -1,8 +1,8 @@
 // app/[locale]/page.tsx - WERSJA ZOPTYMALIZOWANA (WĘŻSZY KONTENER)
 "use client";
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image'; // ✅ Next.js Image
-import LanguageSwitcher from './components/LanguageSwitcher';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import { createPortal } from 'react-dom';
 import React, { useEffect, useMemo, useState, useCallback, FormEvent, memo, useRef } from "react";
 import { useTranslations, useLocale } from 'next-intl';
@@ -371,7 +371,7 @@ const ImageGallery = memo<{ images: string[] }>(({ images }) => {
                 width={1200}
                 height={800}
                 className="w-full max-h-[70vh] object-contain rounded-lg select-none"
-                quality={85}
+                quality={75}
                 priority
                 sizes="90vw"
               />
@@ -478,20 +478,13 @@ const InfleeVerticalLanding: React.FC = () => {
     try {
       let initialLocale = sessionStorage.getItem('initialLocale');
 
-      // DEBUG LOGI:
-      console.log('--- JĘZYK DEBUG ---');
-      console.log('Aktualny locale (z URL):', activeLocale);
-      console.log('Zapisany "initialLocale" (z sessionStorage):', initialLocale);
-
       if (!initialLocale) {
         // Pierwsza wizyta w sesji: zapisujemy aktualny język.
         initialLocale = activeLocale;
         sessionStorage.setItem('initialLocale', initialLocale);
-        console.log('To pierwsza wizyta. Zapisuję:', initialLocale);
       }
 
       const decision = initialLocale === 'pl';
-      console.log('Decyzja o pokazaniu przełącznika (musi być "true" na /pl):', decision);
 
       // Ustawiamy widoczność na podstawie zapisanego, początkowego języka.
       setShowSwitcher(decision);
@@ -683,13 +676,11 @@ const InfleeVerticalLanding: React.FC = () => {
 
               // 🔥 LOGIKA: Jeśli to sekcja CEN (pricing) -> Wyślij HYBRYDOWO (Mocne śledzenie)
               if (sectionId === 'pricing') {
-                 console.log(`👁️ [Hybrid ViewContent] Pricing Section (Double Track)`);
                  trackHybridEvent('ViewContent', eventParams);
               }
               // Dla reszty sekcji (FAQ, Features) -> Zostawiamy tylko Browser (Oszczędność serwera)
               else {
                  if (typeof window !== 'undefined' && (window as any).fbq) {
-                    console.log(`👁️ [Browser ViewContent] ${sectionId}`);
                     (window as any).fbq('track', 'ViewContent', eventParams);
                  }
               }
@@ -821,7 +812,7 @@ const InfleeVerticalLanding: React.FC = () => {
                 width={1920}
                 height={1080}
                 priority
-                quality={85}
+                quality={75}
                 className="w-full h-full object-cover object-center md:w-auto"
                 sizes="(max-width: 768px) 100vw, 60vw"
               />
@@ -1244,8 +1235,8 @@ const InfleeVerticalLanding: React.FC = () => {
                     <h4 className="font-semibold text-white text-right">{t('footer.legal')}</h4>
                     <div className="my-4 h-px w-48 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50 ml-auto"></div>
                     <div className="flex flex-col space-y-3 items-end">
-                      <a href="#" className="text-slate-400 hover:text-white transition text-right">{t('footer.privacy')}</a>
-                      <a href="#" className="text-slate-400 hover:text-white transition text-right">{t('footer.terms')}</a>
+                      <a href={`/${activeLocale}/privacy`} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition text-right">{t('footer.privacy')}</a>
+                      <a href={`/${activeLocale}/terms`} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition text-right">{t('footer.terms')}</a>
                       <button
                         onClick={() => handleOpenModal(t('footer.contactSubject'))}
                         className="text-slate-400 hover:text-white transition text-right cursor-pointer bg-transparent border-0 p-0"

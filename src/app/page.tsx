@@ -1,31 +1,17 @@
 // src/app/page.tsx
-import { redirect } from 'next/navigation';
-import { headers } from 'next/headers';
+import { getLocale, getMessages } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+
+// Importuj ten sam komponent co [locale]/page.tsx
+import LocalePage from './[locale]/(main)/page';
 
 export default async function RootPage() {
-  const headersList = await headers();
-  const acceptLanguage = headersList.get('accept-language') || '';
+  const locale = await getLocale();
+  const messages = await getMessages();
 
-  console.log('🌍 Full Accept-Language:', acceptLanguage);
-
-  // Pobierz PIERWSZY język z listy (najwyższy priorytet)
-  const languages = acceptLanguage
-    .split(',')
-    .map(lang => lang.split(';')[0].trim().toLowerCase());
-
-  console.log('📋 All languages:', languages);
-
-  // Sprawdź TYLKO PIERWSZY język
-  const firstLanguage = languages[0] || '';
-  const preferEnglish = firstLanguage.startsWith('en');
-
-  console.log('🎯 First language:', firstLanguage);
-  console.log('🏴 Prefer English?', preferEnglish);
-
-  // Przekieruj na odpowiedni język
-  const locale = preferEnglish ? 'en' : 'pl';
-
-  console.log('✅ Redirecting to:', `/${locale}`);
-
-  redirect(`/${locale}`);
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <LocalePage params={Promise.resolve({ locale })} />
+    </NextIntlClientProvider>
+  );
 }

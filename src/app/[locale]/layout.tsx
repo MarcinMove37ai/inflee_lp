@@ -1,25 +1,21 @@
 // app/[locale]/layout.tsx
 import Analytics from './components/Analytics';
-import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import type { Metadata, Viewport } from 'next';
 import CookieConsent from './components/CookieConsent';
 
-// --- Typ Props ---
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// ✅ Ustawienia viewportu
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 };
 
-// ✅ Asynchroniczne metadata (tu params jest Promise)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params; // ← poprawnie awaitowane
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata' });
 
   return {
@@ -76,8 +72,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     manifest: '/manifest.json',
     metadataBase: new URL('https://inflee.app'),
     alternates: {
-      canonical: `https://inflee.app/${locale}`,
-      languages: { pl: 'https://inflee.app/pl', en: 'https://inflee.app/en' },
+      canonical: `https://inflee.app/${locale === 'en' ? '' : locale}`,
+      languages: { pl: 'https://inflee.app/pl', en: 'https://inflee.app/' },
     },
     robots: {
       index: true,
@@ -93,66 +89,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// --- GŁÓWNY KOMPONENT LAYOUTU (tu params NIE jest Promise) ---
 export default async function LocaleLayout({
   children,
-  params, // <-- 1. Pobierz cały obiekt `params`
+  params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const { locale } = await params;// <-- 2. Wyciągnij `locale` wewnątrz funkcji
+  const { locale } = await params;
   const messages = await getMessages({ locale });
 
   return (
-    // 🛑 USUNIĘTO: `${inter.className}` z tagu <html>
-    <html lang={locale} className={`scroll-smooth bg-[#0A0A0A]`}>
-      <head>
-        <meta name="theme-color" content="#7c3aed" />
-        <meta name="msapplication-TileColor" content="#7c3aed" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
-
-        {/* ✅ Preload dla obrazów */}
-        <link rel="preload" as="image" href="/hero.webp" fetchPriority="high" />
-        <link rel="preload" as="image" href="/logoW.webp" fetchPriority="high" />
-        <link rel="preload" as="image" href="/images/hiw_1_1.webp" />
-        <link rel="preload" as="image" href="/images/hiw_2_1.webp" />
-        <link rel="preload" as="image" href="/images/hiw_3_1.webp" />
-        <link rel="preload" as="image" href="/images/hiw_4_1.webp" />
-
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
-
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'inflee.app',
-              description:
-                'Platforma AI dla początkujących twórców cyfrowych. Analizuj profil, targetuj odbiorców, monetyzuj treści.',
-              url: 'https://inflee.app',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: 'https://inflee.app/?q={search_term_string}',
-                'query-input': 'required name=search_term_string',
-              },
-              sameAs: [
-                'https://instagram.com/inflee_app',
-                'https://linkedin.com/company/inflee-app',
-              ],
-            }),
-          }}
-        />
-      </head>
-      <body className="text-slate-200 overflow-x-hidden">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Analytics />
-          {children}
-          <CookieConsent />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'inflee.app',
+            url: 'https://inflee.app',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://inflee.app/?q={search_term_string}',
+              'query-input': 'required name=search_term_string',
+            },
+            sameAs: [
+              'https://instagram.com/inflee_app',
+              'https://linkedin.com/company/inflee-app',
+            ],
+          }),
+        }}
+      />
+      <Analytics />
+      {children}
+      <CookieConsent />
+    </NextIntlClientProvider>
   );
 }
