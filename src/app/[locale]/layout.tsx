@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'website',
       locale: locale === 'pl' ? 'pl_PL' : 'en_US',
-      url: 'https://inflee.app/',
+      url: `https://inflee.app/${locale === 'en' ? '' : locale}`,
       siteName: 'inflee.app',
       title: t('ogTitle'),
       description: t('ogDescription'),
@@ -106,14 +106,13 @@ export default async function LocaleLayout({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'WebSite',
+            '@type': 'Organization',
             name: 'inflee.app',
             url: 'https://inflee.app',
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: 'https://inflee.app/?q={search_term_string}',
-              'query-input': 'required name=search_term_string',
-            },
+            logo: 'https://inflee.app/android-chrome-512x512.png',
+            description: locale === 'pl'
+              ? 'Platforma do tworzenia e-booków i stron lądowania z AI'
+              : 'AI-powered platform for creating ebooks and landing pages',
             sameAs: [
               'https://instagram.com/inflee_app',
               'https://linkedin.com/company/inflee-app',
