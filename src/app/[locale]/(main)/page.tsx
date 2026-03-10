@@ -1207,11 +1207,14 @@ const InfleeVerticalLanding: React.FC = () => {
                   <div className="h-px w-64 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50"></div>
                   <div className="text-sm text-slate-400">
                     <p>{t('footer.owner')}</p>
+                    <p>{t('footer.address')}</p>
                   </div>
                   <div className="text-xs text-slate-500 space-y-1">
+                    <p style={{ whiteSpace: 'pre-line' }}>{t('footer.court')}</p>
                     <p>{t('footer.krs')}</p>
                     <p>{t('footer.nip')}</p>
                     <p>{t('footer.regon')}</p>
+                    <p>{t('footer.shareCapital')}</p>
                   </div>
                   <p className="text-xs text-slate-500 pt-2">
                     {t('footer.copyright', { year: new Date().getFullYear() })}

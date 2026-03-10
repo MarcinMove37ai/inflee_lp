@@ -50,7 +50,7 @@ function PrivacyContentPL() {
           Administratorem danych osobowych jest <strong className="text-white">AQUATREK SOLUTIONS PROSTA SPÓŁKA AKCYJNA</strong> z
           siedzibą w Łodzi, ul.&nbsp;Romana&nbsp;20A, 93-370&nbsp;Łódź, zarejestrowana w rejestrze przedsiębiorców KRS
           przez Sąd Rejonowy dla Łodzi Śródmieścia w Łodzi, XX&nbsp;Wydział Gospodarczy KRS pod numerem 0001044483,
-          NIP:&nbsp;7292750466, REGON:&nbsp;525692626, o kapitale akcyjnym w wysokości 10&nbsp;000,00&nbsp;zł.
+          NIP:&nbsp;7292750466, REGON:&nbsp;525692626, o kapitale akcyjnym w wysokości 50&nbsp;000,00&nbsp;zł.
         </p>
         <p className="mt-2">
           Kontakt: e-mail: <a href="mailto:contact@inflee.app" className="text-purple-400 hover:text-purple-300">contact@inflee.app</a>,
@@ -282,7 +282,7 @@ function PrivacyContentEN() {
           with its registered office in Łódź, ul.&nbsp;Romana&nbsp;20A, 93-370&nbsp;Łódź, Poland, entered in the
           National Court Register (KRS) by the District Court for Łódź-Śródmieście in Łódź, 20th Commercial Division
           of the KRS under number 0001044483, NIP (Tax ID):&nbsp;7292750466, REGON:&nbsp;525692626, with share capital
-          of PLN&nbsp;10,000.00.
+          of PLN&nbsp;50,000.00.
         </p>
         <p className="mt-2">
           Contact: e-mail: <a href="mailto:contact@inflee.app" className="text-purple-400 hover:text-purple-300">contact@inflee.app</a>,

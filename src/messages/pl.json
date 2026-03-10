@@ -285,18 +285,21 @@
     "button": "Zacznij generować leady"
   },
   "footer": {
-    "privacy": "Polityka Prywatności",
-    "terms": "Regulamin",
-    "contact": "Kontakt",
-    "contactSubject": "Ogólne zapytanie",
-    "owner": "Właścicielem marki jest Aquatrek Solutions PSA",
-    "copyright": "© {year} Inflee.app. Wszelkie prawa zastrzeżone.",
-    "navigation": "Nawigacja",
-    "legal": "Informacje Prawne",
-    "krs": "KRS: 0001044483",
-    "nip": "NIP: PL7292750466",
-    "regon": "REGON: 525692626"
-  },
+  "privacy": "Polityka prywatności",
+  "terms": "Regulamin",
+  "contact": "Kontakt",
+  "contactSubject": "Zapytanie ogólne",
+  "owner": "Aquatrek Solutions Prosta Spółka Akcyjna",
+  "address": "ul. Romana 20A, 93-370 Łódź",
+  "court": "Sąd Rejonowy dla Łodzi-Śródmieścia w Łodzi,\nXX Wydział Gospodarczy KRS",
+  "krs": "KRS: 0001044483",
+  "nip": "NIP: PL7292750466",
+  "regon": "REGON: 525692626",
+  "shareCapital": "Kapitał akcyjny: 50 000 zł",
+  "copyright": "© {year} Inflee.app. Wszelkie prawa zastrzeżone.",
+  "navigation": "Nawigacja",
+  "legal": "Prawne"
+},
   "contactModal": {
     "title": "Skontaktuj się z nami",
     "subtitle": "Wypełnij formularz, a my odezwiemy się do Ciebie.",
