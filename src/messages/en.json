@@ -251,28 +251,28 @@
       "part2": "We have answers"
     },
     "faq1": {
-      "q": "Who is Inflee for?",
-      "a": "Inflee is for entrepreneurs, freelancers, consultants, coaches, and small businesses that want to consistently attract new clients. If you have expert knowledge in your industry and want to turn it into a sales tool — Inflee is for you. No technical skills required."
+      "q": "How exactly does this easy sales funnel builder work?",
+      "a": "Inflee is a complete automated lead generation tool for small businesses and freelancers. You simply define your niche by providing a title, subtitle, and optional sources (docs or links). The platform smoothly guides you from creating an e-book and a landing page, to generating promotional reels and managing leads in a CRM."
     },
     "faq2": {
-      "q": "How do promotional reels help me generate leads?",
-      "a": "AI analyzes your e-book's content and creates a series of short, engaging video reels ready to publish on Instagram, TikTok, or Facebook. Each reel includes a call-to-action to download your e-book — building reach and driving potential clients to your landing page."
+      "q": "How does the AI ebook creator generate content, and can I edit it?",
+      "a": "You are always in the driver's seat (human-in-the-loop approach). First, our AI ebook creator generates a table of contents which you can customize to your expectations. Once approved, the AI drafts the chapter content, which you can manually edit and refine at any time."
     },
     "faq3": {
-      "q": "Can I edit the generated content?",
-      "a": "Yes. The e-book content, reels, and landing page copy are all fully editable. AI does 90% of the work, you provide the final touch. You have full control over every element — from titles to illustrations and reel scripts."
+      "q": "Where do I get the cover and illustrations for my AI lead magnet?",
+      "a": "You don't need a designer. Based on your chapter content, the AI lead magnet generator automatically creates a stunning cover and matching chapter illustrations. You also have the option to upload your own custom graphics if you prefer."
     },
     "faq4": {
-      "q": "Do I need to provide card details to start?",
-      "a": "No. The 21-day free trial does not require a credit card. Sign up and create your first lead magnet. No strings attached."
+      "q": "Do I need my own domain to use the simple landing page builder?",
+      "a": "No hosting is required. Once your e-book is created, one click generates a dedicated landing page hosted on inflee.app. After you customize the text, one more click makes it public and instantly ready to collect sales leads."
     },
     "faq5": {
-      "q": "What kind of content can I use as a source?",
-      "a": "You can paste a link to an article, a LinkedIn post, share a Google/Notion document, or upload a PDF/DOCX/TXT file. Inflee also accepts plain text copied directly. We support most popular content formats."
+      "q": "How does the reel generator work and what are the CTA options?",
+      "a": "One click from your landing page takes you to the reel generator. You choose a male or female voiceover to read an intro encouraging downloads. You can add a reel headline, highlight key parts of your cover, and define the CTA: a traditional \"Get e-book\" button or a Manychat-ready \"Comment to get\" option."
     },
     "faq6": {
-      "q": "How much does it cost to generate graphics and reels with AI?",
-      "a": "All costs for generating AI graphics and promotional reels are included in your plan's price. You pay nothing extra. The free plan has a generation limit, while paid plans offer much higher or no limits."
+      "q": "How do I manage clients once I start getting sales leads with AI?",
+      "a": "As soon as leads sign up, they are aggregated into our built-in, simple CRM. You can easily track your prospects, change their sales statuses, and add personal comments, giving you full control over your new clients."
     }
   },
   "finalCta": {
