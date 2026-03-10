@@ -251,28 +251,28 @@
       "part2": "Mamy odpowiedzi"
     },
     "faq1": {
-      "q": "Dla kogo jest Inflee?",
-      "a": "Inflee jest dla przedsiębiorców, freelancerów, konsultantów, coachów i małych firm, którym zależy na systematycznym pozyskiwaniu nowych klientów. Jeśli masz wiedzę ekspercką w swojej branży i chcesz ją zamienić w narzędzie sprzedażowe — Inflee jest dla Ciebie. Nie potrzebujesz wiedzy technicznej."
+      "q": "Jak dokładnie działa ten gotowy lejek sprzedażowy od Inflee?",
+      "a": "Inflee to kompletne narzędzie wspomagające pozyskiwanie leadów dla małych firm i freelancerów. Wystarczy, że podasz swoją niszę (tytuł i podtytuł) oraz opcjonalnie wgrasz źródła (dokumenty lub linki). Narzędzie płynnie przeprowadzi Cię przez proces: od wygenerowania e-booka, przez stronę zapisu, po rolki promocyjne i zarządzanie kontaktami w prostym CRM-ie."
     },
     "faq2": {
-      "q": "Jak rolki promocyjne pomagają mi generować leady?",
-      "a": "AI analizuje treść Twojego e-booka i tworzy z niego serię krótkich, angażujących rolek wideo gotowych do publikacji na Instagramie, TikToku czy Facebooku. Każda rolka zawiera wezwanie do pobrania Twojego e-booka — dzięki temu buduje zasięg i kieruje potencjalnych klientów na Twoją stronę zapisu."
+      "q": "Jak kreator ebooków AI tworzy treść i czy mam na nią wpływ?",
+      "a": "Masz pełną kontrolę na każdym etapie (podejście human-in-the-loop). Najpierw nasz kreator ebooków AI generuje optymalny spis treści, który możesz dowolnie dostosować do swoich oczekiwań. Po jego zatwierdzeniu, AI tworzy treść rozdziałów, którą również możesz ręcznie edytować i poprawiać."
     },
     "faq3": {
-      "q": "Czy mogę edytować wygenerowane treści?",
-      "a": "Tak. Zarówno treść e-booka, rolek, jak i strony zapisu jest w pełni edytowalna. AI robi 90% pracy, Ty nadajesz finalny szlif. Masz pełną kontrolę nad każdym elementem — od tytułów po ilustracje i scenariusze rolek."
+      "q": "Skąd wziąć grafikę i okładkę do mojego lead magnetu?",
+      "a": "Nie potrzebujesz grafika. Po stworzeniu tekstu, nasz generator lead magnetów automatycznie przygotuje doskonałą okładkę oraz dopasowane ilustracje do każdego rozdziału na podstawie jego treści. Jeśli wolisz, masz również pełną swobodę wgrania własnych, autorskich grafik."
     },
     "faq4": {
-      "q": "Czy muszę podawać dane karty, aby zacząć?",
-      "a": "Nie. Darmowy 21-dniowy okres próbny nie wymaga karty kredytowej. Zarejestruj się i stwórz swój pierwszy lead magnet. Bez zobowiązań."
+      "q": "Czy potrzebuję hostingu, by używać prostego kreatora landing page?",
+      "a": "Nie, wszystko dzieje się na naszej platformie. Gdy Twój e-book powstanie, jednym kliknięciem tworzona jest dedykowana strona zapisu hostowana na inflee.app. Po krótkim dostosowaniu treści przez Ciebie, wystarczy jedno kliknięcie, by stała się publiczna i natychmiast gotowa do gromadzenia leadów."
     },
     "faq5": {
-      "q": "Jakiego rodzaju treści mogę użyć jako źródło?",
-      "a": "Możesz wkleić link do artykułu, wpisu na LinkedIn, udostępnić dokument Google/Notion, a także wgrać PDF/DOCX/TXT. Inflee przyjmie też zwykły tekst skopiowany bezpośrednio. Obsługujemy większość popularnych formatów treści."
+      "q": "Jak wygenerować rolki promocyjne i jakie mają opcje CTA?",
+      "a": "Kolejne kliknięcie ze strony zapisu zabiera Cię do generatora rolek. Możesz ustalić męski lub żeński głos lektora, który odczytuje wstęp zachęcający do pobrania. Dodajesz nagłówek, zaznaczasz kluczowy fragment okładki i definiujesz przycisk CTA: tradycyjne \"Pobierz e-book\" lub idealną pod automatyzacje Manychat opcję \"Skomentuj, aby otrzymać\"."
     },
     "faq6": {
-      "q": "Ile kosztuje generowanie grafik i rolek przez AI?",
-      "a": "Wszystkie koszty generowania grafik AI i rolek promocyjnych są wliczone w cenę planu. Nie płacisz nic ekstra. W planie darmowym masz limit generowań, w planach płatnych — znacznie wyższe lub brak limitów."
+      "q": "Co dzieje się z kontaktami, gdy zacznę pozyskiwać leady?",
+      "a": "Jak już leady wpadną, są automatycznie agregowane w naszym wbudowanym, prostym CRM-ie. W jednym miejscu możesz łatwo przeglądać listę, zmieniać statusy sprzedażowe oraz dodawać własne komentarze do każdego kontaktu. To najszybsza droga od leada do płacącego klienta."
     }
   },
   "finalCta": {
